@@ -17,10 +17,22 @@ type ASCOMAlpacaAPIClient struct {
 	errorMessage  string
 }
 
-func NewAlpacaAPI(clientId uint32, ip string, port int32) *ASCOMAlpacaAPIClient {
+func NewAlpacaAPI(clientId uint32, secure bool, domain string, ip string, port int32) *ASCOMAlpacaAPIClient {
+	var protocol string = "https"
+
+	if !secure {
+		protocol = "http"
+	}
+
+	var urlBase string = fmt.Sprintf("%s://%s:%d", protocol, ip, port)
+
+	if port == -1 && len(domain) > 0 {
+		urlBase = fmt.Sprintf("%s://%s", protocol, domain)
+	}
+
 	client := ASCOMAlpacaAPIClient{
 		client:        resty.New(),
-		urlBase:       fmt.Sprintf("http://%s:%d", ip, port),
+		urlBase:       urlBase,
 		clientId:      clientId,
 		transactionId: 0,
 	}
