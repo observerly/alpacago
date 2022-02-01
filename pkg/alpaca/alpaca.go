@@ -38,3 +38,14 @@ func NewAlpacaAPI(clientId uint32, ip string, port int32) *ASCOMAlpacaAPIClient 
 func (a *ASCOMAlpacaAPIClient) getQueryString() string {
 	return fmt.Sprintf("ClientID=%d&ClientTransactionID=%d", a.clientId, a.transactionId)
 }
+
+/*
+	getEndpoint()
+
+	Alpaca Device API URLs are of the form http(s)://host:port/path
+	where path comprises "/api/v1/" followed by one of the ASCOM
+	method from https://ascom-standards.org/api/
+*/
+func (a *ASCOMAlpacaAPIClient) getEndpoint(deviceType string, deviceNumber uint, method string) string {
+	return fmt.Sprintf("%s/api/v1/%s/%d/%s", a.urlBase, deviceType, deviceNumber, method)
+}
