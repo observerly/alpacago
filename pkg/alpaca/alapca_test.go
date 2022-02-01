@@ -150,3 +150,23 @@ func TestNewAlpacaAPIFloat64Response(t *testing.T) {
 		t.Errorf("got %q, wanted %f", a.errorMessage, want)
 	}
 }
+
+func TestNewAlpacaAPIInt32Response(t *testing.T) {
+	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+
+	got, err := a.GetInt32Response("telescope", 0, "alignmentmode")
+
+	var want int32 = 0
+
+	if err != nil {
+		t.Errorf("got %q, wanted %d", err, want)
+	}
+
+	if got != want {
+		t.Errorf("got %d, wanted %d", got, want)
+	}
+
+	if a.errorNumber != 0 {
+		t.Errorf("got %q, wanted %d", a.errorMessage, want)
+	}
+}

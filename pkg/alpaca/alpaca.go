@@ -202,3 +202,38 @@ func (a *ASCOMAlpacaAPIClient) GetFloat64Response(deviceType string, deviceNumbe
 
 	return result.Value, nil
 }
+
+type int32Response struct {
+	Value               int32  `json:"Value"`
+	ClientTransactionID uint32 `json:"ClientTransactionID"`
+	ServerTransactionID uint32 `json:"ServerTransactionID"`
+	ErrorNumber         int32  `json:"ErrorNumber"`
+	ErrorMessage        string `json:"ErrorMessage"`
+}
+
+/*
+	GetInt32Response()
+
+	Global public method to work with calls returning int32Response
+*/
+func (a *ASCOMAlpacaAPIClient) GetInt32Response(deviceType string, deviceNumber uint, method string) (int32, error) {
+	// Build the ASCOM endpoint:
+	url := a.getEndpoint(deviceType, deviceNumber, method)
+
+	resp, err := a.client.R().SetResult(&int32Response{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
+
+	if err != nil {
+		return 0, err
+	}
+
+	// If the response object has a REST error:
+	if resp.IsError() {
+		a.errorNumber = resp.StatusCode()
+		a.errorMessage = resp.String()
+	}
+
+	// Return the result:
+	result := (resp.Result().(*int32Response))
+
+	return result.Value, nil
+}
