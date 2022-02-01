@@ -34,3 +34,14 @@ func TestNewAlpacaAPITransactionID(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 }
+
+func TestNewAlpacaAPIQueryString(t *testing.T) {
+	client := NewAlpacaAPI(65535, "0.0.0.0", 8000)
+
+	var got string = client.getQueryString()
+	var want string = "ClientID=65535&ClientTransactionID=0"
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+}

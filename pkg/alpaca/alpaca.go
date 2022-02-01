@@ -27,3 +27,14 @@ func NewAlpacaAPI(clientId uint32, ip string, port int32) *ASCOMAlpacaAPIClient 
 
 	return &client
 }
+
+/*
+	getQueryString()
+
+	Many ASCOM methods require parameter values. All methods
+	that use the HTTP GET verb should include parameters as
+	query string name-value pairs.
+*/
+func (a *ASCOMAlpacaAPIClient) getQueryString() string {
+	return fmt.Sprintf("ClientID=%d&ClientTransactionID=%d", a.clientId, a.transactionId)
+}
