@@ -132,3 +132,38 @@ func (a *ASCOMAlpacaAPIClient) GetStringListResponse(deviceType string, deviceNu
 
 	return result.Value, nil
 }
+
+type booleanResponse struct {
+	Value               bool   `json:"Value"`
+	ClientTransactionID uint32 `json:"ClientTransactionID"`
+	ServerTransactionID uint32 `json:"ServerTransactionID"`
+	ErrorNumber         int32  `json:"ErrorNumber"`
+	ErrorMessage        string `json:"ErrorMessage"`
+}
+
+/*
+	GetBooleanResponse()
+
+	Global public method to work with calls returning booleanResponse
+*/
+func (a *ASCOMAlpacaAPIClient) GetBooleanResponse(deviceType string, deviceNumber uint, method string) (bool, error) {
+	// Build the ASCOM endpoint:
+	url := a.getEndpoint(deviceType, deviceNumber, method)
+
+	resp, err := a.client.R().SetResult(&booleanResponse{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
+
+	if err != nil {
+		return false, err
+	}
+
+	// If the response object has a REST error:
+	if resp.IsError() {
+		a.errorNumber = resp.StatusCode()
+		a.errorMessage = resp.String()
+	}
+
+	// Return the result:
+	result := (resp.Result().(*booleanResponse))
+
+	return result.Value, nil
+}
