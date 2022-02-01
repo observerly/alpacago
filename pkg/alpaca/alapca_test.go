@@ -87,3 +87,23 @@ func TestNewAlpacaAPIStringResponse(t *testing.T) {
 		t.Errorf("got %q, wanted %q", a.errorMessage, want)
 	}
 }
+
+func TestNewAlpacaAPIStringListResponse(t *testing.T) {
+	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+
+	got, err := a.GetStringListResponse("telescope", 0, "supportedactions")
+
+	var want string = "string"
+
+	if err != nil {
+		t.Errorf("got %q, wanted %q", err, want)
+	}
+
+	if got[0] != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if a.errorNumber != 0 {
+		t.Errorf("got %q, wanted %q", a.errorMessage, want)
+	}
+}

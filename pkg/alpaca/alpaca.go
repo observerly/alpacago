@@ -97,3 +97,38 @@ func (a *ASCOMAlpacaAPIClient) GetStringResponse(deviceType string, deviceNumber
 
 	return result.Value, nil
 }
+
+type stringlistResponse struct {
+	Value               []string `json:"Value"`
+	ClientTransactionID uint32   `json:"ClientTransactionID"`
+	ServerTransactionID uint32   `json:"ServerTransactionID"`
+	ErrorNumber         int32    `json:"ErrorNumber"`
+	ErrorMessage        string   `json:"ErrorMessage"`
+}
+
+/*
+	GetStringListResponse()
+
+	Global public method to work with calls returning stringListResponse
+*/
+func (a *ASCOMAlpacaAPIClient) GetStringListResponse(deviceType string, deviceNumber uint, method string) ([]string, error) {
+	// Build the ASCOM endpoint:
+	url := a.getEndpoint(deviceType, deviceNumber, method)
+
+	resp, err := a.client.R().SetResult(&stringlistResponse{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
+
+	if err != nil {
+		return []string{""}, err
+	}
+
+	// If the response object has a REST error:
+	if resp.IsError() {
+		a.errorNumber = resp.StatusCode()
+		a.errorMessage = resp.String()
+	}
+
+	// Return the result:
+	result := (resp.Result().(*stringlistResponse))
+
+	return result.Value, nil
+}
