@@ -167,3 +167,38 @@ func (a *ASCOMAlpacaAPIClient) GetBooleanResponse(deviceType string, deviceNumbe
 
 	return result.Value, nil
 }
+
+type float64Response struct {
+	Value               float64 `json:"Value"`
+	ClientTransactionID int32   `json:"ClientTransactionID"`
+	ServerTransactionID int32   `json:"ServerTransactionID"`
+	ErrorNumber         int32   `json:"ErrorNumber"`
+	ErrorMessage        string  `json:"ErrorMessage"`
+}
+
+/*
+	GetFloat64Response()
+
+	Global public method to work with calls returning float64Response
+*/
+func (a *ASCOMAlpacaAPIClient) GetFloat64Response(deviceType string, deviceNumber uint, method string) (float64, error) {
+	// Build the ASCOM endpoint:
+	url := a.getEndpoint(deviceType, deviceNumber, method)
+
+	resp, err := a.client.R().SetResult(&float64Response{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
+
+	if err != nil {
+		return 0, err
+	}
+
+	// If the response object has a REST error:
+	if resp.IsError() {
+		a.errorNumber = resp.StatusCode()
+		a.errorMessage = resp.String()
+	}
+
+	// Return the result:
+	result := (resp.Result().(*float64Response))
+
+	return result.Value, nil
+}

@@ -1,6 +1,9 @@
 package alpaca
 
-import "testing"
+import (
+	"math"
+	"testing"
+)
 
 func TestNewAlpacaAPIBaseURL(t *testing.T) {
 	client := NewAlpacaAPI(65535, false, "", "0.0.0.0", 8000)
@@ -125,5 +128,25 @@ func TestNewAlpacaAPIBooleanResponse(t *testing.T) {
 
 	if a.errorNumber != 0 {
 		t.Errorf("got %q, wanted %t", a.errorMessage, want)
+	}
+}
+
+func TestNewAlpacaAPIFloat64Response(t *testing.T) {
+	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+
+	got, err := a.GetFloat64Response("telescope", 0, "focallength")
+
+	var want float64 = 1.1
+
+	if err != nil {
+		t.Errorf("got %q, wanted %f", err, want)
+	}
+
+	if math.Abs(got-want) > 0.00001 {
+		t.Errorf("got %f, wanted %f", got, want)
+	}
+
+	if a.errorNumber != 0 {
+		t.Errorf("got %q, wanted %f", a.errorMessage, want)
 	}
 }
