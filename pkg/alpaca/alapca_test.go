@@ -45,3 +45,14 @@ func TestNewAlpacaAPIQueryString(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 }
+
+func TestNewAlpacaAPIEndpoint(t *testing.T) {
+	client := NewAlpacaAPI(65535, "0.0.0.0", 8000)
+
+	var got string = client.getEndpoint("telescope", 0, "canslew")
+	var want string = "http://0.0.0.0:8000/api/v1/telescope/0/canslew"
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+}
