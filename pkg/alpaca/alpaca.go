@@ -237,3 +237,33 @@ func (a *ASCOMAlpacaAPIClient) GetInt32Response(deviceType string, deviceNumber 
 
 	return result.Value, nil
 }
+
+type uint32listResponse struct {
+	Value               []uint32 `json:"Value"`
+	ClientTransactionID int32    `json:"ClientTransactionID"`
+	ServerTransactionID int32    `json:"ServerTransactionID"`
+	ErrorNumber         int32    `json:"ErrorNumber"`
+	ErrorMessage        string   `json:"ErrorMessage"`
+}
+
+func (a *ASCOMAlpacaAPIClient) GetUInt32ListResponse(deviceType string, deviceNumber uint, method string) ([]uint32, error) {
+	// Build the ASCOM endpoint:
+	url := a.getEndpoint(deviceType, deviceNumber, method)
+
+	resp, err := a.client.R().SetResult(&uint32listResponse{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
+
+	if err != nil {
+		return []uint32{}, err
+	}
+
+	// If the response object has a REST error:
+	if resp.IsError() {
+		a.errorNumber = resp.StatusCode()
+		a.errorMessage = resp.String()
+	}
+
+	// Return the result:
+	result := (resp.Result().(*uint32listResponse))
+
+	return result.Value, nil
+}

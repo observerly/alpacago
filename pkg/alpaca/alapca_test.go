@@ -170,3 +170,23 @@ func TestNewAlpacaAPIInt32Response(t *testing.T) {
 		t.Errorf("got %q, wanted %d", a.errorMessage, want)
 	}
 }
+
+func TestNewAlpacaAPIInt32ListResponse(t *testing.T) {
+	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+
+	got, err := a.GetUInt32ListResponse("filterwheel", 0, "focusoffsets")
+
+	var want uint32 = 0
+
+	if err != nil {
+		t.Errorf("got %q, wanted %d", err, want)
+	}
+
+	if got[0] != want {
+		t.Errorf("got %d, wanted %d", got, want)
+	}
+
+	if a.errorNumber != 0 {
+		t.Errorf("got %q, wanted %d", a.errorMessage, want)
+	}
+}
