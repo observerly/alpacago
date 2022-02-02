@@ -287,3 +287,13 @@ func (a *ASCOMAlpacaAPIClient) IsConnected(deviceType string, deviceNumber uint)
 func (a *ASCOMAlpacaAPIClient) GetDescription(deviceType string, deviceNumber uint) (string, error) {
 	return a.GetStringResponse(deviceType, deviceNumber, "description")
 }
+
+/*
+	GetDriverInfo() common method to all ASCOM Alpaca compliant devices
+
+	@returns the description of the driver
+	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__driverinfo
+*/
+func (a *ASCOMAlpacaAPIClient) GetDriverInfo(deviceType string, deviceNumber uint) (string, error) {
+	return a.GetStringResponse(deviceType, deviceNumber, "driverinfo")
+}
