@@ -323,3 +323,13 @@ func (a *ASCOMAlpacaAPIClient) GetDriverVersion(deviceType string, deviceNumber 
 func (a *ASCOMAlpacaAPIClient) GetInterfaceVersion(deviceType string, deviceNumber uint) (int32, error) {
 	return a.GetInt32Response(deviceType, deviceNumber, "interfaceversion")
 }
+
+/*
+	GetName() common method to all ASCOM Alpaca compliant devices
+
+	@returns the name of the device
+	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__name
+*/
+func (a *ASCOMAlpacaAPIClient) GetName(deviceType string, deviceNumber uint) (string, error) {
+	return a.GetStringResponse(deviceType, deviceNumber, "name")
+}
