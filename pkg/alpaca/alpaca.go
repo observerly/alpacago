@@ -333,3 +333,13 @@ func (a *ASCOMAlpacaAPIClient) GetInterfaceVersion(deviceType string, deviceNumb
 func (a *ASCOMAlpacaAPIClient) GetName(deviceType string, deviceNumber uint) (string, error) {
 	return a.GetStringResponse(deviceType, deviceNumber, "name")
 }
+
+/*
+	GetSupportedActions() common method to all ASCOM Alpaca compliant devices
+
+	@returns the list of action names supported by this driver.
+	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__supportedactions
+*/
+func (a *ASCOMAlpacaAPIClient) GetSupportedActions(deviceType string, deviceNumber uint) ([]string, error) {
+	return a.GetStringListResponse(deviceType, deviceNumber, "supportedactions")
+}
