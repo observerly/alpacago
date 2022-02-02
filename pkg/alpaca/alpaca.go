@@ -11,12 +11,12 @@ import (
 )
 
 type ASCOMAlpacaAPIClient struct {
-	client        *resty.Client
-	urlBase       string
-	clientId      uint32
-	transactionId uint32
-	errorNumber   int
-	errorMessage  string
+	Client        *resty.Client
+	UrlBase       string
+	ClientId      uint32
+	TransactionId uint32
+	ErrorNumber   int
+	ErrorMessage  string
 }
 
 func NewAlpacaAPI(clientId uint32, secure bool, domain string, ip string, port int32) *ASCOMAlpacaAPIClient {
@@ -33,10 +33,10 @@ func NewAlpacaAPI(clientId uint32, secure bool, domain string, ip string, port i
 	}
 
 	client := ASCOMAlpacaAPIClient{
-		client:        resty.New(),
-		urlBase:       urlBase,
-		clientId:      clientId,
-		transactionId: 0,
+		Client:        resty.New(),
+		UrlBase:       urlBase,
+		ClientId:      clientId,
+		TransactionId: 0,
 	}
 
 	return &client
@@ -50,7 +50,7 @@ func NewAlpacaAPI(clientId uint32, secure bool, domain string, ip string, port i
 	query string name-value pairs.
 */
 func (a *ASCOMAlpacaAPIClient) getQueryString() string {
-	return fmt.Sprintf("ClientID=%d&ClientTransactionID=%d", a.clientId, a.transactionId)
+	return fmt.Sprintf("ClientID=%d&ClientTransactionID=%d", a.ClientId, a.TransactionId)
 }
 
 /*
@@ -61,7 +61,7 @@ func (a *ASCOMAlpacaAPIClient) getQueryString() string {
 	method from https://ascom-standards.org/api/
 */
 func (a *ASCOMAlpacaAPIClient) getEndpoint(deviceType string, deviceNumber uint, method string) string {
-	return fmt.Sprintf("%s/api/v1/%s/%d/%s", a.urlBase, deviceType, deviceNumber, method)
+	return fmt.Sprintf("%s/api/v1/%s/%d/%s", a.UrlBase, deviceType, deviceNumber, method)
 }
 
 type stringResponse struct {
@@ -82,7 +82,7 @@ func (a *ASCOMAlpacaAPIClient) GetStringResponse(deviceType string, deviceNumber
 	url := a.getEndpoint(deviceType, deviceNumber, method)
 
 	// Setup the resty client:
-	resp, err := a.client.R().SetResult(&stringResponse{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
+	resp, err := a.Client.R().SetResult(&stringResponse{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
 
 	if err != nil {
 		return "", err
@@ -90,8 +90,8 @@ func (a *ASCOMAlpacaAPIClient) GetStringResponse(deviceType string, deviceNumber
 
 	// If the response object has a REST error:
 	if resp.IsError() {
-		a.errorNumber = resp.StatusCode()
-		a.errorMessage = resp.String()
+		a.ErrorNumber = resp.StatusCode()
+		a.ErrorMessage = resp.String()
 	}
 
 	// Return the result:
@@ -117,7 +117,7 @@ func (a *ASCOMAlpacaAPIClient) GetStringListResponse(deviceType string, deviceNu
 	// Build the ASCOM endpoint:
 	url := a.getEndpoint(deviceType, deviceNumber, method)
 
-	resp, err := a.client.R().SetResult(&stringlistResponse{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
+	resp, err := a.Client.R().SetResult(&stringlistResponse{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
 
 	if err != nil {
 		return []string{""}, err
@@ -125,8 +125,8 @@ func (a *ASCOMAlpacaAPIClient) GetStringListResponse(deviceType string, deviceNu
 
 	// If the response object has a REST error:
 	if resp.IsError() {
-		a.errorNumber = resp.StatusCode()
-		a.errorMessage = resp.String()
+		a.ErrorNumber = resp.StatusCode()
+		a.ErrorMessage = resp.String()
 	}
 
 	// Return the result:
@@ -152,7 +152,7 @@ func (a *ASCOMAlpacaAPIClient) GetBooleanResponse(deviceType string, deviceNumbe
 	// Build the ASCOM endpoint:
 	url := a.getEndpoint(deviceType, deviceNumber, method)
 
-	resp, err := a.client.R().SetResult(&booleanResponse{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
+	resp, err := a.Client.R().SetResult(&booleanResponse{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
 
 	if err != nil {
 		return false, err
@@ -160,8 +160,8 @@ func (a *ASCOMAlpacaAPIClient) GetBooleanResponse(deviceType string, deviceNumbe
 
 	// If the response object has a REST error:
 	if resp.IsError() {
-		a.errorNumber = resp.StatusCode()
-		a.errorMessage = resp.String()
+		a.ErrorNumber = resp.StatusCode()
+		a.ErrorMessage = resp.String()
 	}
 
 	// Return the result:
@@ -187,7 +187,7 @@ func (a *ASCOMAlpacaAPIClient) GetFloat64Response(deviceType string, deviceNumbe
 	// Build the ASCOM endpoint:
 	url := a.getEndpoint(deviceType, deviceNumber, method)
 
-	resp, err := a.client.R().SetResult(&float64Response{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
+	resp, err := a.Client.R().SetResult(&float64Response{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
 
 	if err != nil {
 		return 0, err
@@ -195,8 +195,8 @@ func (a *ASCOMAlpacaAPIClient) GetFloat64Response(deviceType string, deviceNumbe
 
 	// If the response object has a REST error:
 	if resp.IsError() {
-		a.errorNumber = resp.StatusCode()
-		a.errorMessage = resp.String()
+		a.ErrorNumber = resp.StatusCode()
+		a.ErrorMessage = resp.String()
 	}
 
 	// Return the result:
@@ -222,7 +222,7 @@ func (a *ASCOMAlpacaAPIClient) GetInt32Response(deviceType string, deviceNumber 
 	// Build the ASCOM endpoint:
 	url := a.getEndpoint(deviceType, deviceNumber, method)
 
-	resp, err := a.client.R().SetResult(&int32Response{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
+	resp, err := a.Client.R().SetResult(&int32Response{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
 
 	if err != nil {
 		return 0, err
@@ -230,8 +230,8 @@ func (a *ASCOMAlpacaAPIClient) GetInt32Response(deviceType string, deviceNumber 
 
 	// If the response object has a REST error:
 	if resp.IsError() {
-		a.errorNumber = resp.StatusCode()
-		a.errorMessage = resp.String()
+		a.ErrorNumber = resp.StatusCode()
+		a.ErrorMessage = resp.String()
 	}
 
 	// Return the result:
@@ -257,7 +257,7 @@ func (a *ASCOMAlpacaAPIClient) GetUInt32ListResponse(deviceType string, deviceNu
 	// Build the ASCOM endpoint:
 	url := a.getEndpoint(deviceType, deviceNumber, method)
 
-	resp, err := a.client.R().SetResult(&uint32listResponse{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
+	resp, err := a.Client.R().SetResult(&uint32listResponse{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
 
 	if err != nil {
 		return []uint32{}, err
@@ -265,8 +265,8 @@ func (a *ASCOMAlpacaAPIClient) GetUInt32ListResponse(deviceType string, deviceNu
 
 	// If the response object has a REST error:
 	if resp.IsError() {
-		a.errorNumber = resp.StatusCode()
-		a.errorMessage = resp.String()
+		a.ErrorNumber = resp.StatusCode()
+		a.ErrorMessage = resp.String()
 	}
 
 	// Return the result:
@@ -286,7 +286,7 @@ func (a *ASCOMAlpacaAPIClient) Put(deviceType string, deviceNumber uint, method 
 	// Build the ASCOM endpoint:
 	url := a.getEndpoint(deviceType, deviceNumber, method)
 
-	resp, err := a.client.R().SetHeader("Content-Type", "application/x-www-form-urlencoded").SetResult(&putResponse{}).SetFormData(form).Put(url)
+	resp, err := a.Client.R().SetHeader("Content-Type", "application/x-www-form-urlencoded").SetResult(&putResponse{}).SetFormData(form).Put(url)
 
 	if err != nil {
 		return err
@@ -294,8 +294,8 @@ func (a *ASCOMAlpacaAPIClient) Put(deviceType string, deviceNumber uint, method 
 
 	// If the response object has a REST error:
 	if resp.IsError() {
-		a.errorNumber = resp.StatusCode()
-		a.errorMessage = resp.String()
+		a.ErrorNumber = resp.StatusCode()
+		a.ErrorMessage = resp.String()
 	}
 
 	// Return the result:

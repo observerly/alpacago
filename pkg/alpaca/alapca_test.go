@@ -8,7 +8,7 @@ import (
 func TestNewAlpacaAPIBaseURL(t *testing.T) {
 	client := NewAlpacaAPI(65535, false, "", "0.0.0.0", 8000)
 
-	var got string = client.urlBase
+	var got string = client.UrlBase
 	var want string = "http://0.0.0.0:8000"
 
 	if got != want {
@@ -19,7 +19,7 @@ func TestNewAlpacaAPIBaseURL(t *testing.T) {
 func TestNewAlpacaAPIBaseURLForHost(t *testing.T) {
 	client := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
 
-	var got string = client.urlBase
+	var got string = client.UrlBase
 	var want string = "https://virtserver.swaggerhub.com/ASCOMInitiative"
 
 	if got != want {
@@ -30,7 +30,7 @@ func TestNewAlpacaAPIBaseURLForHost(t *testing.T) {
 func TestNewAlpacaAPIClientID(t *testing.T) {
 	client := NewAlpacaAPI(65535, false, "", "0.0.0.0", 8000)
 
-	var got uint32 = client.clientId
+	var got uint32 = client.ClientId
 	var want uint32 = 65535
 
 	if got != want {
@@ -41,7 +41,7 @@ func TestNewAlpacaAPIClientID(t *testing.T) {
 func TestNewAlpacaAPITransactionID(t *testing.T) {
 	client := NewAlpacaAPI(65535, false, "", "0.0.0.0", 8000)
 
-	var got uint32 = client.transactionId
+	var got uint32 = client.TransactionId
 	var want uint32 = 0
 
 	if got != want {
@@ -86,8 +86,8 @@ func TestNewAlpacaAPIStringResponse(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.errorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.errorMessage, want)
+	if a.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
 	}
 }
 
@@ -106,8 +106,8 @@ func TestNewAlpacaAPIStringListResponse(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.errorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.errorMessage, want)
+	if a.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
 	}
 }
 
@@ -126,8 +126,8 @@ func TestNewAlpacaAPIBooleanResponse(t *testing.T) {
 		t.Errorf("got %t, wanted %t", got, want)
 	}
 
-	if a.errorNumber != 0 {
-		t.Errorf("got %q, wanted %t", a.errorMessage, want)
+	if a.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %t", a.ErrorMessage, want)
 	}
 }
 
@@ -146,8 +146,8 @@ func TestNewAlpacaAPIFloat64Response(t *testing.T) {
 		t.Errorf("got %f, wanted %f", got, want)
 	}
 
-	if a.errorNumber != 0 {
-		t.Errorf("got %q, wanted %f", a.errorMessage, want)
+	if a.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %f", a.ErrorMessage, want)
 	}
 }
 
@@ -166,8 +166,8 @@ func TestNewAlpacaAPIInt32Response(t *testing.T) {
 		t.Errorf("got %d, wanted %d", got, want)
 	}
 
-	if a.errorNumber != 0 {
-		t.Errorf("got %q, wanted %d", a.errorMessage, want)
+	if a.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %d", a.ErrorMessage, want)
 	}
 }
 
@@ -186,8 +186,8 @@ func TestNewAlpacaAPIInt32ListResponse(t *testing.T) {
 		t.Errorf("got %d, wanted %d", got, want)
 	}
 
-	if a.errorNumber != 0 {
-		t.Errorf("got %q, wanted %d", a.errorMessage, want)
+	if a.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %d", a.ErrorMessage, want)
 	}
 }
 
@@ -206,8 +206,8 @@ func TestNewAlpacaAPIConnected(t *testing.T) {
 		t.Errorf("got %t, wanted %t", got, want)
 	}
 
-	if a.errorNumber != 0 {
-		t.Errorf("got %q, wanted %t", a.errorMessage, want)
+	if a.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %t", a.ErrorMessage, want)
 	}
 }
 
@@ -226,8 +226,8 @@ func TestNewAlpacaAPIDescription(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.errorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.errorMessage, want)
+	if a.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
 	}
 }
 
@@ -246,8 +246,8 @@ func TestNewAlpacaAPIDriverInfo(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.errorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.errorMessage, want)
+	if a.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
 	}
 }
 
@@ -266,8 +266,8 @@ func TestNewAlpacaAPIDriverVersion(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.errorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.errorMessage, want)
+	if a.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
 	}
 }
 
@@ -286,8 +286,8 @@ func TestNewAlpacaAPIInterfaceVersion(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.errorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.errorMessage, want)
+	if a.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
 	}
 }
 
@@ -306,8 +306,8 @@ func TestNewAlpacaAPIName(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.errorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.errorMessage, want)
+	if a.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
 	}
 }
 
@@ -326,7 +326,7 @@ func TestNewAlpacaAPDSupportedActions(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.errorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.errorMessage, want)
+	if a.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
 	}
 }
