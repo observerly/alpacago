@@ -190,3 +190,23 @@ func TestNewAlpacaAPIInt32ListResponse(t *testing.T) {
 		t.Errorf("got %q, wanted %d", a.errorMessage, want)
 	}
 }
+
+func TestNewAlpacaAPIConnected(t *testing.T) {
+	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+
+	got, err := a.IsConnected("telescope", 0)
+
+	var want bool = true
+
+	if err != nil {
+		t.Errorf("got %q, wanted %t", err, want)
+	}
+
+	if got != want {
+		t.Errorf("got %t, wanted %t", got, want)
+	}
+
+	if a.errorNumber != 0 {
+		t.Errorf("got %q, wanted %t", a.errorMessage, want)
+	}
+}

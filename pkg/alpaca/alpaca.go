@@ -267,3 +267,13 @@ func (a *ASCOMAlpacaAPIClient) GetUInt32ListResponse(deviceType string, deviceNu
 
 	return result.Value, nil
 }
+
+/*
+	IsConnected() common method to all ASCOM Alpaca compliant devices
+
+	@returns the connection status of the device
+	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__connected
+*/
+func (a *ASCOMAlpacaAPIClient) IsConnected(deviceType string, deviceNumber uint) (bool, error) {
+	return a.GetBooleanResponse(deviceType, deviceNumber, "connected")
+}
