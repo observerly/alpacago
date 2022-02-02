@@ -307,3 +307,19 @@ func (a *ASCOMAlpacaAPIClient) GetDriverInfo(deviceType string, deviceNumber uin
 func (a *ASCOMAlpacaAPIClient) GetDriverVersion(deviceType string, deviceNumber uint) (string, error) {
 	return a.GetStringResponse(deviceType, deviceNumber, "driverversion")
 }
+
+/*
+	GetInterfaceVersion() common method to all ASCOM Alpaca compliant devices
+
+	@returns the version of the ASCOM device interface contract to which
+	this device complies. Only one interface version is current at a
+	moment in time and all new devices should be built to the latest
+	interface version. Applications can choose which device interface
+	versions they support and it is in their interest to support previous
+	versions as well as the current version to ensure thay can use the
+	largest number of devices.
+	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__interfaceversion
+*/
+func (a *ASCOMAlpacaAPIClient) GetInterfaceVersion(deviceType string, deviceNumber uint) (int32, error) {
+	return a.GetInt32Response(deviceType, deviceNumber, "interfaceversion")
+}
