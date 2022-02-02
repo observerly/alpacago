@@ -230,3 +230,23 @@ func TestNewAlpacaAPIDescription(t *testing.T) {
 		t.Errorf("got %q, wanted %q", a.errorMessage, want)
 	}
 }
+
+func TestNewAlpacaAPIDriverInfo(t *testing.T) {
+	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+
+	got, err := a.GetDriverInfo("telescope", 0)
+
+	var want string = "string"
+
+	if err != nil {
+		t.Errorf("got %q, wanted %q", err, want)
+	}
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if a.errorNumber != 0 {
+		t.Errorf("got %q, wanted %q", a.errorMessage, want)
+	}
+}
