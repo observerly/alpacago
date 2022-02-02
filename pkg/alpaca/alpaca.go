@@ -5,6 +5,8 @@ package alpaca
 import (
 	"fmt"
 
+	log "github.com/sirupsen/logrus"
+
 	"github.com/go-resty/resty/v2"
 )
 
@@ -246,6 +248,11 @@ type uint32listResponse struct {
 	ErrorMessage        string   `json:"ErrorMessage"`
 }
 
+/*
+	GetInt32ListResponse()
+
+	Global public method to work with calls returning int32listResponse
+*/
 func (a *ASCOMAlpacaAPIClient) GetUInt32ListResponse(deviceType string, deviceNumber uint, method string) ([]uint32, error) {
 	// Build the ASCOM endpoint:
 	url := a.getEndpoint(deviceType, deviceNumber, method)
@@ -266,6 +273,41 @@ func (a *ASCOMAlpacaAPIClient) GetUInt32ListResponse(deviceType string, deviceNu
 	result := (resp.Result().(*uint32listResponse))
 
 	return result.Value, nil
+}
+
+type putResponse struct {
+	ClientTransactionID uint32 `json:"ClientTransactionID"`
+	ServerTransactionID uint32 `json:"ServerTransactionID"`
+	ErrorNumber         int32  `json:"ErrorNumber"`
+	ErrorMessage        string `json:"ErrorMessage"`
+}
+
+func (a *ASCOMAlpacaAPIClient) Put(deviceType string, deviceNumber uint, method string, form map[string]string) error {
+	// Build the ASCOM endpoint:
+	url := a.getEndpoint(deviceType, deviceNumber, method)
+
+	resp, err := a.client.R().SetHeader("Content-Type", "application/x-www-form-urlencoded").SetResult(&putResponse{}).SetFormData(form).Put(url)
+
+	if err != nil {
+		return err
+	}
+
+	// If the response object has a REST error:
+	if resp.IsError() {
+		a.errorNumber = resp.StatusCode()
+		a.errorMessage = resp.String()
+	}
+
+	// Return the result:
+	result := (resp.Result().(*putResponse))
+
+	if result.ErrorNumber != 0 {
+		return fmt.Errorf("%d: %s", result.ErrorNumber, result.ErrorMessage)
+	}
+
+	log.Debugf("%v", result)
+
+	return nil
 }
 
 /*
