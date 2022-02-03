@@ -55,3 +55,13 @@ func (t *Telescope) GetAlignmentMode() (AlignmentMode, error) {
 	mode, err := t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "alignmentmode")
 	return AlignmentMode(mode), err
 }
+
+/*
+	GetAltitude()
+
+	@returns The altitude above the local horizon of the mount's current position (degrees, positive up)
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__altitude
+*/
+func (t *Telescope) GetAltitude() (float64, error) {
+	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "altitude")
+}
