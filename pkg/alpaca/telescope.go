@@ -42,3 +42,15 @@ func NewTelescope(clientId uint32, secure bool, domain string, ip string, port i
 
 	return &telescope
 }
+
+/*
+	GetAlignmentMode()
+
+	Returns the alignment mode of the mount (Alt/Az, Polar, German Polar).
+	The alignment mode is specified as an integer value from the
+	AlignmentModes Enum.
+*/
+func (t *Telescope) GetAlignmentMode() (AlignmentMode, error) {
+	mode, err := t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "alignmentmode")
+	return AlignmentMode(mode), err
+}
