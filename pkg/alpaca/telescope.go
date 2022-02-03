@@ -75,3 +75,13 @@ func (t *Telescope) GetAltitude() (float64, error) {
 func (t *Telescope) GetApertureArea() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "aperturearea")
 }
+
+/*
+	GetApertureDiameter()
+
+	@returns The telescope's effective aperture diameter (meters)
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__aperturediameter
+*/
+func (t *Telescope) GetApertureDiameter() (float64, error) {
+	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "aperturearea")
+}
