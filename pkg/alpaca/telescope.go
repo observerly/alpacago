@@ -65,3 +65,13 @@ func (t *Telescope) GetAlignmentMode() (AlignmentMode, error) {
 func (t *Telescope) GetAltitude() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "altitude")
 }
+
+/*
+	GetApertureArea()
+
+	@returns The area of the telescope's aperture, taking into account any obstructions (square meters)
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__aperturearea
+*/
+func (t *Telescope) GetApertureArea() (float64, error) {
+	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "aperturearea")
+}
