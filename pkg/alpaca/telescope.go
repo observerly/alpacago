@@ -59,7 +59,7 @@ func (t *Telescope) GetAlignmentMode() (AlignmentMode, error) {
 /*
 	GetAltitude()
 
-	@returns The altitude above the local horizon of the mount's current position (degrees, positive up)
+	@returns the altitude above the local horizon of the mount's current position (degrees, positive up)
 	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__altitude
 */
 func (t *Telescope) GetAltitude() (float64, error) {
@@ -69,7 +69,7 @@ func (t *Telescope) GetAltitude() (float64, error) {
 /*
 	GetApertureArea()
 
-	@returns The area of the telescope's aperture, taking into account any obstructions (square meters)
+	@returns the area of the telescope's aperture, taking into account any obstructions (square meters)
 	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__aperturearea
 */
 func (t *Telescope) GetApertureArea() (float64, error) {
@@ -79,7 +79,7 @@ func (t *Telescope) GetApertureArea() (float64, error) {
 /*
 	GetApertureDiameter()
 
-	@returns The telescope's effective aperture diameter (meters)
+	@returns the telescope's effective aperture diameter (meters)
 	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__aperturediameter
 */
 func (t *Telescope) GetApertureDiameter() (float64, error) {
