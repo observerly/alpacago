@@ -12,10 +12,10 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: CI/CD Build
     strategy:
       matrix:
-        go: [ '1.17.x', '1.16.x' ]
+        go: [ '1.17.x', ]
         os: [ ubuntu-latest ]
 
     runs-on: ${{ matrix.os }}
@@ -24,10 +24,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Go
+      - name: Go Setup
         uses: actions/setup-go@v2
         with:
           go-version: ${{ matrix.go }}
 
-      - name: Test
+      - name: Go Test
         run: go test ./... -race -coverprofile=coverage.txt -covermode=atomic
