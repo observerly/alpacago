@@ -95,3 +95,13 @@ func (t *Telescope) GetApertureDiameter() (float64, error) {
 func (t *Telescope) IsAtHome() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "athome")
 }
+
+/*
+	IsAtPark()
+
+	@returns true if the telescope has been put into the parked state by the seee Park() method.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__atpark
+*/
+func (t *Telescope) IsAtPark() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "atpark")
+}
