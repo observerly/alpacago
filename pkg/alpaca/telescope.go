@@ -113,5 +113,5 @@ func (t *Telescope) IsAtPark() (bool, error) {
 	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__azimuth
 */
 func (t *Telescope) GetAzimuth() (float64, error) {
-	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "altitude")
+	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "azimuth")
 }
