@@ -85,3 +85,14 @@ func (t *Telescope) GetApertureArea() (float64, error) {
 func (t *Telescope) GetApertureDiameter() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "aperturearea")
 }
+
+/*
+	IsAtHome()
+
+	@returns true if the mount is stopped in the Home position. Set only following a FindHome() operation,
+	and reset with any slew operation. This property must be False if the telescope does not support homing.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__athome
+*/
+func (t *Telescope) IsAtHome() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "athome")
+}
