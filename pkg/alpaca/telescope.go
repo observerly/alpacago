@@ -105,3 +105,13 @@ func (t *Telescope) IsAtHome() (bool, error) {
 func (t *Telescope) IsAtPark() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "atpark")
 }
+
+/*
+	GetAzimuth()
+
+	@returns the azimuth at the local horizon of the mount's current position (degrees, North-referenced, positive East/clockwise).
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__azimuth
+*/
+func (t *Telescope) GetAzimuth() (float64, error) {
+	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "altitude")
+}
