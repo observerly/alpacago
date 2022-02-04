@@ -89,8 +89,7 @@ func (t *Telescope) GetApertureDiameter() (float64, error) {
 /*
 	IsAtHome()
 
-	@returns true if the mount is stopped in the Home position. Set only following a FindHome() operation,
-	and reset with any slew operation. This property must be False if the telescope does not support homing.
+	@returns true if the mount is stopped in the Home position. This property will alwayts be false if the telescope does not support homing.
 	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__athome
 */
 func (t *Telescope) IsAtHome() (bool, error) {
