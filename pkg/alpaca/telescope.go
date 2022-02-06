@@ -185,3 +185,13 @@ func (t *Telescope) CanSetPark() (bool, error) {
 func (t *Telescope) CanSetPierSide() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetpierside")
 }
+
+/*
+	CanSetRightAscensionRate()
+
+	@returns true if the RightAscensionRate property can be changed to provide offset tracking in the right ascension axis.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetrightascensionrate
+*/
+func (t *Telescope) CanSetRightAscensionRate() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetrightascensionrate")
+}
