@@ -195,3 +195,13 @@ func (t *Telescope) CanSetPierSide() (bool, error) {
 func (t *Telescope) CanSetRightAscensionRate() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetrightascensionrate")
 }
+
+/*
+	CanSetTracking()
+
+	@returns true if the Tracking property can be changed, turning telescope sidereal tracking on and off.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansettracking
+*/
+func (t *Telescope) CanSetTracking() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansettracking")
+}
