@@ -165,3 +165,13 @@ func (t *Telescope) CanSetDeclinationRate() (bool, error) {
 func (t *Telescope) CanSetGuideRates() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetguiderates")
 }
+
+/*
+	CanSetPark()
+
+	@returns true if this telescope is capable of programmed parking (Park() method)
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetpark
+*/
+func (t *Telescope) CanSetPark() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetpark")
+}
