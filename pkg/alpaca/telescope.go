@@ -125,3 +125,13 @@ func (t *Telescope) GetAzimuth() (float64, error) {
 func (t *Telescope) CanFindHome() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canfindhome")
 }
+
+/*
+	CanPark()
+
+	@returns true if this telescope is capable of programmed parking (Park() method)
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canpark
+*/
+func (t *Telescope) CanPark() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canpark")
+}
