@@ -3,7 +3,10 @@ package alpaca
 import (
 	"math"
 	"testing"
+	"time"
 )
+
+var delay time.Duration = 1
 
 func TestNewTelescopeBaseURL(t *testing.T) {
 	telescope := NewTelescope(65535, false, "", "0.0.0.0", 8000, 0, 1)
@@ -72,6 +75,8 @@ func TestNewTelescopeTrackingMode(t *testing.T) {
 }
 
 func TestNewTelescopeAlignmentMode(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
 	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
 
 	var got, err = telescope.GetAlignmentMode()
@@ -92,6 +97,8 @@ func TestNewTelescopeAlignmentMode(t *testing.T) {
 }
 
 func TestNewTelescopeAltitude(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
 	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
 
 	var got, err = telescope.GetAltitude()
@@ -112,6 +119,8 @@ func TestNewTelescopeAltitude(t *testing.T) {
 }
 
 func TestNewTelescopeApertureArea(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
 	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
 
 	var got, err = telescope.GetApertureArea()
@@ -132,6 +141,8 @@ func TestNewTelescopeApertureArea(t *testing.T) {
 }
 
 func TestNewTelescopeApertureDiameter(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
 	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
 
 	var got, err = telescope.GetApertureDiameter()
@@ -152,6 +163,8 @@ func TestNewTelescopeApertureDiameter(t *testing.T) {
 }
 
 func TestNewTelescopeAtHome(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
 	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
 
 	var got, err = telescope.IsAtHome()
@@ -172,6 +185,8 @@ func TestNewTelescopeAtHome(t *testing.T) {
 }
 
 func TestNewTelescopeAtPark(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
 	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
 
 	var got, err = telescope.IsAtPark()
@@ -192,6 +207,8 @@ func TestNewTelescopeAtPark(t *testing.T) {
 }
 
 func TestNewTelescopeAzimuth(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
 	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
 
 	var got, err = telescope.GetAzimuth()
@@ -212,6 +229,8 @@ func TestNewTelescopeAzimuth(t *testing.T) {
 }
 
 func TestNewTelescopeCanFindHome(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
 	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
 
 	var got, err = telescope.CanFindHome()
