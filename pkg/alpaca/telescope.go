@@ -183,5 +183,5 @@ func (t *Telescope) CanSetPark() (bool, error) {
 	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetpierside
 */
 func (t *Telescope) CanSetPierSide() (bool, error) {
-	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetpark")
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetpierside")
 }
