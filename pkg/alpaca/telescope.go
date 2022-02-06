@@ -175,3 +175,13 @@ func (t *Telescope) CanSetGuideRates() (bool, error) {
 func (t *Telescope) CanSetPark() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetpark")
 }
+
+/*
+	CanSetPierSide()
+
+	@returns true if the SideOfPier property can be set, meaning that the mount can be forced to flip.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetpierside
+*/
+func (t *Telescope) CanSetPierSide() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetpark")
+}
