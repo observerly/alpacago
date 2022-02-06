@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-var delay time.Duration = 2
+var delay time.Duration = 6
 
 func TestNewTelescopeBaseURL(t *testing.T) {
 	telescope := NewTelescope(65535, false, "", "0.0.0.0", 8000, 0, 1)
