@@ -425,3 +425,25 @@ func TestNewTelescopeCanSetTracking(t *testing.T) {
 		t.Errorf("got %q, wanted %t", telescope.Alpaca.ErrorMessage, want)
 	}
 }
+
+func TestNewTelescopeCanSlew(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var got, err = telescope.CanSlew()
+
+	var want bool = true
+
+	if err != nil {
+		t.Errorf("got %q, wanted %t", err, want)
+	}
+
+	if got != want {
+		t.Errorf("got %t, wanted %t", got, want)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %t", telescope.Alpaca.ErrorMessage, want)
+	}
+}
