@@ -145,3 +145,13 @@ func (t *Telescope) CanPark() (bool, error) {
 func (t *Telescope) CanPulseGuide() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canpulseguide")
 }
+
+/*
+	CanSetDeclinationRate()
+
+	@returns true if the DeclinationRate property can be changed to provide offset tracking in the declination axis.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetdeclinationrate
+*/
+func (t *Telescope) CanSetDeclinationRate() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetdeclinationrate")
+}
