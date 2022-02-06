@@ -155,3 +155,13 @@ func (t *Telescope) CanPulseGuide() (bool, error) {
 func (t *Telescope) CanSetDeclinationRate() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetdeclinationrate")
 }
+
+/*
+	CanSetGuideRates()
+
+	@returns true if the guide rate properties used for PulseGuide(GuideDirections, Int32) can ba adjusted.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetguiderates
+*/
+func (t *Telescope) CanSetGuideRates() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetguiderates")
+}
