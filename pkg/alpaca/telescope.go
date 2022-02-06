@@ -135,3 +135,13 @@ func (t *Telescope) CanFindHome() (bool, error) {
 func (t *Telescope) CanPark() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canpark")
 }
+
+/*
+	CanPulseGuide()
+
+	@returns true if this telescope is capable of software-pulsed guiding (via the PulseGuide(GuideDirections, Int32) method)
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canpulseguide
+*/
+func (t *Telescope) CanPulseGuide() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canpulseguide")
+}
