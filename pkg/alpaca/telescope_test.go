@@ -210,3 +210,23 @@ func TestNewTelescopeAzimuth(t *testing.T) {
 		t.Errorf("got %q, wanted %f", telescope.Alpaca.ErrorMessage, want)
 	}
 }
+
+func TestNewTelescopeCanFindHome(t *testing.T) {
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var got, err = telescope.CanFindHome()
+
+	var want bool = true
+
+	if err != nil {
+		t.Errorf("got %q, wanted %t", err, want)
+	}
+
+	if got != want {
+		t.Errorf("got %t, wanted %t", got, want)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %t", telescope.Alpaca.ErrorMessage, want)
+	}
+}
