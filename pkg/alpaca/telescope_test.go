@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-var delay time.Duration = 6
+var delay time.Duration = 8
 
 func TestNewTelescopeBaseURL(t *testing.T) {
 	telescope := NewTelescope(65535, false, "", "0.0.0.0", 8000, 0, 1)
@@ -322,6 +322,28 @@ func TestNewTelescopeCanSetGuideRates(t *testing.T) {
 	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
 
 	var got, err = telescope.CanSetGuideRates()
+
+	var want bool = true
+
+	if err != nil {
+		t.Errorf("got %q, wanted %t", err, want)
+	}
+
+	if got != want {
+		t.Errorf("got %t, wanted %t", got, want)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %t", telescope.Alpaca.ErrorMessage, want)
+	}
+}
+
+func TestNewTelescopeCanSetPark(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var got, err = telescope.CanSetPark()
 
 	var want bool = true
 
