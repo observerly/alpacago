@@ -205,3 +205,13 @@ func (t *Telescope) CanSetRightAscensionRate() (bool, error) {
 func (t *Telescope) CanSetTracking() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansettracking")
 }
+
+/*
+	CanSlew()
+
+	@returns true if this telescope is capable of programmed slewing (synchronous or asynchronous) to equatorial coordinates
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canslew
+*/
+func (t *Telescope) CanSlew() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canslew")
+}
