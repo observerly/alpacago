@@ -275,3 +275,15 @@ func (t *Telescope) CanSyncAltAz() (bool, error) {
 func (t *Telescope) CanUnPark() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canunpark")
 }
+
+/*
+	GetDeclination()
+
+	@returns the declination (degrees) of the mount's current equatorial coordinates, in the coordinate
+	system given by the EquatorialSystem property. Reading the property will raise an error if the value
+	is unavailable.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__declination
+*/
+func (t *Telescope) GetDeclination() (float64, error) {
+	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "declination")
+}
