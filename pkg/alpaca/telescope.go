@@ -267,6 +267,16 @@ func (t *Telescope) CanSyncAltAz() (bool, error) {
 }
 
 /*
+	CanUnPark()
+
+	@returns true if this telescope is capable of programmed unparking (UnPark() method)
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canunpark
+*/
+func (t *Telescope) CanUnPark() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canunpark")
+}
+
+/*
 	GetDeclination()
 
 	@returns the declination (degrees) of the mount's current equatorial coordinates, in the coordinate
