@@ -215,3 +215,13 @@ func (t *Telescope) CanSetTracking() (bool, error) {
 func (t *Telescope) CanSlew() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canslew")
 }
+
+/*
+	CanSlewAltAz()
+
+	@returns true if this telescope is capable of programmed slewing (synchronous or asynchronous) to local horizontal coordinates
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canslewaltaz
+*/
+func (t *Telescope) CanSlewAltAz() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canslewaltaz")
+}
