@@ -263,5 +263,5 @@ func (t *Telescope) CanSync() (bool, error) {
 	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansyncaltaz
 */
 func (t *Telescope) CanSyncAltAz() (bool, error) {
-	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansync")
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansyncaltaz")
 }
