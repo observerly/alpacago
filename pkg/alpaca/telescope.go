@@ -297,3 +297,13 @@ func (t *Telescope) GetDeclination() (float64, error) {
 func (t *Telescope) GetDeclinationRate() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "declinationrate")
 }
+
+/*
+	DoesRefraction()
+
+	@returns true if the telescope or driver applies atmospheric refraction to coordinates
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__doesrefraction
+*/
+func (t *Telescope) DoesRefraction() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "doesrefraction")
+}
