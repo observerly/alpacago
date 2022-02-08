@@ -335,3 +335,13 @@ func (t *Telescope) GetEquatorialSystem() (EquatorialSystem, error) {
 func (t *Telescope) GetFocalLength() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "focallength")
 }
+
+/*
+	IsPulseGuiding()
+
+	@returns true if a PulseGuide(GuideDirections, Int32) command is in progress, false otherwise
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__ispulseguiding
+*/
+func (t *Telescope) IsPulseGuiding() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "ispulseguiding")
+}
