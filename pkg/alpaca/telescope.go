@@ -325,3 +325,13 @@ func (t *Telescope) GetEquatorialSystem() (EquatorialSystem, error) {
 	system, err := t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "equatorialsystem")
 	return EquatorialSystem(system), err
 }
+
+/*
+	GetFocalLength()
+
+	@returns the telescope's focal length in meters
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__focallength
+*/
+func (t *Telescope) GetFocalLength() (float64, error) {
+	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "focallength")
+}
