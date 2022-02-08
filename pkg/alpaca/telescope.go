@@ -287,3 +287,13 @@ func (t *Telescope) CanUnPark() (bool, error) {
 func (t *Telescope) GetDeclination() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "declination")
 }
+
+/*
+	GetDeclinationRate()
+
+	@returns the declination tracking rate (arcseconds per second, default = 0.0)
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__declinationrate
+*/
+func (t *Telescope) GetDeclinationRate() (float64, error) {
+	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "declinationrate")
+}
