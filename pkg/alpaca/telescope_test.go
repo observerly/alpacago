@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-var delay time.Duration = 8
+var delay time.Duration = 9
 
 func TestNewTelescopeBaseURL(t *testing.T) {
 	telescope := NewTelescope(65535, false, "", "0.0.0.0", 8000, 0, 1)
@@ -643,5 +643,26 @@ func TestNewTelescopeDoesRefraction(t *testing.T) {
 
 	if telescope.Alpaca.ErrorNumber != 0 {
 		t.Errorf("got %q, wanted %t", telescope.Alpaca.ErrorMessage, want)
+	}
+}
+func TestNewTelescopeEquatorialSystem(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var got, err = telescope.GetEquatorialSystem()
+
+	var want = Topocentric
+
+	if err != nil {
+		t.Errorf("got %q, wanted %q", err, want)
+	}
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %d", telescope.Alpaca.ErrorMessage, want)
 	}
 }

@@ -4,6 +4,8 @@ type AlignmentMode int32
 
 type AxisType int
 
+type EquatorialSystem int
+
 type TrackingMode int
 
 const (
@@ -16,6 +18,11 @@ const (
 	AxisAzmRa AxisType = iota
 	AxisAltDec
 	AxisTertiary
+)
+
+const (
+	Topocentric EquatorialSystem = iota
+	J2000
 )
 
 const (
@@ -306,4 +313,15 @@ func (t *Telescope) GetDeclinationRate() (float64, error) {
 */
 func (t *Telescope) DoesRefraction() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "doesrefraction")
+}
+
+/*
+	GetEquatorialSystem()
+
+	@returns the current equatorial coordinate system used by this telescope (e.g. Topocentric or J2000).
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__equatorialsystem
+*/
+func (t *Telescope) GetEquatorialSystem() (EquatorialSystem, error) {
+	system, err := t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "equatorialsystem")
+	return EquatorialSystem(system), err
 }
