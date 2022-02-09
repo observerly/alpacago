@@ -345,3 +345,14 @@ func (t *Telescope) GetFocalLength() (float64, error) {
 func (t *Telescope) IsPulseGuiding() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "ispulseguiding")
 }
+
+/*
+	GetRightAscension()
+
+	@returns the right ascension (hours) of the mount's current equatorial coordinates, in the coordinate
+	system given by the EquatorialSystem property
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__rightascension
+*/
+func (t *Telescope) GetRightAscension() (float64, error) {
+	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "declination")
+}
