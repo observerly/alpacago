@@ -732,3 +732,25 @@ func TestNewTelescopeRightAscension(t *testing.T) {
 		t.Errorf("got %q, wanted %f", telescope.Alpaca.ErrorMessage, want)
 	}
 }
+
+func TestNewTelescopeRightAscensionRate(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var got, err = telescope.GetRightAscensionRate()
+
+	var want float64 = 1.1
+
+	if err != nil {
+		t.Errorf("got %q, wanted %f", err, want)
+	}
+
+	if math.Abs(got-want) > 0.00001 {
+		t.Errorf("got %f, wanted %f", got, want)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %f", telescope.Alpaca.ErrorMessage, want)
+	}
+}
