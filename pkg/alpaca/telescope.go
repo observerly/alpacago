@@ -436,3 +436,13 @@ func (t *Telescope) GetSiteLongitude() (float64, error) {
 func (t *Telescope) IsSlewing() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "slewing")
 }
+
+/*
+	GetSlewSettleTime()
+
+	@returns the post-slew settling time (in seconds).
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__slewsettletime
+*/
+func (t *Telescope) GetSlewSettleTime() (int32, error) {
+	return t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "slewsettletime")
+}

@@ -886,3 +886,25 @@ func TestNewTelescopeSlewing(t *testing.T) {
 		t.Errorf("got %q, wanted %t", telescope.Alpaca.ErrorMessage, want)
 	}
 }
+
+func TestNewTelescopeGetSlewSettleTime(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var got, err = telescope.GetSlewSettleTime()
+
+	var want int32 = 0
+
+	if err != nil {
+		t.Errorf("got %q, wanted %d", err, want)
+	}
+
+	if got != want {
+		t.Errorf("got %d, wanted %d", got, want)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %d", telescope.Alpaca.ErrorMessage, want)
+	}
+}
