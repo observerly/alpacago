@@ -425,3 +425,14 @@ func (t *Telescope) GetSiteLatitude() (float64, error) {
 func (t *Telescope) GetSiteLongitude() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "sitelongitude")
 }
+
+/*
+	IsSlewing()
+
+	@returns true  if telescope is currently moving in response to one of the Slew methods or the MoveAxis(TelescopeAxes,
+	Double) method, false at all other times.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__slewing
+*/
+func (t *Telescope) IsSlewing() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "slewing")
+}
