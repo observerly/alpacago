@@ -6,6 +6,8 @@ type AxisType int
 
 type EquatorialSystem int
 
+type PierPointingMode int32
+
 type TrackingMode int
 
 const (
@@ -23,6 +25,12 @@ const (
 const (
 	Topocentric EquatorialSystem = iota
 	J2000
+)
+
+const (
+	PierUnknown PierPointingMode = -1
+	PierEast    PierPointingMode = 0
+	PierWest    PierPointingMode = 1
 )
 
 const (
@@ -365,4 +373,15 @@ func (t *Telescope) GetRightAscension() (float64, error) {
 */
 func (t *Telescope) GetRightAscensionRate() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "rightascensionrate")
+}
+
+/*
+	GetSideOfPier()
+
+	@returns the pointing state of the mount. 0 = pierEast, 1 = pierWest, -1= pierUnknown
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__sideofpier
+*/
+func (t *Telescope) GetSideOfPier() (PierPointingMode, error) {
+	mode, err := t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "sideofpier")
+	return PierPointingMode(mode), err
 }
