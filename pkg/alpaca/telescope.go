@@ -385,3 +385,13 @@ func (t *Telescope) GetSideOfPier() (PierPointingMode, error) {
 	mode, err := t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "sideofpier")
 	return PierPointingMode(mode), err
 }
+
+/*
+	GetSiderealTime()
+
+	@returns the local apparent sidereal time from the telescope's internal clock (hours, sidereal).
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__siderealtime
+*/
+func (t *Telescope) GetSiderealTime() (float64, error) {
+	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "siderealtime")
+}
