@@ -415,3 +415,13 @@ func (t *Telescope) GetSiteElevation() (float64, error) {
 func (t *Telescope) GetSiteLatitude() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "sitelatitude")
 }
+
+/*
+	GetSiteLongitude()
+
+	@returns the geodetic(map) longitude (degrees, positive East, WGS84) of the site at which the telescope is located.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__sitelongitude
+*/
+func (t *Telescope) GetSiteLongitude() (float64, error) {
+	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "sitelongitude")
+}
