@@ -354,5 +354,5 @@ func (t *Telescope) IsPulseGuiding() (bool, error) {
 	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__rightascension
 */
 func (t *Telescope) GetRightAscension() (float64, error) {
-	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "declination")
+	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "rightascension")
 }
