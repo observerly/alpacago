@@ -395,3 +395,13 @@ func (t *Telescope) GetSideOfPier() (PierPointingMode, error) {
 func (t *Telescope) GetSiderealTime() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "siderealtime")
 }
+
+/*
+	GetSiteElevation()
+
+	@returns the elevation above mean sea level (meters) of the site at which the telescope is located.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__siteelevation
+*/
+func (t *Telescope) GetSiteElevation() (float64, error) {
+	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "siteelevation")
+}
