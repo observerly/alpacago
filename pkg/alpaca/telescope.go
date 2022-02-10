@@ -466,3 +466,13 @@ func (t *Telescope) GetTargetDeclination() (float64, error) {
 func (t *Telescope) GetTargetRightAscension() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "targetrightascension")
 }
+
+/*
+	IsTracking()
+
+	@returns the state of the telescope's sidereal tracking drive.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__tracking
+*/
+func (t *Telescope) IsTracking() (bool, error) {
+	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "tracking")
+}
