@@ -456,3 +456,13 @@ func (t *Telescope) GetSlewSettleTime() (int32, error) {
 func (t *Telescope) GetTargetDeclination() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "targetdeclination")
 }
+
+/*
+	GetTargetRightAscension()
+
+	@returns the right ascension (hours) for the target of an equatorial slew or sync operation
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__targetrightascension
+*/
+func (t *Telescope) GetTargetRightAscension() (float64, error) {
+	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "targetrightascension")
+}
