@@ -446,3 +446,13 @@ func (t *Telescope) IsSlewing() (bool, error) {
 func (t *Telescope) GetSlewSettleTime() (int32, error) {
 	return t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "slewsettletime")
 }
+
+/*
+	GetTargetDeclination()
+
+	@returns the declination (degrees, positive North) for the target of an equatorial slew or sync operation.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__targetdeclination
+*/
+func (t *Telescope) GetTargetDeclination() (float64, error) {
+	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "targetdeclination")
+}
