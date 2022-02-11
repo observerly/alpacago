@@ -1,5 +1,7 @@
 package alpaca
 
+import "time"
+
 type AlignmentMode int32
 
 type AxisType int
@@ -485,4 +487,19 @@ func (t *Telescope) IsTracking() (bool, error) {
 */
 func (t *Telescope) GetTrackingRate() (int32, error) {
 	return t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "trackingrate")
+}
+
+/*
+	GetUTCDate()
+
+	@returns the UTC date/time of the telescope's internal clock in ISO 8601 format including fractional
+	seconds. The general format (in Microsoft custom date format style) is yyyy-MM-ddTHH:mm:ss.fffffffZ
+	e.g. 2016-03-04T17:45:31.1234567Z or 2016-11-14T07:03:08.1234567Z Please note the compulsary trailing
+	Z indicating the 'Zulu', UTC time zone.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__utcdate
+*/
+func (t *Telescope) GetUTCDate() (time.Time, error) {
+	utc, err := t.Alpaca.GetStringResponse("telescope", t.DeviceNumber, "utcdate")
+	date, _ := time.Parse("yyyy-MM-ddTHH:mm:ss.fffffffZ", utc)
+	return date, err
 }
