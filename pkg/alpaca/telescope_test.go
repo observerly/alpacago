@@ -1018,3 +1018,32 @@ func TestNewTelescopeGetUTCDate(t *testing.T) {
 		t.Errorf("got %q, wanted %q", telescope.Alpaca.ErrorMessage, want.String())
 	}
 }
+
+func TestNewTelescopeGetAxisRates(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var got, err = telescope.GetAxisRates(0)
+
+	var want = make(map[string]float64)
+
+	want["Maximum"] = 1.5
+	want["Minimum"] = 1.5
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got["Maximum"] != want["Maximum"] {
+		t.Errorf("got %f, wanted %f", got["Maximum"], want["Maximum"])
+	}
+
+	if got["Minimum"] != want["Minimum"] {
+		t.Errorf("got %f, wanted %f", got["Minimum"], want["Minimum"])
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}

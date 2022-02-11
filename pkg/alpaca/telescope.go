@@ -1,6 +1,9 @@
 package alpaca
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 type AlignmentMode int32
 
@@ -46,6 +49,14 @@ type Telescope struct {
 	Alpaca       *ASCOMAlpacaAPIClient
 	DeviceNumber uint
 	Tracking     TrackingMode
+}
+
+type AxisRatesResponse struct {
+	Value               []map[string]float64 `json:"Value"`
+	ClientTransactionID int32                `json:"ClientTransactionID"`
+	ServerTransactionID int32                `json:"ServerTransactionID"`
+	ErrorNumber         int32                `json:"ErrorNumber"`
+	ErrorMessage        string               `json:"ErrorMessage"`
 }
 
 func NewTelescope(clientId uint32, secure bool, domain string, ip string, port int32, deviceNumber uint, tm TrackingMode) *Telescope {
@@ -101,6 +112,31 @@ func (t *Telescope) GetApertureArea() (float64, error) {
 */
 func (t *Telescope) GetApertureDiameter() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "aperturearea")
+}
+
+/*
+	GetAxisRates()
+
+	@returns the rates at which the telescope may be moved about the specified axis by the MoveAxis(TelescopeAxes, Double) method.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__axisrates
+*/
+func (t *Telescope) GetAxisRates(axis AxisType) (map[string]float64, error) {
+	url := t.Alpaca.getEndpoint("telescope", t.DeviceNumber, "axisrates")
+
+	querystring := fmt.Sprintf("axis=%d&%s", axis, t.Alpaca.getQueryString())
+
+	// Setup the resty client:
+	resp, err := t.Alpaca.Client.R().SetResult(&AxisRatesResponse{}).SetQueryString(querystring).SetHeader("Accept", "application/json").Get(url)
+
+	// If the response object has a REST error:
+	if err != nil {
+		return map[string]float64{}, err
+	}
+
+	// Return the result:
+	result := (resp.Result().(*AxisRatesResponse))
+
+	return result.Value[0], nil
 }
 
 /*
