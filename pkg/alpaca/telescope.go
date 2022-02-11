@@ -180,6 +180,36 @@ func (t *Telescope) CanFindHome() (bool, error) {
 }
 
 /*
+	CanMoveAxis()
+
+	@returns true if this telescope can move the requested axis.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canmoveaxis
+*/
+func (t *Telescope) CanMoveAxis(axis AxisType) (bool, error) {
+	url := t.Alpaca.getEndpoint("telescope", t.DeviceNumber, "canmoveaxis")
+
+	querystring := fmt.Sprintf("axis=%d&%s", axis, t.Alpaca.getQueryString())
+
+	// Setup the resty client:
+	resp, err := t.Alpaca.Client.R().SetResult(&booleanResponse{}).SetQueryString(querystring).SetHeader("Accept", "application/json").Get(url)
+
+	if err != nil {
+		return false, err
+	}
+
+	// If the response object has a REST error:
+	if resp.IsError() {
+		t.Alpaca.ErrorNumber = resp.StatusCode()
+		t.Alpaca.ErrorMessage = resp.String()
+	}
+
+	// Return the result:
+	result := (resp.Result().(*booleanResponse))
+
+	return result.Value, nil
+}
+
+/*
 	CanPark()
 
 	@returns true if this telescope is capable of programmed parking (Park() method)
