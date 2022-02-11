@@ -996,3 +996,25 @@ func TestNewTelescopeGetTrackingRate(t *testing.T) {
 		t.Errorf("got %q, wanted %d", telescope.Alpaca.ErrorMessage, want)
 	}
 }
+
+func TestNewTelescopeGetUTCDate(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var got, err = telescope.GetUTCDate()
+
+	var want time.Time = time.Date(1, 1, 1, 0, 0, 0, 0, time.UTC)
+
+	if err != nil {
+		t.Errorf("got %q, wanted %q", err, want.String())
+	}
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want.String())
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", telescope.Alpaca.ErrorMessage, want.String())
+	}
+}
