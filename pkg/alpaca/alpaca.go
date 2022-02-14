@@ -286,7 +286,7 @@ func (a *ASCOMAlpacaAPIClient) Put(deviceType string, deviceNumber uint, method 
 	// Build the ASCOM endpoint:
 	url := a.getEndpoint(deviceType, deviceNumber, method)
 
-	resp, err := a.Client.R().SetHeader("Content-Type", "application/x-www-form-urlencoded").SetResult(&putResponse{}).SetFormData(form).Put(url)
+	resp, err := a.Client.R().SetHeader("Content-Type", "application/x-www-form-urlencoded").SetResult(&putResponse{}).SetHeader("Accept", "application/json").SetFormData(form).Put(url)
 
 	if err != nil {
 		return err
