@@ -382,6 +382,24 @@ func (t *Telescope) GetDeclinationRate() (float64, error) {
 }
 
 /*
+	SetDeclinationRate()
+
+	@returns an error or nil, if nil it sets the declination tracking rate (arcseconds per second)
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__declinationrate
+*/
+func (t *Telescope) SetDeclinationRate(declinationRate float64) error {
+	t.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"DeclinationRate":     fmt.Sprintf("%f", declinationRate),
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "declinationrate", form)
+}
+
+/*
 	DoesRefraction()
 
 	@returns true if the telescope or driver applies atmospheric refraction to coordinates
