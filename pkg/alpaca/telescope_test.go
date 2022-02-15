@@ -646,6 +646,22 @@ func TestNewTelescopeDeclinationRate(t *testing.T) {
 	}
 }
 
+func TestNewTelescopeDeclinationRatePut(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var err = telescope.SetDeclinationRate(5)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewTelescopeDoesRefraction(t *testing.T) {
 	time.Sleep(delay * time.Second)
 
