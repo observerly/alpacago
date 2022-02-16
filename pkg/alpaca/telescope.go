@@ -482,6 +482,24 @@ func (t *Telescope) GetRightAscensionRate() (float64, error) {
 }
 
 /*
+	SetRightAscensionRate()
+
+	@returns an error or nil, if nil it sets the right ascension tracking rate (arcseconds per second)
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__rightascensionrate
+*/
+func (t *Telescope) SetRightAscensionRate(rightAscensionRate float64) error {
+	t.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"RightAscensionRate":  fmt.Sprintf("%f", rightAscensionRate),
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "rightascensionrate", form)
+}
+
+/*
 	GetSideOfPier()
 
 	@returns the pointing state of the mount. 0 = pierEast, 1 = pierWest, -1= pierUnknown

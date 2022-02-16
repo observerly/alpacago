@@ -810,6 +810,22 @@ func TestNewTelescopeRightAscensionRate(t *testing.T) {
 	}
 }
 
+func TestNewTelescopeSetRightAscensionRatePut(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var err = telescope.SetRightAscensionRate(5)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewTelescopeSideOfPier(t *testing.T) {
 	time.Sleep(delay * time.Second)
 
