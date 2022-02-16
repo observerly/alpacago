@@ -1,6 +1,7 @@
 package alpaca
 
 import (
+	"errors"
 	"fmt"
 	"time"
 )
@@ -508,6 +509,28 @@ func (t *Telescope) SetRightAscensionRate(rightAscensionRate float64) error {
 func (t *Telescope) GetSideOfPier() (PierPointingMode, error) {
 	mode, err := t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "sideofpier")
 	return PierPointingMode(mode), err
+}
+
+/*
+	SetSideOfPier()
+
+	@returns an error or nil, if nil it sets the pointing state of the mount. 0 = pierEast, 1 = pierWest
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__sideofpier
+*/
+func (t *Telescope) SetSideOfPier(sideOfPier PierPointingMode) error {
+	t.Alpaca.TransactionId++
+
+	if sideOfPier != 1 && sideOfPier != 0 {
+		return errors.New("Please provide a valid pointing state for the mount e.g., eiher 0 = pierEast, 1 = pierWest")
+	}
+
+	var form map[string]string = map[string]string{
+		"SideOfPier":          fmt.Sprintf("%d", sideOfPier),
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "sideofpier", form)
 }
 
 /*
