@@ -410,6 +410,26 @@ func (t *Telescope) DoesRefraction() (bool, error) {
 }
 
 /*
+	SetDoesRefraction()
+
+	Determines whether atmospheric refraction is applied to coordinates.
+
+	@returns an error or nil, if nil causes the rotator to move Position degrees relative to the current position value.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__doesrefraction
+*/
+func (t *Telescope) SetDoesRefraction(doesRefraction bool) error {
+	t.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"DoesRefraction":      fmt.Sprintf("%t", doesRefraction),
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "doesrefraction", form)
+}
+
+/*
 	GetEquatorialSystem()
 
 	@returns the current equatorial coordinate system used by this telescope (e.g. Topocentric or J2000).
