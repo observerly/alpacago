@@ -848,6 +848,50 @@ func TestNewTelescopeSideOfPier(t *testing.T) {
 	}
 }
 
+func TestNewTelescopeSetSideOfPierEastPut(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var err = telescope.SetSideOfPier(0)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewTelescopeSetSideOfPierWestPut(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var err = telescope.SetSideOfPier(1)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewTelescopeSetSideOfPierInvalidPut(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var err = telescope.SetSideOfPier(-1)
+
+	if err == nil {
+		t.Errorf("got %q", err)
+	}
+}
+
 func TestNewTelescopeSiderealTime(t *testing.T) {
 	time.Sleep(delay * time.Second)
 
