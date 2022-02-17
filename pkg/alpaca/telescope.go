@@ -554,6 +554,29 @@ func (t *Telescope) GetSiteElevation() (float64, error) {
 }
 
 /*
+	SetSiteElevation()
+
+	@params siteElevation - the site elevation above mean sea level (metres).
+	@returns an error or nil, if nil it sets the elevation above mean sea level (metres) of the site at which the telescope is located.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__siteelevation
+*/
+func (t *Telescope) SetSiteElevation(siteElevation float64) error {
+	t.Alpaca.TransactionId++
+
+	if siteElevation < -1000 || siteElevation > 10000 {
+		return errors.New("Please provide a realistic site elevation, e.g., greater than or equal to -1000m, but less than 10000m relative to mean sea level")
+	}
+
+	var form map[string]string = map[string]string{
+		"SiteElevation":       fmt.Sprintf("%f", siteElevation),
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "siteelevation", form)
+}
+
+/*
 	GetSiteLatitude()
 
 	@returns the geodetic(map) latitude (degrees, positive North, WGS84) of the site at which the telescope is located.
