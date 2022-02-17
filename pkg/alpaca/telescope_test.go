@@ -1027,7 +1027,7 @@ func TestNewTelescopeSiteLatitudePut(t *testing.T) {
 
 	var err = telescope.SetSiteLatitude(latitude)
 
-	if err == nil {
+	if err != nil {
 		t.Errorf("got %q", err)
 	}
 }
