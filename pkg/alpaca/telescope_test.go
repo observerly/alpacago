@@ -8,6 +8,8 @@ import (
 
 var delay time.Duration = 9
 
+var latitude float64 = 19.820611
+
 func TestNewTelescopeBaseURL(t *testing.T) {
 	telescope := NewTelescope(65535, false, "", "0.0.0.0", 8000, 0, 1)
 
@@ -991,6 +993,42 @@ func TestNewTelescopeSiteLatitude(t *testing.T) {
 
 	if telescope.Alpaca.ErrorNumber != 0 {
 		t.Errorf("got %q, wanted %f", telescope.Alpaca.ErrorMessage, want)
+	}
+}
+
+func TestNewTelescopeSiteLatitudePutInvalid90Minus(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var err = telescope.SetSiteLatitude(-91)
+
+	if err == nil {
+		t.Errorf("got %q", err)
+	}
+}
+
+func TestNewTelescopeSiteLatitudePutInvalid90Plus(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var err = telescope.SetSiteLatitude(91)
+
+	if err == nil {
+		t.Errorf("got %q", err)
+	}
+}
+
+func TestNewTelescopeSiteLatitudePut(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var err = telescope.SetSiteLatitude(latitude)
+
+	if err == nil {
+		t.Errorf("got %q", err)
 	}
 }
 

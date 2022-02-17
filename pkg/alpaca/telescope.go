@@ -587,6 +587,28 @@ func (t *Telescope) GetSiteLatitude() (float64, error) {
 }
 
 /*
+	SetSiteLatitude()
+
+	@returns an error or nil, if nil it sets the observing site's latitude (degrees).
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__sitelatitude
+*/
+func (t *Telescope) SetSiteLatitude(siteLatitude float64) error {
+	t.Alpaca.TransactionId++
+
+	if siteLatitude <= -90 || siteLatitude >= 90 {
+		return errors.New("Please provide a valid latitude between -90° and +90°")
+	}
+
+	var form map[string]string = map[string]string{
+		"SiteLatitude":        fmt.Sprintf("%f", siteLatitude),
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "sitelatitude", form)
+}
+
+/*
 	GetSiteLongitude()
 
 	@returns the geodetic(map) longitude (degrees, positive East, WGS84) of the site at which the telescope is located.
