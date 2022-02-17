@@ -619,6 +619,28 @@ func (t *Telescope) GetSiteLongitude() (float64, error) {
 }
 
 /*
+	SetSiteLongitude()
+
+	@returns an error or nil, if nil it sets the observing site's longitude (degrees, positive East, WGS84).
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__sitelongitude
+*/
+func (t *Telescope) SetSiteLongitude(siteLongitude float64) error {
+	t.Alpaca.TransactionId++
+
+	if siteLongitude <= -180 || siteLongitude >= 180 {
+		return errors.New("Please provide a valid longitude between -180° and +180°")
+	}
+
+	var form map[string]string = map[string]string{
+		"SiteLongitude":       fmt.Sprintf("%f", siteLongitude),
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "sitelongitude", form)
+}
+
+/*
 	IsSlewing()
 
 	@returns true  if telescope is currently moving in response to one of the Slew methods or the MoveAxis(TelescopeAxes,
