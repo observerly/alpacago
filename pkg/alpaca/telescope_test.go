@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-var delay time.Duration = 9
+var delay time.Duration = 10
 
 var latitude float64 = 19.820611
 
