@@ -936,6 +936,42 @@ func TestNewTelescopeSiteElevation(t *testing.T) {
 	}
 }
 
+func TestNewTelescopeSiteElevationPut(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	// Elevation at Mauna Kea, Hawaii:
+	var err = telescope.SetSiteElevation(4207)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+}
+
+func TestNewTelescopeSiteElevationPutUnrealisticallyHigh(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var err = telescope.SetSiteElevation(20000)
+
+	if err == nil {
+		t.Errorf("got %q", err)
+	}
+}
+func TestNewTelescopeSiteElevationPutUnrealisticallyLow(t *testing.T) {
+	time.Sleep(delay * time.Second)
+
+	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
+
+	var err = telescope.SetSiteElevation(-1001)
+
+	if err == nil {
+		t.Errorf("got %q", err)
+	}
+}
+
 func TestNewTelescopeSiteLatitude(t *testing.T) {
 	time.Sleep(delay * time.Second)
 
