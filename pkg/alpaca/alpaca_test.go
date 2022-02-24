@@ -5,6 +5,8 @@ import (
 	"testing"
 )
 
+var client = NewAlpacaAPI(65535, true, "alpaca.observerly.com", "", -1)
+
 func TestNewAlpacaAPIBaseURL(t *testing.T) {
 	client := NewAlpacaAPI(65535, false, "", "0.0.0.0", 8000)
 
@@ -17,10 +19,8 @@ func TestNewAlpacaAPIBaseURL(t *testing.T) {
 }
 
 func TestNewAlpacaAPIBaseURLForHost(t *testing.T) {
-	client := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
-
 	var got string = client.UrlBase
-	var want string = "https://virtserver.swaggerhub.com/ASCOMInitiative"
+	var want string = "https://alpaca.observerly.com"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)
@@ -72,11 +72,9 @@ func TestNewAlpacaAPIEndpoint(t *testing.T) {
 }
 
 func TestNewAlpacaAPIStringResponse(t *testing.T) {
-	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+	got, err := client.GetStringResponse("telescope", 0, "description")
 
-	got, err := a.GetStringResponse("telescope", 0, "description")
-
-	var want string = "string"
+	var want string = "Software Telescope Simulator for ASCOM"
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
@@ -86,57 +84,57 @@ func TestNewAlpacaAPIStringResponse(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
+	if client.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", client.ErrorMessage, want)
 	}
 }
 
 func TestNewAlpacaAPIStringListResponse(t *testing.T) {
-	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+	got, err := client.GetStringListResponse("telescope", 0, "supportedactions")
 
-	got, err := a.GetStringListResponse("telescope", 0, "supportedactions")
-
-	var want string = "string"
+	var want []string = []string{"AssemblyVersionNumber", "SlewToHA", "AvailableTimeInThisPointingState", "TimeUntilPointingStateCanChange"}
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
 	}
 
-	if got[0] != want {
+	if got[0] != want[0] {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
+	if got[1] != want[1] {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if got[2] != want[2] {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if got[3] != want[3] {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if client.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", client.ErrorMessage, want)
 	}
 }
 
 func TestNewAlpacaAPIBooleanResponse(t *testing.T) {
-	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
-
-	got, err := a.GetBooleanResponse("telescope", 0, "connected")
-
-	var want bool = true
+	_, err := client.GetBooleanResponse("telescope", 0, "connected")
 
 	if err != nil {
-		t.Errorf("got %q, wanted %t", err, want)
+		t.Errorf("got %q, wanted a boolean value", err)
 	}
 
-	if got != want {
-		t.Errorf("got %t, wanted %t", got, want)
-	}
-
-	if a.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %t", a.ErrorMessage, want)
+	if client.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted a boolean value", client.ErrorMessage)
 	}
 }
 
 func TestNewAlpacaAPIFloat64Response(t *testing.T) {
-	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+	got, err := client.GetFloat64Response("telescope", 0, "focallength")
 
-	got, err := a.GetFloat64Response("telescope", 0, "focallength")
-
-	var want float64 = 1.1
+	var want float64 = 1.260000
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -146,17 +144,15 @@ func TestNewAlpacaAPIFloat64Response(t *testing.T) {
 		t.Errorf("got %f, wanted %f", got, want)
 	}
 
-	if a.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %f", a.ErrorMessage, want)
+	if client.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %f", client.ErrorMessage, want)
 	}
 }
 
 func TestNewAlpacaAPIInt32Response(t *testing.T) {
-	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+	got, err := client.GetInt32Response("telescope", 0, "alignmentmode")
 
-	got, err := a.GetInt32Response("telescope", 0, "alignmentmode")
-
-	var want int32 = 0
+	var want int32 = 2
 
 	if err != nil {
 		t.Errorf("got %q, wanted %d", err, want)
@@ -166,57 +162,65 @@ func TestNewAlpacaAPIInt32Response(t *testing.T) {
 		t.Errorf("got %d, wanted %d", got, want)
 	}
 
-	if a.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %d", a.ErrorMessage, want)
+	if client.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %d", client.ErrorMessage, want)
 	}
 }
 
 func TestNewAlpacaAPIInt32ListResponse(t *testing.T) {
-	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+	got, err := client.GetUInt32ListResponse("filterwheel", 0, "focusoffsets")
 
-	got, err := a.GetUInt32ListResponse("filterwheel", 0, "focusoffsets")
-
-	var want uint32 = 0
+	var want []uint32 = []uint32{8280, 8079, 9234, 790, 6553, 4650}
 
 	if err != nil {
 		t.Errorf("got %q, wanted %d", err, want)
 	}
 
-	if got[0] != want {
+	if got[0] != want[0] {
 		t.Errorf("got %d, wanted %d", got, want)
 	}
 
-	if a.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %d", a.ErrorMessage, want)
+	if got[1] != want[1] {
+		t.Errorf("got %d, wanted %d", got, want)
+	}
+
+	if got[2] != want[2] {
+		t.Errorf("got %d, wanted %d", got, want)
+	}
+
+	if got[3] != want[3] {
+		t.Errorf("got %d, wanted %d", got, want)
+	}
+
+	if got[4] != want[4] {
+		t.Errorf("got %d, wanted %d", got, want)
+	}
+
+	if got[5] != want[5] {
+		t.Errorf("got %d, wanted %d", got, want)
+	}
+
+	if client.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %d", client.ErrorMessage, want)
 	}
 }
 
 func TestNewAlpacaAPIConnected(t *testing.T) {
-	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
-
-	got, err := a.IsConnected("telescope", 0)
-
-	var want bool = true
+	_, err := client.IsConnected("telescope", 0)
 
 	if err != nil {
-		t.Errorf("got %q, wanted %t", err, want)
+		t.Errorf("got %q, wanted a boolean value", err)
 	}
 
-	if got != want {
-		t.Errorf("got %t, wanted %t", got, want)
-	}
-
-	if a.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %t", a.ErrorMessage, want)
+	if client.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted a boolean value", client.ErrorMessage)
 	}
 }
 
 func TestNewAlpacaAPIDescription(t *testing.T) {
-	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+	got, err := client.GetDescription("telescope", 0)
 
-	got, err := a.GetDescription("telescope", 0)
-
-	var want string = "string"
+	var want string = "Software Telescope Simulator for ASCOM"
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
@@ -226,17 +230,15 @@ func TestNewAlpacaAPIDescription(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
+	if client.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", client.ErrorMessage, want)
 	}
 }
 
 func TestNewAlpacaAPIDriverInfo(t *testing.T) {
-	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+	got, err := client.GetDriverInfo("telescope", 0)
 
-	got, err := a.GetDriverInfo("telescope", 0)
-
-	var want string = "string"
+	var want string = "TelescopeSimulator, Version=0.1.1.0, Culture=neutral, PublicKeyToken=null"
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
@@ -246,17 +248,15 @@ func TestNewAlpacaAPIDriverInfo(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
+	if client.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", client.ErrorMessage, want)
 	}
 }
 
 func TestNewAlpacaAPIDriverVersion(t *testing.T) {
-	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+	got, err := client.GetDriverVersion("telescope", 0)
 
-	got, err := a.GetDriverVersion("telescope", 0)
-
-	var want string = "string"
+	var want string = "0.1"
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
@@ -266,17 +266,15 @@ func TestNewAlpacaAPIDriverVersion(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
+	if client.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", client.ErrorMessage, want)
 	}
 }
 
 func TestNewAlpacaAPIInterfaceVersion(t *testing.T) {
-	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+	got, err := client.GetInterfaceVersion("telescope", 0)
 
-	got, err := a.GetInterfaceVersion("telescope", 0)
-
-	var want int32 = 0
+	var want int32 = 3
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
@@ -286,17 +284,15 @@ func TestNewAlpacaAPIInterfaceVersion(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
+	if client.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", client.ErrorMessage, want)
 	}
 }
 
 func TestNewAlpacaAPIName(t *testing.T) {
-	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+	got, err := client.GetName("telescope", 0)
 
-	got, err := a.GetName("telescope", 0)
-
-	var want string = "string"
+	var want string = "Alpaca Telescope Sim"
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
@@ -306,27 +302,37 @@ func TestNewAlpacaAPIName(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
+	if client.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", client.ErrorMessage, want)
 	}
 }
 
 func TestNewAlpacaAPDSupportedActions(t *testing.T) {
-	a := NewAlpacaAPI(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1)
+	got, err := client.GetSupportedActions("telescope", 0)
 
-	got, err := a.GetSupportedActions("telescope", 0)
-
-	var want string = "string"
+	var want []string = []string{"AssemblyVersionNumber", "SlewToHA", "AvailableTimeInThisPointingState", "TimeUntilPointingStateCanChange"}
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
 	}
 
-	if got[0] != want {
+	if got[0] != want[0] {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if a.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %q", a.ErrorMessage, want)
+	if got[1] != want[1] {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if got[2] != want[2] {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if got[3] != want[3] {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if client.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", client.ErrorMessage, want)
 	}
 }

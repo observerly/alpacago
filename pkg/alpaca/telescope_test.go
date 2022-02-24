@@ -6,11 +6,11 @@ import (
 	"time"
 )
 
-var delay time.Duration = 10
-
 var latitude float64 = 19.820611
 
 var longitude float64 = -155.468094
+
+var telescope = NewTelescope(65535, true, "alpaca.observerly.com", "", -1, 0, 1)
 
 func TestNewTelescopeBaseURL(t *testing.T) {
 	telescope := NewTelescope(65535, false, "", "0.0.0.0", 8000, 0, 1)
@@ -24,10 +24,8 @@ func TestNewTelescopeBaseURL(t *testing.T) {
 }
 
 func TestNewTelescopeBaseURLForHost(t *testing.T) {
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got string = telescope.Alpaca.UrlBase
-	var want string = "https://virtserver.swaggerhub.com/ASCOMInitiative"
+	var want string = "https://alpaca.observerly.com"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)
@@ -79,13 +77,9 @@ func TestNewTelescopeTrackingMode(t *testing.T) {
 }
 
 func TestNewTelescopeAlignmentMode(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetAlignmentMode()
 
-	var want = AlignmentAltAz
+	var want = AlignmentGermanPolar
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
@@ -101,13 +95,9 @@ func TestNewTelescopeAlignmentMode(t *testing.T) {
 }
 
 func TestNewTelescopeAltitude(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetAltitude()
 
-	var want float64 = 1.1
+	var want float64 = 70.179389
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -123,13 +113,9 @@ func TestNewTelescopeAltitude(t *testing.T) {
 }
 
 func TestNewTelescopeApertureArea(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetApertureArea()
 
-	var want float64 = 1.1
+	var want float64 = 0.026900
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -145,13 +131,9 @@ func TestNewTelescopeApertureArea(t *testing.T) {
 }
 
 func TestNewTelescopeApertureDiameter(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetApertureDiameter()
 
-	var want float64 = 1.1
+	var want float64 = 0.026900
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -167,13 +149,9 @@ func TestNewTelescopeApertureDiameter(t *testing.T) {
 }
 
 func TestNewTelescopeAtHome(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.IsAtHome()
 
-	var want bool = true
+	var want bool = false
 
 	if err != nil {
 		t.Errorf("got %q, wanted %t", err, want)
@@ -189,13 +167,9 @@ func TestNewTelescopeAtHome(t *testing.T) {
 }
 
 func TestNewTelescopeAtPark(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.IsAtPark()
 
-	var want bool = true
+	var want bool = false
 
 	if err != nil {
 		t.Errorf("got %q, wanted %t", err, want)
@@ -211,13 +185,9 @@ func TestNewTelescopeAtPark(t *testing.T) {
 }
 
 func TestNewTelescopeAzimuth(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetAzimuth()
 
-	var want float64 = 1.1
+	var want float64 = 180.000007
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -233,10 +203,6 @@ func TestNewTelescopeAzimuth(t *testing.T) {
 }
 
 func TestNewTelescopeCanFindHome(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanFindHome()
 
 	var want bool = true
@@ -255,10 +221,6 @@ func TestNewTelescopeCanFindHome(t *testing.T) {
 }
 
 func TestNewTelescopeCanMoveAxis(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanMoveAxis(0)
 
 	var want bool = true
@@ -277,10 +239,6 @@ func TestNewTelescopeCanMoveAxis(t *testing.T) {
 }
 
 func TestNewTelescopeCanPark(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanPark()
 
 	var want bool = true
@@ -299,10 +257,6 @@ func TestNewTelescopeCanPark(t *testing.T) {
 }
 
 func TestNewTelescopeCanPulseGuide(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanPulseGuide()
 
 	var want bool = true
@@ -321,10 +275,6 @@ func TestNewTelescopeCanPulseGuide(t *testing.T) {
 }
 
 func TestNewTelescopeCanSetDeclinationRate(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanSetDeclinationRate()
 
 	var want bool = true
@@ -343,10 +293,6 @@ func TestNewTelescopeCanSetDeclinationRate(t *testing.T) {
 }
 
 func TestNewTelescopeCanSetGuideRates(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanSetGuideRates()
 
 	var want bool = true
@@ -365,10 +311,6 @@ func TestNewTelescopeCanSetGuideRates(t *testing.T) {
 }
 
 func TestNewTelescopeCanSetPark(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanSetPark()
 
 	var want bool = true
@@ -387,10 +329,6 @@ func TestNewTelescopeCanSetPark(t *testing.T) {
 }
 
 func TestNewTelescopeCanSetPierSide(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanSetPierSide()
 
 	var want bool = true
@@ -409,10 +347,6 @@ func TestNewTelescopeCanSetPierSide(t *testing.T) {
 }
 
 func TestNewTelescopeCanSetRightAscensionRate(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanSetRightAscensionRate()
 
 	var want bool = true
@@ -431,10 +365,6 @@ func TestNewTelescopeCanSetRightAscensionRate(t *testing.T) {
 }
 
 func TestNewTelescopeCanSetTracking(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanSetTracking()
 
 	var want bool = true
@@ -453,10 +383,6 @@ func TestNewTelescopeCanSetTracking(t *testing.T) {
 }
 
 func TestNewTelescopeCanSlew(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanSlew()
 
 	var want bool = true
@@ -475,10 +401,6 @@ func TestNewTelescopeCanSlew(t *testing.T) {
 }
 
 func TestNewTelescopeCanSlewAltAz(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanSlewAltAz()
 
 	var want bool = true
@@ -497,10 +419,6 @@ func TestNewTelescopeCanSlewAltAz(t *testing.T) {
 }
 
 func TestNewTelescopeCanSlewAltAzAsync(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanSlewAltAzAsync()
 
 	var want bool = true
@@ -519,10 +437,6 @@ func TestNewTelescopeCanSlewAltAzAsync(t *testing.T) {
 }
 
 func TestNewTelescopeCanSlewAsync(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanSlewAsync()
 
 	var want bool = true
@@ -541,10 +455,6 @@ func TestNewTelescopeCanSlewAsync(t *testing.T) {
 }
 
 func TestNewTelescopeCanSync(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanSync()
 
 	var want bool = true
@@ -563,10 +473,6 @@ func TestNewTelescopeCanSync(t *testing.T) {
 }
 
 func TestNewTelescopeCanSyncAltAz(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanSyncAltAz()
 
 	var want bool = true
@@ -585,10 +491,6 @@ func TestNewTelescopeCanSyncAltAz(t *testing.T) {
 }
 
 func TestNewTelescopeCanUnPark(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.CanUnPark()
 
 	var want bool = true
@@ -607,13 +509,9 @@ func TestNewTelescopeCanUnPark(t *testing.T) {
 }
 
 func TestNewTelescopeDeclination(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetDeclination()
 
-	var want float64 = 1.1
+	var want float64 = 0.000000
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -629,13 +527,9 @@ func TestNewTelescopeDeclination(t *testing.T) {
 }
 
 func TestNewTelescopeDeclinationRate(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetDeclinationRate()
 
-	var want float64 = 1.1
+	var want float64 = 5.000000
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -651,10 +545,6 @@ func TestNewTelescopeDeclinationRate(t *testing.T) {
 }
 
 func TestNewTelescopeDeclinationRatePut(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var err = telescope.SetDeclinationRate(5)
 
 	if err != nil {
@@ -667,10 +557,6 @@ func TestNewTelescopeDeclinationRatePut(t *testing.T) {
 }
 
 func TestNewTelescopeDoesRefraction(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.DoesRefraction()
 
 	var want bool = true
@@ -689,10 +575,6 @@ func TestNewTelescopeDoesRefraction(t *testing.T) {
 }
 
 func TestNewTelescopeSetDoesRefractionPut(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var err = telescope.SetDoesRefraction(true)
 
 	if err != nil {
@@ -705,13 +587,9 @@ func TestNewTelescopeSetDoesRefractionPut(t *testing.T) {
 }
 
 func TestNewTelescopeEquatorialSystem(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetEquatorialSystem()
 
-	var want = Topocentric
+	var want = J2000
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
@@ -727,13 +605,9 @@ func TestNewTelescopeEquatorialSystem(t *testing.T) {
 }
 
 func TestNewTelescopeFocalLength(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetFocalLength()
 
-	var want float64 = 1.1
+	var want float64 = 1.260000
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -749,13 +623,9 @@ func TestNewTelescopeFocalLength(t *testing.T) {
 }
 
 func TestNewTelescopeIsPulseGuiding(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.IsPulseGuiding()
 
-	var want bool = true
+	var want bool = false
 
 	if err != nil {
 		t.Errorf("got %q, wanted %t", err, want)
@@ -771,35 +641,25 @@ func TestNewTelescopeIsPulseGuiding(t *testing.T) {
 }
 
 func TestNewTelescopeRightAscension(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetRightAscension()
 
-	var want float64 = 1.1
-
 	if err != nil {
-		t.Errorf("got %q, wanted %f", err, want)
+		t.Errorf("got %q", err)
 	}
 
-	if math.Abs(got-want) > 0.00001 {
-		t.Errorf("got %f, wanted %f", got, want)
+	if got < 0 || got > 360 {
+		t.Errorf("got %f, an unrelastic right ascension value", got)
 	}
 
 	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %f", telescope.Alpaca.ErrorMessage, want)
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
 
 func TestNewTelescopeRightAscensionRate(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetRightAscensionRate()
 
-	var want float64 = 1.1
+	var want float64 = 5.000000
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -815,10 +675,6 @@ func TestNewTelescopeRightAscensionRate(t *testing.T) {
 }
 
 func TestNewTelescopeSetRightAscensionRatePut(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var err = telescope.SetRightAscensionRate(5)
 
 	if err != nil {
@@ -831,10 +687,6 @@ func TestNewTelescopeSetRightAscensionRatePut(t *testing.T) {
 }
 
 func TestNewTelescopeSideOfPier(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetSideOfPier()
 
 	var want = PierEast
@@ -853,10 +705,6 @@ func TestNewTelescopeSideOfPier(t *testing.T) {
 }
 
 func TestNewTelescopeSetSideOfPierEastPut(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var err = telescope.SetSideOfPier(0)
 
 	if err != nil {
@@ -869,10 +717,6 @@ func TestNewTelescopeSetSideOfPierEastPut(t *testing.T) {
 }
 
 func TestNewTelescopeSetSideOfPierWestPut(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var err = telescope.SetSideOfPier(1)
 
 	if err != nil {
@@ -885,10 +729,6 @@ func TestNewTelescopeSetSideOfPierWestPut(t *testing.T) {
 }
 
 func TestNewTelescopeSetSideOfPierInvalidPut(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var err = telescope.SetSideOfPier(-1)
 
 	if err == nil {
@@ -897,35 +737,25 @@ func TestNewTelescopeSetSideOfPierInvalidPut(t *testing.T) {
 }
 
 func TestNewTelescopeSiderealTime(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetSiderealTime()
 
-	var want float64 = 1.100000023841858
-
 	if err != nil {
-		t.Errorf("got %q, wanted %f", err, want)
+		t.Errorf("got %q", err)
 	}
 
-	if math.Abs(got-want) > 0.00001 {
-		t.Errorf("got %f, wanted %f", got, want)
+	if got < 0 || got > 24 {
+		t.Errorf("got %f, an unrelastic sidereal value", got)
 	}
 
 	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %f", telescope.Alpaca.ErrorMessage, want)
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
 
 func TestNewTelescopeSiteElevation(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetSiteElevation()
 
-	var want float64 = 1.100000023841858
+	var want float64 = 4207.000000
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -941,10 +771,6 @@ func TestNewTelescopeSiteElevation(t *testing.T) {
 }
 
 func TestNewTelescopeSiteElevationPut(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	// Elevation at Mauna Kea, Hawaii:
 	var err = telescope.SetSiteElevation(4207)
 
@@ -954,10 +780,6 @@ func TestNewTelescopeSiteElevationPut(t *testing.T) {
 }
 
 func TestNewTelescopeSiteElevationPutUnrealisticallyHigh(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var err = telescope.SetSiteElevation(20000)
 
 	if err == nil {
@@ -965,10 +787,6 @@ func TestNewTelescopeSiteElevationPutUnrealisticallyHigh(t *testing.T) {
 	}
 }
 func TestNewTelescopeSiteElevationPutUnrealisticallyLow(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var err = telescope.SetSiteElevation(-1001)
 
 	if err == nil {
@@ -977,13 +795,9 @@ func TestNewTelescopeSiteElevationPutUnrealisticallyLow(t *testing.T) {
 }
 
 func TestNewTelescopeSiteLatitude(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetSiteLatitude()
 
-	var want float64 = 1.100000023841858
+	var want float64 = 19.820611
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -999,10 +813,6 @@ func TestNewTelescopeSiteLatitude(t *testing.T) {
 }
 
 func TestNewTelescopeSiteLatitudePutInvalid90Minus(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var err = telescope.SetSiteLatitude(-91)
 
 	if err == nil {
@@ -1011,10 +821,6 @@ func TestNewTelescopeSiteLatitudePutInvalid90Minus(t *testing.T) {
 }
 
 func TestNewTelescopeSiteLatitudePutInvalid90Plus(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var err = telescope.SetSiteLatitude(91)
 
 	if err == nil {
@@ -1023,10 +829,6 @@ func TestNewTelescopeSiteLatitudePutInvalid90Plus(t *testing.T) {
 }
 
 func TestNewTelescopeSiteLatitudePut(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var err = telescope.SetSiteLatitude(latitude)
 
 	if err != nil {
@@ -1035,13 +837,9 @@ func TestNewTelescopeSiteLatitudePut(t *testing.T) {
 }
 
 func TestNewTelescopeSiteLongitude(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetSiteLongitude()
 
-	var want float64 = 1.100000023841858
+	var want float64 = -155.468094
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -1057,10 +855,6 @@ func TestNewTelescopeSiteLongitude(t *testing.T) {
 }
 
 func TestNewTelescopeSiteLongitudePutInvalid180Minus(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var err = telescope.SetSiteLongitude(-181)
 
 	if err == nil {
@@ -1069,10 +863,6 @@ func TestNewTelescopeSiteLongitudePutInvalid180Minus(t *testing.T) {
 }
 
 func TestNewTelescopeSiteLongitudePutInvalid180Plus(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var err = telescope.SetSiteLongitude(181)
 
 	if err == nil {
@@ -1081,10 +871,6 @@ func TestNewTelescopeSiteLongitudePutInvalid180Plus(t *testing.T) {
 }
 
 func TestNewTelescopeSiteLongitudePut(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var err = telescope.SetSiteLongitude(longitude)
 
 	if err != nil {
@@ -1093,32 +879,18 @@ func TestNewTelescopeSiteLongitudePut(t *testing.T) {
 }
 
 func TestNewTelescopeSlewing(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
-	var got, err = telescope.IsSlewing()
-
-	var want bool = true
+	var _, err = telescope.IsSlewing()
 
 	if err != nil {
-		t.Errorf("got %q, wanted %t", err, want)
-	}
-
-	if got != want {
-		t.Errorf("got %t, wanted %t", got, want)
+		t.Errorf("got %q", err)
 	}
 
 	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %t", telescope.Alpaca.ErrorMessage, want)
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
 
 func TestNewTelescopeGetSlewSettleTime(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetSlewSettleTime()
 
 	var want int32 = 0
@@ -1137,13 +909,9 @@ func TestNewTelescopeGetSlewSettleTime(t *testing.T) {
 }
 
 func TestNewTelescopeTargetDeclination(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetTargetDeclination()
 
-	var want float64 = 1.100000023841858
+	var want float64 = 0.000000
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -1159,13 +927,9 @@ func TestNewTelescopeTargetDeclination(t *testing.T) {
 }
 
 func TestNewTelescopeTargetRightAscension(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetTargetRightAscension()
 
-	var want float64 = 1.100000023841858
+	var want float64 = 0.000000
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -1181,13 +945,9 @@ func TestNewTelescopeTargetRightAscension(t *testing.T) {
 }
 
 func TestNewTelescopeTracking(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.IsTracking()
 
-	var want bool = true
+	var want bool = false
 
 	if err != nil {
 		t.Errorf("got %q, wanted %t", err, want)
@@ -1203,10 +963,6 @@ func TestNewTelescopeTracking(t *testing.T) {
 }
 
 func TestNewTelescopeGetTrackingRate(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetTrackingRate()
 
 	var want int32 = 0
@@ -1225,10 +981,6 @@ func TestNewTelescopeGetTrackingRate(t *testing.T) {
 }
 
 func TestNewTelescopeGetUTCDate(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetUTCDate()
 
 	var want time.Time = time.Date(1, 1, 1, 0, 0, 0, 0, time.UTC)
@@ -1247,26 +999,22 @@ func TestNewTelescopeGetUTCDate(t *testing.T) {
 }
 
 func TestNewTelescopeGetAxisRates(t *testing.T) {
-	time.Sleep(delay * time.Second)
-
-	telescope := NewTelescope(65535, true, "virtserver.swaggerhub.com/ASCOMInitiative", "", -1, 0, 1)
-
 	var got, err = telescope.GetAxisRates(0)
 
 	var want = make(map[string]float64)
 
-	want["Maximum"] = 1.5
-	want["Minimum"] = 1.5
+	want["Maximum"] = 6.666667
+	want["Minimum"] = 0.000000
 
 	if err != nil {
 		t.Errorf("got %q", err)
 	}
 
-	if got["Maximum"] != want["Maximum"] {
+	if math.Abs(got["Maximum"]-want["Maximum"]) > 0.00001 {
 		t.Errorf("got %f, wanted %f", got["Maximum"], want["Maximum"])
 	}
 
-	if got["Minimum"] != want["Minimum"] {
+	if math.Abs(got["Minimum"]-want["Minimum"]) > 0.00001 {
 		t.Errorf("got %f, wanted %f", got["Minimum"], want["Minimum"])
 	}
 
