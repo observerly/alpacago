@@ -908,6 +908,14 @@ func TestNewTelescopeGetSlewSettleTime(t *testing.T) {
 	}
 }
 
+func TestNewTelescopeSetSlewSettleTime(t *testing.T) {
+	var err = telescope.SetSlewSettleTime(0)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+}
+
 func TestNewTelescopeTargetDeclination(t *testing.T) {
 	var got, err = telescope.GetTargetDeclination()
 
