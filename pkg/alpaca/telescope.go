@@ -662,6 +662,24 @@ func (t *Telescope) GetSlewSettleTime() (int32, error) {
 }
 
 /*
+	SetSlewSettleTime()
+
+	@returns an error or nil, if nil it sets the post-slew settling time (integer sec.).
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewsettletime
+*/
+func (t *Telescope) SetSlewSettleTime(SlewSettleTime int32) error {
+	t.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"SlewSettleTime":      fmt.Sprintf("%d", SlewSettleTime),
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "slewsettletime", form)
+}
+
+/*
 	GetTargetDeclination()
 
 	@returns the declination (degrees, positive North) for the target of an equatorial slew or sync operation.
