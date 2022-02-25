@@ -934,6 +934,14 @@ func TestNewTelescopeTargetDeclination(t *testing.T) {
 	}
 }
 
+func TestNewTelescopeSetTargetDeclination(t *testing.T) {
+	var err = telescope.SetTargetDeclination(7.4070639)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+}
+
 func TestNewTelescopeTargetRightAscension(t *testing.T) {
 	var got, err = telescope.GetTargetRightAscension()
 

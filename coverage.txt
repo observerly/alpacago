@@ -5,7 +5,7 @@ github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:35.2,42.16 2 12
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:25.13,27.3 1 10
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:31.35,33.3 1 2
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:52.56,54.2 1 59
-github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:63.104,65.2 1 68
+github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:63.104,65.2 1 69
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:80.119,87.16 3 6
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:92.2,92.20 1 6
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:98.2,100.26 2 6
@@ -36,10 +36,10 @@ github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:267.2,267.20 1 1
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:273.2,275.26 2 1
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:262.16,264.3 1 0
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:267.20,270.3 2 0
-github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:285.119,291.16 3 9
-github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:296.2,296.20 1 9
-github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:302.2,304.29 2 9
-github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:308.2,310.12 2 9
+github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:285.119,291.16 3 10
+github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:296.2,296.20 1 10
+github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:302.2,304.29 2 10
+github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:308.2,310.12 2 10
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:291.16,293.3 1 0
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:296.20,299.3 2 0
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:304.29,306.3 1 0
@@ -114,7 +114,8 @@ github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:650.47,652.2 1 1
 github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:660.56,662.2 1 1
 github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:670.67,680.2 3 1
 github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:688.61,690.2 1 1
-github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:698.64,700.2 1 1
-github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:708.48,710.2 1 1
-github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:718.54,720.2 1 1
-github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:731.53,735.2 3 1
+github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:698.75,708.2 3 1
+github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:716.64,718.2 1 1
+github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:726.48,728.2 1 1
+github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:736.54,738.2 1 1
+github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:749.53,753.2 3 1
