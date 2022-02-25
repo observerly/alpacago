@@ -697,6 +697,33 @@ func (t *Telescope) SetSlewSettleTime(slewSettleTime int32) error {
 }
 
 /*
+	SetSlewToAltAz
+
+	@returns an error or nil, if nil it moves the telescope to the given local horizontal coordinates, return when slew is complete
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtoaltaz
+*/
+func (t *Telescope) SetSlewToAltAz(altitude float64, azimuth float64) error {
+	t.Alpaca.TransactionId++
+
+	if altitude < -90 || altitude > 90 {
+		return errors.New("Please provide a valid altitude between -90° and +90°")
+	}
+
+	if azimuth < 0 || azimuth > 360 {
+		return errors.New("Please provide a valid azimuth between 0° and +360°")
+	}
+
+	var form map[string]string = map[string]string{
+		"Altitude":            fmt.Sprintf("%f", altitude),
+		"Azimuth":             fmt.Sprintf("%f", azimuth),
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "slewsettletime", form)
+}
+
+/*
 	GetTargetDeclination()
 
 	@returns the declination (degrees, positive North) for the target of an equatorial slew or sync operation.
