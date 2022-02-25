@@ -73,6 +73,23 @@ func NewTelescope(clientId uint32, secure bool, domain string, ip string, port i
 }
 
 /*
+	SetAbortSlew()
+
+	@returns an error or nil, if nil immediately Stops a slew in progress.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__abortslew
+*/
+func (t *Telescope) SetAbortSlew() error {
+	t.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "abortslew", form)
+}
+
+/*
 	GetAlignmentMode()
 
 	@returns the alignment mode of the mount (Alt/Az, Polar, German Polar).
