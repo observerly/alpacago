@@ -787,3 +787,27 @@ func (t *Telescope) GetUTCDate() (time.Time, error) {
 	date, _ := time.Parse("yyyy-MM-ddTHH:mm:ss.fffffffZ", utc)
 	return date, err
 }
+
+/*
+	SetUTCDate()
+
+	@returns an error or nil, if nil it sets the UTC date/time of the telescope's internal clock in ISO 8601 format including fractional
+	seconds. The general format (in Microsoft custom date format style) is yyyy-MM-ddTHH:mm:ss.fffffffZ
+	e.g. 2016-03-04T17:45:31.1234567Z or 2016-11-14T07:03:08.1234567Z Please note the compulsary trailing
+	Z indicating the 'Zulu', UTC time zone.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__utcdate
+*/
+func (t *Telescope) SetUTCDate(UTCDate time.Time) error {
+	t.Alpaca.TransactionId++
+
+	// Don't ask, just read: https://go.dev/src/time/format.go
+	date := UTCDate.Format("2006-01-02T15:04:05.000000000Z")
+
+	var form map[string]string = map[string]string{
+		"UTCDate":             fmt.Sprintf("%q", date),
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "utcdate", form)
+}
