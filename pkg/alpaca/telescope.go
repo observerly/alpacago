@@ -718,6 +718,24 @@ func (t *Telescope) GetTargetRightAscension() (float64, error) {
 }
 
 /*
+	SetTargetRightAscension()
+
+	@returns  an error or nil, if nil it the right ascension (hours) for the target of an equatorial slew or sync operation
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__targetrightascension
+*/
+func (t *Telescope) SetTargetRightAscension(targetRightAscension float64) error {
+	t.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"TargetRightAscension": fmt.Sprintf("%f", targetRightAscension),
+		"ClientID":             fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID":  fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "targetrightascension", form)
+}
+
+/*
 	IsTracking()
 
 	@returns the state of the telescope's sidereal tracking drive.
