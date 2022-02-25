@@ -1072,3 +1072,30 @@ func TestNewTelescopeSetUTCDate(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 }
+
+// Live Telescope Controls
+
+// Slew to Altitude / Azimuth
+func TestNewTelescopeSetSlewToAltAz(t *testing.T) {
+	var err = telescope.SetSlewToAltAz(45.0, 90.0)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+}
+
+func TestNewTelescopeSetSlewToAltAzInValidAltitude(t *testing.T) {
+	var err = telescope.SetSlewToAltAz(-91, 90.0)
+
+	if err == nil {
+		t.Errorf("got %q", err)
+	}
+}
+
+func TestNewTelescopeSetSlewToAltAzInValidAzimuth(t *testing.T) {
+	var err = telescope.SetSlewToAltAz(45.0, 361)
+
+	if err == nil {
+		t.Errorf("got %q", err)
+	}
+}
