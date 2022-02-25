@@ -184,6 +184,31 @@ func TestNewTelescopeAtPark(t *testing.T) {
 	}
 }
 
+func TestNewTelescopeAxisRates(t *testing.T) {
+	var got, err = telescope.GetAxisRates(1)
+
+	var want = make(map[string]float64)
+
+	want["Maximum"] = 6.666667
+	want["Minimum"] = 0.000000
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if math.Abs(got["Maximum"]-want["Maximum"]) > 0.00001 {
+		t.Errorf("got %f, wanted %f", got["Maximum"], want["Maximum"])
+	}
+
+	if math.Abs(got["Minimum"]-want["Minimum"]) > 0.00001 {
+		t.Errorf("got %f, wanted %f", got["Minimum"], want["Minimum"])
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewTelescopeAzimuth(t *testing.T) {
 	var got, err = telescope.GetAzimuth()
 
@@ -1025,32 +1050,17 @@ func TestNewTelescopeGetUTCDate(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want.String())
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
+	if telescope.Alpaca.ErrorNumber != 0 && telescope.Alpaca.ErrorMessage != "" {
 		t.Errorf("got %q, wanted %q", telescope.Alpaca.ErrorMessage, want.String())
 	}
 }
 
-func TestNewTelescopeGetAxisRates(t *testing.T) {
-	var got, err = telescope.GetAxisRates(0)
+func TestNewTelescopeSetUTCDate(t *testing.T) {
+	var UTCDate time.Time = time.Now().UTC()
 
-	var want = make(map[string]float64)
-
-	want["Maximum"] = 6.666667
-	want["Minimum"] = 0.000000
+	var err = telescope.SetUTCDate(UTCDate)
 
 	if err != nil {
 		t.Errorf("got %q", err)
-	}
-
-	if math.Abs(got["Maximum"]-want["Maximum"]) > 0.00001 {
-		t.Errorf("got %f, wanted %f", got["Maximum"], want["Maximum"])
-	}
-
-	if math.Abs(got["Minimum"]-want["Minimum"]) > 0.00001 {
-		t.Errorf("got %f, wanted %f", got["Minimum"], want["Minimum"])
-	}
-
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
