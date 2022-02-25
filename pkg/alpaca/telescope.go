@@ -667,11 +667,11 @@ func (t *Telescope) GetSlewSettleTime() (int32, error) {
 	@returns an error or nil, if nil it sets the post-slew settling time (integer sec.).
 	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewsettletime
 */
-func (t *Telescope) SetSlewSettleTime(SlewSettleTime int32) error {
+func (t *Telescope) SetSlewSettleTime(slewSettleTime int32) error {
 	t.Alpaca.TransactionId++
 
 	var form map[string]string = map[string]string{
-		"SlewSettleTime":      fmt.Sprintf("%d", SlewSettleTime),
+		"SlewSettleTime":      fmt.Sprintf("%d", slewSettleTime),
 		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
 		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
 	}
