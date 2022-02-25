@@ -945,7 +945,7 @@ func TestNewTelescopeSetTargetDeclination(t *testing.T) {
 func TestNewTelescopeTargetRightAscension(t *testing.T) {
 	var got, err = telescope.GetTargetRightAscension()
 
-	var want float64 = 0.000000
+	var want float64 = 3.699707
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -957,6 +957,14 @@ func TestNewTelescopeTargetRightAscension(t *testing.T) {
 
 	if telescope.Alpaca.ErrorNumber != 0 {
 		t.Errorf("got %q, wanted %f", telescope.Alpaca.ErrorMessage, want)
+	}
+}
+
+func TestNewTelescopeSetTargetRightAscension(t *testing.T) {
+	var err = telescope.SetTargetRightAscension(88.7929583 / 24)
+
+	if err != nil {
+		t.Errorf("got %q", err)
 	}
 }
 
