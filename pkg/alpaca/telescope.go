@@ -746,6 +746,24 @@ func (t *Telescope) IsTracking() (bool, error) {
 }
 
 /*
+	SetTracking()
+
+	@returns an error or nil, if nil it sets the state of the telescope's sidereal tracking drive.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__tracking
+*/
+func (t *Telescope) SetTracking(tracking bool) error {
+	t.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"Tracking":            fmt.Sprintf("%t", tracking),
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "tracking", form)
+}
+
+/*
 	GetTrackingRate()
 
 	@returns the current tracking rate of the telescope's sidereal drive.
