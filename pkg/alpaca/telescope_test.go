@@ -76,6 +76,14 @@ func TestNewTelescopeTrackingMode(t *testing.T) {
 	}
 }
 
+func TestNewTelescopeSetAbortSlew(t *testing.T) {
+	var err = telescope.SetAbortSlew()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+}
+
 func TestNewTelescopeAlignmentMode(t *testing.T) {
 	var got, err = telescope.GetAlignmentMode()
 
