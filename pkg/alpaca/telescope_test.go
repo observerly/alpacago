@@ -916,10 +916,10 @@ func TestNewTelescopeSetSlewSettleTime(t *testing.T) {
 	}
 }
 
-func TestNewTelescopeTargetDeclination(t *testing.T) {
+func TestNewTelescopeGetTargetDeclination(t *testing.T) {
 	var got, err = telescope.GetTargetDeclination()
 
-	var want float64 = 0.000000
+	var want float64 = 7.407064
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
