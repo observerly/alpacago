@@ -916,10 +916,10 @@ func TestNewTelescopeSetSlewSettleTime(t *testing.T) {
 	}
 }
 
-func TestNewTelescopeTargetDeclination(t *testing.T) {
+func TestNewTelescopeGetTargetDeclination(t *testing.T) {
 	var got, err = telescope.GetTargetDeclination()
 
-	var want float64 = 0.000000
+	var want float64 = 7.407064
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -931,6 +931,14 @@ func TestNewTelescopeTargetDeclination(t *testing.T) {
 
 	if telescope.Alpaca.ErrorNumber != 0 {
 		t.Errorf("got %q, wanted %f", telescope.Alpaca.ErrorMessage, want)
+	}
+}
+
+func TestNewTelescopeSetTargetDeclination(t *testing.T) {
+	var err = telescope.SetTargetDeclination(7.4070639)
+
+	if err != nil {
+		t.Errorf("got %q", err)
 	}
 }
 
