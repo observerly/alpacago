@@ -986,6 +986,14 @@ func TestNewTelescopeTracking(t *testing.T) {
 	}
 }
 
+func TestNewTelescopeSetTracking(t *testing.T) {
+	var err = telescope.SetTracking(false)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+}
+
 func TestNewTelescopeGetTrackingRate(t *testing.T) {
 	var got, err = telescope.GetTrackingRate()
 
