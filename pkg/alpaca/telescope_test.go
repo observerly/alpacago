@@ -1093,3 +1093,29 @@ func TestNewTelescopeSetSlewToAltAzInValidAzimuth(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 }
+
+// Slew to Altitude / Azimuth Async
+
+func TestNewTelescopeSetSlewToAltAzAsync(t *testing.T) {
+	var err = telescope.SetSlewToAltAzAsync(45.0, 90.0)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+}
+
+func TestNewTelescopeSetSlewToAltAzAsyncInValidAltitude(t *testing.T) {
+	var err = telescope.SetSlewToAltAz(-91, 90.0)
+
+	if err == nil {
+		t.Errorf("got %q", err)
+	}
+}
+
+func TestNewTelescopeSetSlewToAltAzAsyncInValidAzimuth(t *testing.T) {
+	var err = telescope.SetSlewToAltAz(45.0, 361)
+
+	if err == nil {
+		t.Errorf("got %q", err)
+	}
+}
