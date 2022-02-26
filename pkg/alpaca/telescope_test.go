@@ -105,18 +105,16 @@ func TestNewTelescopeAlignmentMode(t *testing.T) {
 func TestNewTelescopeAltitude(t *testing.T) {
 	var got, err = telescope.GetAltitude()
 
-	var want float64 = 70.179389
-
 	if err != nil {
-		t.Errorf("got %q, wanted %f", err, want)
+		t.Errorf("got %q", err)
 	}
 
-	if math.Abs(got-want) > 0.00001 {
-		t.Errorf("got %f, wanted %f", got, want)
+	if got < -90 || got > 90 {
+		t.Errorf("got %f", got)
 	}
 
 	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %f", telescope.Alpaca.ErrorMessage, want)
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
 
@@ -220,18 +218,16 @@ func TestNewTelescopeAxisRates(t *testing.T) {
 func TestNewTelescopeAzimuth(t *testing.T) {
 	var got, err = telescope.GetAzimuth()
 
-	var want float64 = 180.000007
-
 	if err != nil {
-		t.Errorf("got %q, wanted %f", err, want)
+		t.Errorf("got %q", err)
 	}
 
-	if math.Abs(got-want) > 0.00001 {
-		t.Errorf("got %f, wanted %f", got, want)
+	if got < 0 || got > 360 {
+		t.Errorf("got %f", got)
 	}
 
 	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %f", telescope.Alpaca.ErrorMessage, want)
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
 
@@ -544,18 +540,16 @@ func TestNewTelescopeCanUnPark(t *testing.T) {
 func TestNewTelescopeDeclination(t *testing.T) {
 	var got, err = telescope.GetDeclination()
 
-	var want float64 = 0.000000
-
 	if err != nil {
-		t.Errorf("got %q, wanted %f", err, want)
+		t.Errorf("got %q", err)
 	}
 
-	if math.Abs(got-want) > 0.00001 {
-		t.Errorf("got %f, wanted %f", got, want)
+	if got < -90 || got > 90 {
+		t.Errorf("got %f", got)
 	}
 
 	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %f", telescope.Alpaca.ErrorMessage, want)
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
 
@@ -722,7 +716,7 @@ func TestNewTelescopeSetRightAscensionRatePut(t *testing.T) {
 func TestNewTelescopeSideOfPier(t *testing.T) {
 	var got, err = telescope.GetSideOfPier()
 
-	var want = PierEast
+	var want = PierWest | PierEast
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
