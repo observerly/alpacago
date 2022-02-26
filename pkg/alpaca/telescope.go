@@ -720,7 +720,7 @@ func (t *Telescope) SetSlewToAltAz(altitude float64, azimuth float64) error {
 		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
 	}
 
-	return t.Alpaca.Put("telescope", t.DeviceNumber, "slewsettletime", form)
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "slewtoaltaz", form)
 }
 
 /*
