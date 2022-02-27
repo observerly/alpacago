@@ -820,6 +820,26 @@ func (t *Telescope) SetSlewToCoordinatesAsync(rightAscension float64, declinatio
 }
 
 /*
+	SetSlewToTarget
+
+	@returns an error or nil, if nil it moves the telescope to the TargetRightAscension and TargetDeclination
+	equatorial coordinates, return when slew is complete
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtotarget
+*/
+func (t *Telescope) SetSlewToTarget() error {
+	t.Alpaca.TransactionId++
+
+	t.SetTracking(true)
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "slewtotarget", form)
+}
+
+/*
 	GetTargetDeclination()
 
 	@returns the declination (degrees, positive North) for the target of an equatorial slew or sync operation.
