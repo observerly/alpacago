@@ -1141,3 +1141,29 @@ func TestNewTelescopeSetSlewToAltAzAsyncInValidAzimuth(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 }
+
+// Slew To Equatorial Coordinates Async
+
+func TestNewTelescopeSetSlewToCoordinatesAsync(t *testing.T) {
+	var err = telescope.SetSlewToCoordinatesAsync(45.0, 90.0)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+}
+
+func TestNewTelescopeSetSlewToCoordinatesAsyncInValiDeclination(t *testing.T) {
+	var err = telescope.SetSlewToCoordinatesAsync(-91, 90.0)
+
+	if err == nil {
+		t.Errorf("got %q", err)
+	}
+}
+
+func TestNewTelescopeSetSlewToCoordinatesAsyncInValidRightAscension(t *testing.T) {
+	var err = telescope.SetSlewToCoordinatesAsync(45.0, 361)
+
+	if err == nil {
+		t.Errorf("got %q", err)
+	}
+}
