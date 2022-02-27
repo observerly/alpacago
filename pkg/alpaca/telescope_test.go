@@ -1171,3 +1171,13 @@ func TestNewTelescopeSetSlewToCoordinatesAsyncInValidRightAscension(t *testing.T
 		t.Errorf("got %q", err)
 	}
 }
+
+// Slew To Equatorial Coordinates Target Async
+
+func TestNewTelescopeSetSlewToTargetAsync(t *testing.T) {
+	var err = telescope.SetSlewToTargetAsync()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+}
