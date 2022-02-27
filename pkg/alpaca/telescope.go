@@ -705,6 +705,8 @@ func (t *Telescope) SetSlewSettleTime(slewSettleTime int32) error {
 func (t *Telescope) SetSlewToAltAz(altitude float64, azimuth float64) error {
 	t.Alpaca.TransactionId++
 
+	t.SetTracking(false)
+
 	if altitude < -90 || altitude > 90 {
 		return errors.New("Please provide a valid altitude between -90° and +90°")
 	}
@@ -732,6 +734,8 @@ func (t *Telescope) SetSlewToAltAz(altitude float64, azimuth float64) error {
 */
 func (t *Telescope) SetSlewToAltAzAsync(altitude float64, azimuth float64) error {
 	t.Alpaca.TransactionId++
+
+	t.SetTracking(false)
 
 	if altitude < -90 || altitude > 90 {
 		return errors.New("Please provide a valid altitude between -90° and +90°")
