@@ -378,6 +378,23 @@ func (t *Telescope) CanUnPark() (bool, error) {
 }
 
 /*
+	SetUnPark()
+
+	@returns an error or nil, if nil it takes telescope out of the Parked state.
+	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__unpark
+*/
+func (t *Telescope) SetUnPark() error {
+	t.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "unpark", form)
+}
+
+/*
 	GetDeclination()
 
 	@returns the declination (degrees) of the mount's current equatorial coordinates, in the coordinate

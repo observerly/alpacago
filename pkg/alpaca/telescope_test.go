@@ -1181,3 +1181,11 @@ func TestNewTelescopeSetSlewToTargetAsync(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 }
+
+func TestNewTelescopeSetUnPark(t *testing.T) {
+	var err = telescope.SetUnPark()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+}
