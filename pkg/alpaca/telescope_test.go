@@ -992,20 +992,14 @@ func TestNewTelescopeSetTargetRightAscension(t *testing.T) {
 }
 
 func TestNewTelescopeTracking(t *testing.T) {
-	var got, err = telescope.IsTracking()
-
-	var want bool = false
+	var _, err = telescope.IsTracking()
 
 	if err != nil {
-		t.Errorf("got %q, wanted %t", err, want)
-	}
-
-	if got != want {
-		t.Errorf("got %t, wanted %t", got, want)
+		t.Errorf("got %q", err)
 	}
 
 	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %t", telescope.Alpaca.ErrorMessage, want)
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
 
