@@ -1101,7 +1101,7 @@ func TestNewTelescopeSetSlewToCoordinates(t *testing.T) {
 }
 
 func TestNewTelescopeSetSlewToCoordinatesInValiDeclination(t *testing.T) {
-	var err = telescope.SetSlewToAltAz(-91, 90.0)
+	var err = telescope.SetSlewToCoordinates(-91, 90.0)
 
 	if err == nil {
 		t.Errorf("got %q", err)
@@ -1109,7 +1109,7 @@ func TestNewTelescopeSetSlewToCoordinatesInValiDeclination(t *testing.T) {
 }
 
 func TestNewTelescopeSetSlewToCoordinatesInValidRightAscension(t *testing.T) {
-	var err = telescope.SetSlewToAltAz(45.0, 361)
+	var err = telescope.SetSlewToCoordinates(45.0, 361)
 
 	if err == nil {
 		t.Errorf("got %q", err)
