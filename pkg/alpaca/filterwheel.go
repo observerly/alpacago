@@ -35,3 +35,13 @@ func (f *FilterWheel) GetFocusOffsets() ([]uint32, error) {
 func (f *FilterWheel) GetNames() ([]string, error) {
 	return f.Alpaca.GetStringListResponse("filterwheel", f.DeviceNumber, "names")
 }
+
+/*
+	GetPosition()
+
+	@returns the current filter wheel position.
+	@see https://ascom-standards.org/api/#/FilterWheel%20Specific%20Methods/get_filterwheel__device_number__position
+*/
+func (f *FilterWheel) GetPosition() (int32, error) {
+	return f.Alpaca.GetInt32Response("filterwheel", f.DeviceNumber, "position")
+}
