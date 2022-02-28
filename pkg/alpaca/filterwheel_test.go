@@ -134,3 +134,21 @@ func TestNewFilterWheelGetNames(t *testing.T) {
 		t.Errorf("got %q, wanted %q", telescope.Alpaca.ErrorMessage, want)
 	}
 }
+
+func TestNewFilterWheelGetPosition(t *testing.T) {
+	var got, err = filterwheel.GetPosition()
+
+	var want int32 = 0
+
+	if err != nil {
+		t.Errorf("got %q, wanted %q", err, want)
+	}
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", telescope.Alpaca.ErrorMessage, want)
+	}
+}
