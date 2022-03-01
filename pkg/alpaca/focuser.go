@@ -15,3 +15,13 @@ func NewFocuser(clientId uint32, secure bool, domain string, ip string, port int
 
 	return &focuser
 }
+
+/*
+	IsAbsolute()
+
+	@returns true if the focuser is capable of absolute position; that is, being commanded to a specific step location.
+	@see https://ascom-standards.org/api/#/Focuser%20Specific%20Methods/get_focuser__device_number__absolute
+*/
+func (f *Focuser) IsAbsolute() (bool, error) {
+	return f.Alpaca.GetBooleanResponse("focuser", f.DeviceNumber, "absolute")
+}
