@@ -1,6 +1,7 @@
 package alpaca
 
 import (
+	"math"
 	"testing"
 )
 
@@ -196,6 +197,24 @@ func TestNewFocuserIsTemperatureCompensationAvailable(t *testing.T) {
 
 	if got != want {
 		t.Errorf("got %t, wanted %t", got, want)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewFocuserGetTemperature(t *testing.T) {
+	var got, err = focuser.GetTemperature()
+
+	var want = 24.34
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if math.Abs(got-want) > 50 {
+		t.Errorf("got %f, wanted %f", got, want)
 	}
 
 	if telescope.Alpaca.ErrorNumber != 0 {
