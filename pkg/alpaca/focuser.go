@@ -65,3 +65,13 @@ func (f *Focuser) GetMaxStep() (int32, error) {
 func (f *Focuser) GetPosition() (int32, error) {
 	return f.Alpaca.GetInt32Response("focuser", f.DeviceNumber, "position")
 }
+
+/*
+	GetStepSize()
+
+	@returns the step size (microns) for the focuser.
+	@see https://ascom-standards.org/api/#/Focuser%20Specific%20Methods/get_focuser__device_number__stepsize
+*/
+func (f *Focuser) GetStepSize() (int32, error) {
+	return f.Alpaca.GetInt32Response("focuser", f.DeviceNumber, "stepsize")
+}
