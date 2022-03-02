@@ -60,6 +60,7 @@ github.com/observerly/camelopardalis/pkg/alpaca/focuser.go:25.46,27.2 1 1
 github.com/observerly/camelopardalis/pkg/alpaca/focuser.go:35.44,37.2 1 1
 github.com/observerly/camelopardalis/pkg/alpaca/focuser.go:45.52,47.2 1 1
 github.com/observerly/camelopardalis/pkg/alpaca/focuser.go:55.47,57.2 1 1
+github.com/observerly/camelopardalis/pkg/alpaca/focuser.go:65.48,67.2 1 0
 github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:63.134,73.2 3 6
 github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:81.42,90.2 3 1
 github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:100.63,103.2 2 1

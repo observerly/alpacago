@@ -98,13 +98,13 @@ func TestNewFocuserIsMoving(t *testing.T) {
 func TestNewFocuserGetMaxIncrement(t *testing.T) {
 	var got, err = focuser.GetMaxIncrement()
 
-	var want int32 = 2147483647
+	var want int32 = 50000
 
 	if err != nil {
 		t.Errorf("got %q", err)
 	}
 
-	if got >= want {
+	if got != want {
 		t.Errorf("got %b, wanted %b", got, want)
 	}
 
@@ -116,14 +116,14 @@ func TestNewFocuserGetMaxIncrement(t *testing.T) {
 func TestNewFocuserGetMaxStep(t *testing.T) {
 	var got, err = focuser.GetMaxStep()
 
-	var want int32 = 2147483647
+	var want int32 = 50000
 
 	if err != nil {
 		t.Errorf("got %q", err)
 	}
 
-	if got >= want {
-		t.Errorf("got %b, wanted %b", got, want)
+	if got != want {
+		t.Errorf("got %d, wanted %d", got, want)
 	}
 
 	if telescope.Alpaca.ErrorNumber != 0 {
