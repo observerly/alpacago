@@ -188,7 +188,7 @@ func TestNewFocuserGetTemperatureCompensation(t *testing.T) {
 func TestNewFocuserIsTemperatureCompensationAvailable(t *testing.T) {
 	var got, err = focuser.IsTemperatureCompensationAvailable()
 
-	var want = false
+	var want = true
 
 	if err != nil {
 		t.Errorf("got %q", err)
