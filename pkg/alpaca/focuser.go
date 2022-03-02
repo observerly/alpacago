@@ -85,3 +85,13 @@ func (f *Focuser) GetStepSize() (int32, error) {
 func (f *Focuser) GetTemperatureCompensation() (bool, error) {
 	return f.Alpaca.GetBooleanResponse("focuser", f.DeviceNumber, "tempcomp")
 }
+
+/*
+	IsTemperatureCompensationAvailable()
+
+	@returns true if focuser has temperature compensation available., else always false.
+	@see https://ascom-standards.org/api/#/Focuser%20Specific%20Methods/get_focuser__device_number__tempcompavailable
+*/
+func (f *Focuser) IsTemperatureCompensationAvailable() (bool, error) {
+	return f.Alpaca.GetBooleanResponse("focuser", f.DeviceNumber, "tempcomp")
+}
