@@ -95,3 +95,13 @@ func (f *Focuser) GetTemperatureCompensation() (bool, error) {
 func (f *Focuser) IsTemperatureCompensationAvailable() (bool, error) {
 	return f.Alpaca.GetBooleanResponse("focuser", f.DeviceNumber, "tempcomp")
 }
+
+/*
+	GetTemperature()
+
+	@returns the current ambient temperature as measured by the focuser.
+	@see https://ascom-standards.org/api/#/Focuser%20Specific%20Methods/get_focuser__device_number__temperature
+*/
+func (f *Focuser) GetTemperature() (float64, error) {
+	return f.Alpaca.GetFloat64Response("focuser", f.DeviceNumber, "temperature")
+}
