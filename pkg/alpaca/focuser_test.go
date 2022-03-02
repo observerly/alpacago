@@ -148,3 +148,21 @@ func TestNewFocuserGetPosition(t *testing.T) {
 		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewFocuserGetStepSize(t *testing.T) {
+	var got, err = focuser.GetStepSize()
+
+	var want int32 = 20
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %d, wanted %d", got, want)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
