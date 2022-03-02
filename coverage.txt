@@ -1,9 +1,4 @@
 mode: atomic
-github.com/observerly/camelopardalis/pkg/alpaca/filterwheel.go:10.121,19.2 3 5
-github.com/observerly/camelopardalis/pkg/alpaca/filterwheel.go:27.59,29.2 1 1
-github.com/observerly/camelopardalis/pkg/alpaca/filterwheel.go:37.52,39.2 1 1
-github.com/observerly/camelopardalis/pkg/alpaca/filterwheel.go:47.52,49.2 1 1
-github.com/observerly/camelopardalis/pkg/alpaca/filterwheel.go:57.57,67.2 3 1
 github.com/observerly/camelopardalis/pkg/alpaca/focuser.go:8.113,17.2 3 5
 github.com/observerly/camelopardalis/pkg/alpaca/focuser.go:25.46,27.2 1 1
 github.com/observerly/camelopardalis/pkg/alpaca/focuser.go:35.44,37.2 1 1
@@ -161,3 +156,8 @@ github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:349.103,351.2 1 1
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:365.105,367.2 1 1
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:375.94,377.2 1 1
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:385.108,387.2 1 1
+github.com/observerly/camelopardalis/pkg/alpaca/filterwheel.go:10.121,19.2 3 5
+github.com/observerly/camelopardalis/pkg/alpaca/filterwheel.go:27.59,29.2 1 1
+github.com/observerly/camelopardalis/pkg/alpaca/filterwheel.go:37.52,39.2 1 1
+github.com/observerly/camelopardalis/pkg/alpaca/filterwheel.go:47.52,49.2 1 1
+github.com/observerly/camelopardalis/pkg/alpaca/filterwheel.go:57.57,67.2 3 1
