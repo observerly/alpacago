@@ -55,3 +55,13 @@ func (f *Focuser) GetMaxIncrement() (int32, error) {
 func (f *Focuser) GetMaxStep() (int32, error) {
 	return f.Alpaca.GetInt32Response("focuser", f.DeviceNumber, "maxstep")
 }
+
+/*
+	GetPosition()
+
+	@returns the focuser's current position.
+	@see https://ascom-standards.org/api/#/Focuser%20Specific%20Methods/get_focuser__device_number__position
+*/
+func (f *Focuser) GetPosition() (int32, error) {
+	return f.Alpaca.GetInt32Response("focuser", f.DeviceNumber, "position")
+}

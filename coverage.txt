@@ -4,8 +4,8 @@ github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:29.2,31.35 2 22
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:35.2,42.16 2 22
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:25.13,27.3 1 18
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:31.35,33.3 1 4
-github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:52.56,54.2 1 66
-github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:63.104,65.2 1 102
+github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:52.56,54.2 1 67
+github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:63.104,65.2 1 103
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:80.119,87.16 3 6
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:92.2,92.20 1 6
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:98.2,100.26 2 6
@@ -26,9 +26,9 @@ github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:197.2,197.20 1 16
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:203.2,205.26 2 16
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:192.16,194.3 1 0
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:197.20,200.3 2 0
-github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:221.117,227.16 3 10
-github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:232.2,232.20 1 10
-github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:238.2,240.26 2 10
+github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:221.117,227.16 3 11
+github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:232.2,232.20 1 11
+github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:238.2,240.26 2 11
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:227.16,229.3 1 0
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:232.20,235.3 2 0
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:256.125,262.16 3 2
@@ -60,7 +60,7 @@ github.com/observerly/camelopardalis/pkg/alpaca/focuser.go:25.46,27.2 1 1
 github.com/observerly/camelopardalis/pkg/alpaca/focuser.go:35.44,37.2 1 1
 github.com/observerly/camelopardalis/pkg/alpaca/focuser.go:45.52,47.2 1 1
 github.com/observerly/camelopardalis/pkg/alpaca/focuser.go:55.47,57.2 1 1
-github.com/observerly/camelopardalis/pkg/alpaca/focuser.go:65.48,67.2 1 0
+github.com/observerly/camelopardalis/pkg/alpaca/focuser.go:65.48,67.2 1 1
 github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:63.134,73.2 3 6
 github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:81.42,90.2 3 1
 github.com/observerly/camelopardalis/pkg/alpaca/telescope.go:100.63,103.2 2 1
