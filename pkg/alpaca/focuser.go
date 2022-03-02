@@ -35,3 +35,13 @@ func (f *Focuser) IsAbsolute() (bool, error) {
 func (f *Focuser) IsMoving() (bool, error) {
 	return f.Alpaca.GetBooleanResponse("focuser", f.DeviceNumber, "ismoving")
 }
+
+/*
+	GetMaxIncrement()
+
+	@returns the maximum increment size allowed by the focuser; i.e. the maximum number of steps allowed in one move operation.
+	@see https://ascom-standards.org/api/#/Focuser%20Specific%20Methods/get_focuser__device_number__maxincrement
+*/
+func (f *Focuser) GetMaxIncrement() (int32, error) {
+	return f.Alpaca.GetInt32Response("focuser", f.DeviceNumber, "maxincrement")
+}

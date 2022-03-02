@@ -94,3 +94,21 @@ func TestNewFocuserIsMoving(t *testing.T) {
 		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewFocuserGetMaxIncrement(t *testing.T) {
+	var got, err = focuser.GetMaxIncrement()
+
+	var want int32 = 2147483647
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got >= want {
+		t.Errorf("got %b, wanted %b", got, want)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
