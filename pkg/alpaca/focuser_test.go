@@ -270,3 +270,17 @@ func TestNewFocuserSetHalt(t *testing.T) {
 		}
 	}
 }
+
+func TestNewFocuserSetMove(t *testing.T) {
+	var _ = focuser.SetConnected(true)
+
+	var err = focuser.SetMove(25000)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	}
+}

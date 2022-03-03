@@ -164,3 +164,24 @@ func (f *Focuser) SetHalt() error {
 
 	return f.Alpaca.Put("focuser", f.DeviceNumber, "halt", form)
 }
+
+/*
+	SetMove
+
+	@params position int32 (step distance or absolute position, depending on the value of the absolute property.)
+	@returns an error or nil, if nil it moves the focuser by the specified amount or to the specified
+	position depending on the value of the Absolute property.
+	@see https://ascom-standards.org/api/#/Focuser%20Specific%20Methods/put_focuser__device_number__move
+*/
+func (f *Focuser) SetMove(position int32) error {
+	f.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Step distance or absolute position, depending on the value of the Absolute property
+		"Position":            fmt.Sprintf("%d", position),
+		"ClientID":            fmt.Sprintf("%d", f.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", f.Alpaca.TransactionId),
+	}
+
+	return f.Alpaca.Put("focuser", f.DeviceNumber, "move", form)
+}
