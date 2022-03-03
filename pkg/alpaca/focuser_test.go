@@ -60,6 +60,18 @@ func TestNewFocuserDeviceNumber(t *testing.T) {
 	}
 }
 
+func TestNewFocuserSetConnected(t *testing.T) {
+	var err = focuser.SetConnected(true)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewFocuserIsAbsolute(t *testing.T) {
 	var got, err = focuser.IsAbsolute()
 
