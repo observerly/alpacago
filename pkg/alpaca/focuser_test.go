@@ -233,5 +233,28 @@ func TestNewFocuserGetTemperature(t *testing.T) {
 		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewFocuserSetHalt(t *testing.T) {
+	// To halt, we need to get the focuser moving first!
+	var got, err = focuser.IsMoving()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	}
+
+	if got {
+		var err = focuser.SetHalt()
+
+		if err != nil {
+			t.Errorf("got %q", err)
+		}
+
+		if focuser.Alpaca.ErrorNumber != 0 {
+			t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+		}
 	}
 }
