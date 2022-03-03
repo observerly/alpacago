@@ -1,5 +1,7 @@
 package alpaca
 
+import "fmt"
+
 type Focuser struct {
 	Alpaca       *ASCOMAlpacaAPIClient
 	DeviceNumber uint
@@ -84,6 +86,26 @@ func (f *Focuser) GetStepSize() (int32, error) {
 */
 func (f *Focuser) GetTemperatureCompensation() (bool, error) {
 	return f.Alpaca.GetBooleanResponse("focuser", f.DeviceNumber, "tempcomp")
+}
+
+/*
+	SetTemperatureCompensation()
+
+	@params tempComp bool (set true to enable the focuser's temperature compensation mode, otherwise false for normal operation.)
+	@returns an error or nil, if nil it sets the state of temperature compensation mode.
+	@see https://ascom-standards.org/api/#/Focuser%20Specific%20Methods/put_focuser__device_number__tempcomp
+*/
+func (f *Focuser) SetTemperatureCompensation(tempComp bool) error {
+	f.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Set true to enable the focuser's temperature compensation mode, otherwise false for normal operation.
+		"TempComp":            fmt.Sprintf("%t", tempComp),
+		"ClientID":            fmt.Sprintf("%d", f.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", f.Alpaca.TransactionId),
+	}
+
+	return f.Alpaca.Put("focuser", f.DeviceNumber, "tempcomp", form)
 }
 
 /*

@@ -186,6 +186,18 @@ func TestNewFocuserGetTemperatureCompensation(t *testing.T) {
 	}
 }
 
+func TestNewFocuserSetTemperatureCompensation(t *testing.T) {
+	var err = focuser.SetTemperatureCompensation(false)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewFocuserIsTemperatureCompensationAvailable(t *testing.T) {
 	var got, err = focuser.IsTemperatureCompensationAvailable()
 
