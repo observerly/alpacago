@@ -73,8 +73,8 @@ func TestNewFocuserIsAbsolute(t *testing.T) {
 		t.Errorf("got %t, wanted %t", got, want)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
 	}
 }
 
@@ -91,8 +91,8 @@ func TestNewFocuserIsMoving(t *testing.T) {
 		t.Errorf("got %t, wanted %t", got, want)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
 	}
 }
 
@@ -109,8 +109,8 @@ func TestNewFocuserGetMaxIncrement(t *testing.T) {
 		t.Errorf("got %b, wanted %b", got, want)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
 	}
 }
 
@@ -127,8 +127,8 @@ func TestNewFocuserGetMaxStep(t *testing.T) {
 		t.Errorf("got %d, wanted %d", got, want)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
 	}
 }
 
@@ -145,8 +145,8 @@ func TestNewFocuserGetPosition(t *testing.T) {
 		t.Errorf("got %d, wanted %d", got, want)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
 	}
 }
 
@@ -163,8 +163,8 @@ func TestNewFocuserGetStepSize(t *testing.T) {
 		t.Errorf("got %d, wanted %d", got, want)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
 	}
 }
 
@@ -181,8 +181,8 @@ func TestNewFocuserGetTemperatureCompensation(t *testing.T) {
 		t.Errorf("got %t, wanted %t", got, want)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
 	}
 }
 
@@ -193,8 +193,8 @@ func TestNewFocuserSetTemperatureCompensation(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
 	}
 }
 
@@ -211,8 +211,8 @@ func TestNewFocuserIsTemperatureCompensationAvailable(t *testing.T) {
 		t.Errorf("got %t, wanted %t", got, want)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
 	}
 }
 
@@ -229,7 +229,9 @@ func TestNewFocuserGetTemperature(t *testing.T) {
 		t.Errorf("got %f, wanted %f", got, want)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	}
+}
 	}
 }
