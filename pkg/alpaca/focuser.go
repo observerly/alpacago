@@ -127,3 +127,20 @@ func (f *Focuser) IsTemperatureCompensationAvailable() (bool, error) {
 func (f *Focuser) GetTemperature() (float64, error) {
 	return f.Alpaca.GetFloat64Response("focuser", f.DeviceNumber, "temperature")
 }
+
+/*
+	SetHalt
+
+	@returns an error or nil, if nil it immediately stop any focuser motion due to a previous move() method call.
+	@see https://ascom-standards.org/api/#/Focuser%20Specific%20Methods/put_focuser__device_number__halt
+*/
+func (f *Focuser) SetHalt() error {
+	f.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", f.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", f.Alpaca.TransactionId),
+	}
+
+	return f.Alpaca.Put("focuser", f.DeviceNumber, "halt", form)
+}
