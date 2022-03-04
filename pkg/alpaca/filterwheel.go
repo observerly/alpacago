@@ -19,6 +19,26 @@ func NewFilterWheel(clientId uint32, secure bool, domain string, ip string, port
 }
 
 /*
+	SetConnected() common method to all ASCOM Alpaca compliant devices
+
+	@param connected bool (set True to connect to the device hardware, set false to disconnect from the device hardware)
+	@returns the connected state of the device
+	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/put__device_type___device_number__connected
+*/
+func (f *FilterWheel) SetConnected(connected bool) error {
+	f.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Set True to connect to the device hardware, set False to disconnect from the device hardware
+		"Connected":           fmt.Sprintf("%t", connected),
+		"ClientID":            fmt.Sprintf("%d", f.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", f.Alpaca.TransactionId),
+	}
+
+	return f.Alpaca.Put("filterwheel", f.DeviceNumber, "connected", form)
+}
+
+/*
 	GetFocusOffsets()
 
 	@returns an integer array of filter focus offsets.
