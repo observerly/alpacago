@@ -59,6 +59,18 @@ func TestNewFilterWheelDeviceNumber(t *testing.T) {
 	}
 }
 
+func TestNewFFilterWheelSetConnected(t *testing.T) {
+	var err = filterwheel.SetConnected(true)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if filterwheel.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", filterwheel.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewFilterWheelGetFocusOffsets(t *testing.T) {
 	var got, err = filterwheel.GetFocusOffsets()
 
