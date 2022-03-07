@@ -37,3 +37,13 @@ func (r *Rotator) SetConnected(connected bool) error {
 
 	return r.Alpaca.Put("rotator", r.DeviceNumber, "connected", form)
 }
+
+/*
+	CanReverse()
+
+	@returns true if the Rotator supports the Reverse method.
+	@see https://ascom-standards.org/api/#/Rotator%20Specific%20Methods/get_rotator__device_number__canreverse
+*/
+func (r *Rotator) CanReverse() (bool, error) {
+	return r.Alpaca.GetBooleanResponse("rotator", r.DeviceNumber, "canreverse")
+}
