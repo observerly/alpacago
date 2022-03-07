@@ -112,3 +112,21 @@ func TestNewRotatorIsMoving(t *testing.T) {
 		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewRotatorGetMechanicalPosition(t *testing.T) {
+	var got, err = rotator.GetMechanicalPosition()
+
+	var want = 0.0
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %f, wanted %f", got, want)
+	}
+
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	}
+}
