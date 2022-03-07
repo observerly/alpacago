@@ -87,3 +87,21 @@ func (r *Rotator) GetPosition() (float64, error) {
 func (r *Rotator) GetReverse() (bool, error) {
 	return r.Alpaca.GetBooleanResponse("rotator", r.DeviceNumber, "reverse")
 }
+
+/*
+	SetReverse
+
+	@returns an error or nil, if nil it sets the rotator’s reverse state.
+	@see https://ascom-standards.org/api/#/Rotator%20Specific%20Methods/put_rotator__device_number__reverse
+*/
+func (r *Rotator) SetReverse(reverse bool) error {
+	r.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"Reverse":             fmt.Sprintf("%t", reverse),
+		"ClientID":            fmt.Sprintf("%d", r.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", r.Alpaca.TransactionId),
+	}
+
+	return r.Alpaca.Put("rotator", r.DeviceNumber, "reverse", form)
+}
