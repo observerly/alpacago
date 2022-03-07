@@ -1,0 +1,58 @@
+package alpaca
+
+import "testing"
+
+var rotator = NewRotator(65535, true, "alpaca.observerly.com", "", -1, 0)
+
+func TestNewRotatorBaseURL(t *testing.T) {
+	rotator := NewRotator(65535, false, "", "0.0.0.0", 8000, 0)
+
+	var got string = rotator.Alpaca.UrlBase
+	var want string = "http://0.0.0.0:8000"
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+}
+
+func TestNewRotatorBaseURLForHost(t *testing.T) {
+	var got string = rotator.Alpaca.UrlBase
+	var want string = "https://alpaca.observerly.com"
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+}
+
+func TestNewRotatorClientID(t *testing.T) {
+	rotator := NewRotator(65535, false, "", "0.0.0.0", 8000, 0)
+
+	var got uint32 = rotator.Alpaca.ClientId
+	var want uint32 = 65535
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+}
+
+func TestNewRotatorTransactionID(t *testing.T) {
+	rotator := NewRotator(65535, false, "", "0.0.0.0", 8000, 0)
+
+	var got uint32 = rotator.Alpaca.TransactionId
+	var want uint32 = 0
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+}
+
+func TestNewRotatorDeviceNumber(t *testing.T) {
+	rotator := NewRotator(65535, false, "", "0.0.0.0", 8000, 0)
+
+	var got uint = rotator.DeviceNumber
+	var want uint = 0
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+}
