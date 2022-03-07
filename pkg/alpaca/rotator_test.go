@@ -56,3 +56,15 @@ func TestNewRotatorDeviceNumber(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 }
+
+func TestNewRotatorSetConnected(t *testing.T) {
+	var err = rotator.SetConnected(true)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
+	}
+}
