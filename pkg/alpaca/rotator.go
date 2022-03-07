@@ -77,3 +77,13 @@ func (r *Rotator) GetMechanicalPosition() (float64, error) {
 func (r *Rotator) GetPosition() (float64, error) {
 	return r.Alpaca.GetFloat64Response("rotator", r.DeviceNumber, "mechanicalposition")
 }
+
+/*
+	GetReverse()
+
+	@returns the rotator’s reverse state.
+	@see https://ascom-standards.org/api/#/Rotator%20Specific%20Methods/get_rotator__device_number__reverse
+*/
+func (r *Rotator) GetReverse() (bool, error) {
+	return r.Alpaca.GetBooleanResponse("rotator", r.DeviceNumber, "reverse")
+}
