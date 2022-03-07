@@ -59,7 +59,7 @@ func TestNewFilterWheelDeviceNumber(t *testing.T) {
 	}
 }
 
-func TestNewFFilterWheelSetConnected(t *testing.T) {
+func TestNewFilterWheelSetConnected(t *testing.T) {
 	var err = filterwheel.SetConnected(true)
 
 	if err != nil {
