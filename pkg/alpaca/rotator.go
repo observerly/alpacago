@@ -67,3 +67,13 @@ func (r *Rotator) IsMoving() (bool, error) {
 func (r *Rotator) GetMechanicalPosition() (float64, error) {
 	return r.Alpaca.GetFloat64Response("rotator", r.DeviceNumber, "mechanicalposition")
 }
+
+/*
+	GetPosition()
+
+	@returns the current instantaneous Rotator position, in degrees.
+	@see https://ascom-standards.org/api/#/Rotator%20Specific%20Methods/get_rotator__device_number__position
+*/
+func (r *Rotator) GetPosition() (float64, error) {
+	return r.Alpaca.GetFloat64Response("rotator", r.DeviceNumber, "mechanicalposition")
+}
