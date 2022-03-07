@@ -90,3 +90,25 @@ func TestNewRotatorCanReverse(t *testing.T) {
 		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewRotatorIsMoving(t *testing.T) {
+	var got, err = rotator.IsMoving()
+
+	var want = false
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %t, wanted %t", got, want)
+	}
+
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	}
+
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
+	}
+}

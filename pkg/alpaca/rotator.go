@@ -47,3 +47,13 @@ func (r *Rotator) SetConnected(connected bool) error {
 func (r *Rotator) CanReverse() (bool, error) {
 	return r.Alpaca.GetBooleanResponse("rotator", r.DeviceNumber, "canreverse")
 }
+
+/*
+	IsMoving()
+
+	@returns true if the rotator is currently moving to a new position. False if the focuser is stationary.
+	@see https://ascom-standards.org/api/#/Rotator%20Specific%20Methods/get_rotator__device_number__ismoving
+*/
+func (r *Rotator) IsMoving() (bool, error) {
+	return r.Alpaca.GetBooleanResponse("rotator", r.DeviceNumber, "ismoving")
+}
