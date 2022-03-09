@@ -115,3 +115,13 @@ func (r *Rotator) SetReverse(reverse bool) error {
 func (r *Rotator) GetStepSize() (float64, error) {
 	return r.Alpaca.GetFloat64Response("rotator", r.DeviceNumber, "stepsize")
 }
+
+/*
+	GetTargetPosition()
+
+	@returns the destination position angle for Move() and MoveAbsolute().
+	@see https://ascom-standards.org/api/#/Rotator%20Specific%20Methods/get_rotator__device_number__stepsize
+*/
+func (r *Rotator) GetTargetPosition() (float64, error) {
+	return r.Alpaca.GetFloat64Response("rotator", r.DeviceNumber, "stepsize")
+}
