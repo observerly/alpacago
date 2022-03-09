@@ -199,3 +199,21 @@ func TestNewRotatorGetStepSize(t *testing.T) {
 		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewRotatorGetTargetPosition(t *testing.T) {
+	var got, err = rotator.GetTargetPosition()
+
+	var want = 0.75
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if math.Abs(got-want) > 50 {
+		t.Errorf("got %f, wanted %f", got, want)
+	}
+
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	}
+}
