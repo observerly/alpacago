@@ -105,3 +105,13 @@ func (r *Rotator) SetReverse(reverse bool) error {
 
 	return r.Alpaca.Put("rotator", r.DeviceNumber, "reverse", form)
 }
+
+/*
+	GetStepSize()
+
+	@returns the minimum step size, in degrees.
+	@see https://ascom-standards.org/api/#/Rotator%20Specific%20Methods/get_rotator__device_number__stepsize
+*/
+func (r *Rotator) GetStepSize() (float64, error) {
+	return r.Alpaca.GetFloat64Response("rotator", r.DeviceNumber, "stepsize")
+}

@@ -1,6 +1,9 @@
 package alpaca
 
-import "testing"
+import (
+	"math"
+	"testing"
+)
 
 var rotator = NewRotator(65535, true, "alpaca.observerly.com", "", -1, 0)
 
@@ -172,6 +175,24 @@ func TestNewRotatorSetReverse(t *testing.T) {
 
 	if err != nil {
 		t.Errorf("got %q", err)
+	}
+
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewRotatorGetStepSize(t *testing.T) {
+	var got, err = rotator.GetStepSize()
+
+	var want = 0.75
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if math.Abs(got-want) > 50 {
+		t.Errorf("got %f, wanted %f", got, want)
 	}
 
 	if focuser.Alpaca.ErrorNumber != 0 {
