@@ -41,7 +41,7 @@ github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:296.2,296.20 1 46
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:302.2,304.29 2 46
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:308.2,310.12 2 46
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:291.16,293.3 1 0
-github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:296.20,299.3 2 2
+github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:296.20,299.3 2 1
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:304.29,306.3 1 0
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:319.96,321.2 1 1
 github.com/observerly/camelopardalis/pkg/alpaca/alpaca.go:329.101,331.2 1 1

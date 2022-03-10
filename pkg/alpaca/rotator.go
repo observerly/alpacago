@@ -144,7 +144,7 @@ func (r *Rotator) SetHalt() error {
 }
 
 /*
-	SetMove
+	SetMove()
 
 	@params position float64 (relative position to move in degrees from current position.)
 	@returns an error or nil, if nil it causes the rotator to move position degrees relative to the current Position value.
@@ -160,5 +160,5 @@ func (r *Rotator) SetMove(position float64) error {
 		"ClientTransactionID": fmt.Sprintf("%d", r.Alpaca.TransactionId),
 	}
 
-	return r.Alpaca.Put("focuser", r.DeviceNumber, "move", form)
+	return r.Alpaca.Put("rotator", r.DeviceNumber, "move", form)
 }
