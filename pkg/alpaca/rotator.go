@@ -142,3 +142,23 @@ func (r *Rotator) SetHalt() error {
 
 	return r.Alpaca.Put("rotator", r.DeviceNumber, "halt", form)
 }
+
+/*
+	SetMove
+
+	@params position float64 (relative position to move in degrees from current position.)
+	@returns an error or nil, if nil it causes the rotator to move position degrees relative to the current Position value.
+	@see https://ascom-standards.org/api/#/Rotator%20Specific%20Methods/put_rotator__device_number__move
+*/
+func (r *Rotator) SetMove(position float64) error {
+	r.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Relative position to move in degrees from current Position.
+		"Position":            fmt.Sprintf("%f", position),
+		"ClientID":            fmt.Sprintf("%d", r.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", r.Alpaca.TransactionId),
+	}
+
+	return r.Alpaca.Put("focuser", r.DeviceNumber, "move", form)
+}
