@@ -237,7 +237,7 @@ func TestNewFocuserGetTemperature(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if math.Abs(got-want) > 50 {
+	if math.Abs(got-want) > 100 {
 		t.Errorf("got %f, wanted %f", got, want)
 	}
 

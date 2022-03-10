@@ -217,3 +217,15 @@ func TestNewRotatorGetTargetPosition(t *testing.T) {
 		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewRotatorSetHalt(t *testing.T) {
+	var err = rotator.SetHalt()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	}
+}
