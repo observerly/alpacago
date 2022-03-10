@@ -125,3 +125,20 @@ func (r *Rotator) GetStepSize() (float64, error) {
 func (r *Rotator) GetTargetPosition() (float64, error) {
 	return r.Alpaca.GetFloat64Response("rotator", r.DeviceNumber, "stepsize")
 }
+
+/*
+	SetHalt() common method to all ASCOM Alpaca compliant devices
+
+	@returns an error or nil, if nil it immediately stop any Rotator motion due to a previous Move or MoveAbsolute method call.
+	@see https://ascom-standards.org/api/#/Rotator%20Specific%20Methods/put_rotator__device_number__halt
+*/
+func (r *Rotator) SetHalt() error {
+	r.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", r.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", r.Alpaca.TransactionId),
+	}
+
+	return r.Alpaca.Put("rotator", r.DeviceNumber, "halt", form)
+}
