@@ -119,7 +119,7 @@ func TestNewRotatorIsMoving(t *testing.T) {
 func TestNewRotatorGetMechanicalPosition(t *testing.T) {
 	var got, err = rotator.GetMechanicalPosition()
 
-	var want = 0.75
+	var want = 3.000000
 
 	if err != nil {
 		t.Errorf("got %q", err)
@@ -137,7 +137,7 @@ func TestNewRotatorGetMechanicalPosition(t *testing.T) {
 func TestNewRotatorGetPosition(t *testing.T) {
 	var got, err = rotator.GetPosition()
 
-	var want = 0.75
+	var want = 3.000000
 
 	if err != nil {
 		t.Errorf("got %q", err)
@@ -233,7 +233,7 @@ func TestNewRotatorSetHalt(t *testing.T) {
 func TestNewRotatorSetMove(t *testing.T) {
 	var _ = focuser.SetConnected(true)
 
-	var err = rotator.SetMove(0.75)
+	var err = rotator.SetMove(0)
 
 	if err != nil {
 		t.Errorf("got %q", err)
