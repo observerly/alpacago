@@ -170,7 +170,7 @@ func TestNewAlpacaAPIInt32Response(t *testing.T) {
 func TestNewAlpacaAPIInt32ListResponse(t *testing.T) {
 	got, err := client.GetUInt32ListResponse("filterwheel", 0, "focusoffsets")
 
-	var want []uint32 = []uint32{8280, 8079, 9234, 790, 6553, 4650}
+	var want []uint32 = []uint32{8252, 9206, 9383, 3507, 9420, 9163}
 
 	if err != nil {
 		t.Errorf("got %q, wanted %d", err, want)
