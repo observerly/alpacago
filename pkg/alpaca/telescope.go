@@ -555,7 +555,7 @@ func (t *Telescope) SetSideOfPier(sideOfPier PierPointingMode) error {
 	t.Alpaca.TransactionId++
 
 	if sideOfPier != 1 && sideOfPier != 0 {
-		return errors.New("Please provide a valid pointing state for the mount e.g., eiher 0 = pierEast, 1 = pierWest")
+		return errors.New("please provide a valid pointing state for the mount e.g., eiher 0 = pierEast, 1 = pierWest")
 	}
 
 	var form map[string]string = map[string]string{
@@ -598,7 +598,7 @@ func (t *Telescope) SetSiteElevation(siteElevation float64) error {
 	t.Alpaca.TransactionId++
 
 	if siteElevation < -1000 || siteElevation > 10000 {
-		return errors.New("Please provide a realistic site elevation, e.g., greater than or equal to -1000m, but less than 10000m relative to mean sea level")
+		return errors.New("please provide a realistic site elevation, e.g., greater than or equal to -1000m, but less than 10000m relative to mean sea level")
 	}
 
 	var form map[string]string = map[string]string{
@@ -630,7 +630,7 @@ func (t *Telescope) SetSiteLatitude(siteLatitude float64) error {
 	t.Alpaca.TransactionId++
 
 	if siteLatitude <= -90 || siteLatitude >= 90 {
-		return errors.New("Please provide a valid latitude between -90° and +90°")
+		return errors.New("please provide a valid latitude between -90° and +90°")
 	}
 
 	var form map[string]string = map[string]string{
@@ -662,7 +662,7 @@ func (t *Telescope) SetSiteLongitude(siteLongitude float64) error {
 	t.Alpaca.TransactionId++
 
 	if siteLongitude <= -180 || siteLongitude >= 180 {
-		return errors.New("Please provide a valid longitude between -180° and +180°")
+		return errors.New("please provide a valid longitude between -180° and +180°")
 	}
 
 	var form map[string]string = map[string]string{
@@ -725,11 +725,11 @@ func (t *Telescope) SetSlewToAltAz(altitude float64, azimuth float64) error {
 	t.SetTracking(false)
 
 	if altitude < -90 || altitude > 90 {
-		return errors.New("Please provide a valid altitude between -90° and +90°")
+		return errors.New("please provide a valid altitude between -90° and +90°")
 	}
 
 	if azimuth < 0 || azimuth > 360 {
-		return errors.New("Please provide a valid azimuth between 0° and +360°")
+		return errors.New("please provide a valid azimuth between 0° and +360°")
 	}
 
 	var form map[string]string = map[string]string{
@@ -755,11 +755,11 @@ func (t *Telescope) SetSlewToAltAzAsync(altitude float64, azimuth float64) error
 	t.SetTracking(false)
 
 	if altitude < -90 || altitude > 90 {
-		return errors.New("Please provide a valid altitude between -90° and +90°")
+		return errors.New("please provide a valid altitude between -90° and +90°")
 	}
 
 	if azimuth < 0 || azimuth > 360 {
-		return errors.New("Please provide a valid azimuth between 0° and +360°")
+		return errors.New("please provide a valid azimuth between 0° and +360°")
 	}
 
 	var form map[string]string = map[string]string{
@@ -785,11 +785,11 @@ func (t *Telescope) SetSlewToCoordinates(rightAscension float64, declination flo
 	t.SetTracking(true)
 
 	if declination < -90 || declination > 90 {
-		return errors.New("Please provide a valid altitude between -90° and +90°")
+		return errors.New("please provide a valid altitude between -90° and +90°")
 	}
 
 	if rightAscension < 0 || rightAscension > 360 {
-		return errors.New("Please provide a valid azimuth between 0° and +360°")
+		return errors.New("please provide a valid azimuth between 0° and +360°")
 	}
 
 	rightAscension /= 15
@@ -817,11 +817,11 @@ func (t *Telescope) SetSlewToCoordinatesAsync(rightAscension float64, declinatio
 	t.SetTracking(true)
 
 	if declination < -90 || declination > 90 {
-		return errors.New("Please provide a valid altitude between -90° and +90°")
+		return errors.New("please provide a valid altitude between -90° and +90°")
 	}
 
 	if rightAscension < 0 || rightAscension > 360 {
-		return errors.New("Please provide a valid azimuth between 0° and +360°")
+		return errors.New("please provide a valid azimuth between 0° and +360°")
 	}
 
 	rightAscension /= 15
