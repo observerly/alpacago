@@ -182,3 +182,23 @@ func (r *Rotator) SetMoveAbsolute(position float64) error {
 
 	return r.Alpaca.Put("rotator", r.DeviceNumber, "moveabsolute", form)
 }
+
+/*
+	SetMoveMechanical()
+
+	@params position float64 (absolute position in degrees.)
+	@returns an error or nil, if nil it causes the rotator to move the mechanical position of Position degrees.
+	@see https://ascom-standards.org/api/#/Rotator%20Specific%20Methods/put_rotator__device_number__movemechanical
+*/
+func (r *Rotator) SetMoveMechanical(position float64) error {
+	r.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Absolute position in degrees.
+		"Position":            fmt.Sprintf("%f", position),
+		"ClientID":            fmt.Sprintf("%d", r.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", r.Alpaca.TransactionId),
+	}
+
+	return r.Alpaca.Put("rotator", r.DeviceNumber, "movemechanical", form)
+}

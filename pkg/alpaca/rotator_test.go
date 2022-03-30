@@ -257,3 +257,17 @@ func TestNewRotatorSetMoveAbsolute(t *testing.T) {
 		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewRotatorSetMoveMechnical(t *testing.T) {
+	var _ = rotator.SetConnected(true)
+
+	var err = rotator.SetMoveMechanical(0)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
+	}
+}
