@@ -129,8 +129,8 @@ func TestNewRotatorGetMechanicalPosition(t *testing.T) {
 		t.Errorf("got %f, wanted %f", got, want)
 	}
 
-	if focuser.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
 	}
 }
 
@@ -147,8 +147,8 @@ func TestNewRotatorGetPosition(t *testing.T) {
 		t.Errorf("got %f, wanted %f", got, want)
 	}
 
-	if focuser.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
 	}
 }
 
@@ -165,8 +165,8 @@ func TestNewRotatorGetReverse(t *testing.T) {
 		t.Errorf("got %t, wanted %t", got, want)
 	}
 
-	if focuser.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
 	}
 }
 
@@ -177,8 +177,8 @@ func TestNewRotatorSetReverse(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if focuser.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
 	}
 }
 
@@ -195,8 +195,8 @@ func TestNewRotatorGetStepSize(t *testing.T) {
 		t.Errorf("got %f, wanted %f", got, want)
 	}
 
-	if focuser.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
 	}
 }
 
@@ -213,8 +213,8 @@ func TestNewRotatorGetTargetPosition(t *testing.T) {
 		t.Errorf("got %f, wanted %f", got, want)
 	}
 
-	if focuser.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
 	}
 }
 
@@ -225,8 +225,8 @@ func TestNewRotatorSetHalt(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if focuser.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
 	}
 }
 
@@ -239,8 +239,8 @@ func TestNewRotatorSetMove(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if focuser.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
 	}
 }
 
@@ -253,7 +253,7 @@ func TestNewRotatorSetMoveAbsolute(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if focuser.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
 	}
 }
