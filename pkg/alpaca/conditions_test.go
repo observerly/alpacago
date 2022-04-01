@@ -59,7 +59,33 @@ func TestNewObservingConditionsDeviceNumber(t *testing.T) {
 	}
 }
 
+func TestNewObservingConditionsSetConnectedOn(t *testing.T) {
+	var err = conditions.SetConnected(true)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewObservingConditionsSetConnectedOff(t *testing.T) {
+	var err = conditions.SetConnected(false)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewObservingConditionsGetAveragePeriod(t *testing.T) {
+	conditions.SetConnected(true)
+
 	var got, err = conditions.GetAveragePeriod()
 
 	var want int32 = 0

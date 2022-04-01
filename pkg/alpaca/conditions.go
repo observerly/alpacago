@@ -1,5 +1,7 @@
 package alpaca
 
+import "fmt"
+
 type ObservingConditions struct {
 	Alpaca       *ASCOMAlpacaAPIClient
 	DeviceNumber uint
@@ -14,6 +16,26 @@ func NewObservingConditions(clientId uint32, secure bool, domain string, ip stri
 	}
 
 	return &conditions
+}
+
+/*
+	SetConnected() common method to all ASCOM Alpaca compliant devices
+
+	@param connected bool (set True to connect to the device hardware, set false to disconnect from the device hardware)
+	@returns the connected state of the device
+	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/put__device_type___device_number__connected
+*/
+func (c *ObservingConditions) SetConnected(connected bool) error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Set True to connect to the device hardware, set False to disconnect from the device hardware
+		"Connected":           fmt.Sprintf("%t", connected),
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("observingconditions", c.DeviceNumber, "connected", form)
 }
 
 /*
