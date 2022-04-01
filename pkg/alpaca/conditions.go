@@ -15,3 +15,13 @@ func NewObservingConditions(clientId uint32, secure bool, domain string, ip stri
 
 	return &conditions
 }
+
+/*
+	GetAveragePeriod()
+
+	@returns the time period over which observations will be averaged.
+	@see https://ascom-standards.org/api/#/ObservingConditions%20Specific%20Methods/get_observingconditions__device_number__averageperiod
+*/
+func (c *ObservingConditions) GetAveragePeriod() (int32, error) {
+	return c.Alpaca.GetInt32Response("observingconditions", c.DeviceNumber, "averageperiod")
+}

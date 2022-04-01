@@ -58,3 +58,21 @@ func TestNewObservingConditionsDeviceNumber(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 }
+
+func TestNewObservingConditionsGetAveragePeriod(t *testing.T) {
+	var got, err = conditions.GetAveragePeriod()
+
+	var want int32 = 0
+
+	if err != nil {
+		t.Errorf("got %q, wanted %q", err, want)
+	}
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %d", telescope.Alpaca.ErrorMessage, want)
+	}
+}
