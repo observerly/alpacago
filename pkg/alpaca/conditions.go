@@ -67,3 +67,13 @@ func (c *ObservingConditions) GetAveragePeriod() (int32, error) {
 func (c *ObservingConditions) GetCloudCover() (float64, error) {
 	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "cloudcover")
 }
+
+/*
+	GetDewPoint()
+
+	@returns the atmospheric dew point at the observatory reported in °C.
+	@see https://ascom-standards.org/api/#/ObservingConditions%20Specific%20Methods/get_observingconditions__device_number__dewpoint
+*/
+func (c *ObservingConditions) GetDewPoint() (float64, error) {
+	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "dewpoint")
+}
