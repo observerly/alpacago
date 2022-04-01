@@ -1,6 +1,5 @@
 // Copyright (c) 2021-2022 observerly Ltd (michael@observerly.com), All rights reserved.
-
-package alpaca
+package alpacago
 
 import (
 	"fmt"

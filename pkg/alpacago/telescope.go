@@ -1,4 +1,4 @@
-package alpaca
+package alpacago
 
 import (
 	"errors"
