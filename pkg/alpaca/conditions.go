@@ -77,3 +77,13 @@ func (c *ObservingConditions) GetCloudCover() (float64, error) {
 func (c *ObservingConditions) GetDewPoint() (float64, error) {
 	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "dewpoint")
 }
+
+/*
+	GetHumidity()
+
+	@returns the atmospheric humidity (%) at the observatory
+	@see https://ascom-standards.org/api/#/ObservingConditions%20Specific%20Methods/get_observingconditions__device_number__humidity
+*/
+func (c *ObservingConditions) GetHumidity() (float64, error) {
+	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "humidity")
+}
