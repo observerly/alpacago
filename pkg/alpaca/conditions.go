@@ -57,3 +57,13 @@ func (c *ObservingConditions) SetConnected(connected bool) error {
 func (c *ObservingConditions) GetAveragePeriod() (int32, error) {
 	return c.Alpaca.GetInt32Response("observingconditions", c.DeviceNumber, "averageperiod")
 }
+
+/*
+	GetCloudCover()
+
+	@returns the percentage of the sky obscured by cloud
+	@see https://ascom-standards.org/api/#/ObservingConditions%20Specific%20Methods/get_observingconditions__device_number__cloudcover
+*/
+func (c *ObservingConditions) GetCloudCover() (float64, error) {
+	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "cloudcover")
+}
