@@ -138,3 +138,21 @@ func TestNewObservingConditionsGetAveragePeriod(t *testing.T) {
 		t.Errorf("got %q, wanted %d", telescope.Alpaca.ErrorMessage, want)
 	}
 }
+
+func TestNewObservingConditionsGetCloudCoverage(t *testing.T) {
+	conditions.SetConnected(true)
+
+	var got, err = conditions.GetAveragePeriod()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 0 || got > 100 {
+		t.Errorf("got %q", got)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
