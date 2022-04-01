@@ -87,3 +87,13 @@ func (c *ObservingConditions) GetDewPoint() (float64, error) {
 func (c *ObservingConditions) GetHumidity() (float64, error) {
 	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "humidity")
 }
+
+/*
+	GetPressure()
+
+	@returns the atmospheric pressure in hectoPascals at the observatory's altitude - NOT reduced to sea level.
+	@see https://ascom-standards.org/api/#/ObservingConditions%20Specific%20Methods/get_observingconditions__device_number__pressure
+*/
+func (c *ObservingConditions) GetPressure() (float64, error) {
+	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "pressure")
+}

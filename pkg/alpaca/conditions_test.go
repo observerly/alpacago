@@ -1,6 +1,7 @@
 package alpaca
 
 import (
+	"math"
 	"testing"
 )
 
@@ -186,6 +187,35 @@ func TestNewObservingConditionsGetHumidity(t *testing.T) {
 
 	if got < 0 || got > 100 {
 		t.Errorf("got %f", got)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewObservingConditionsGetPressure(t *testing.T) {
+	conditions.SetConnected(true)
+
+	var got, err = conditions.GetPressure()
+
+	// The average pressure at mean sea-level (MSL) in the International
+	// Standard Atmosphere (ISA) is 1013.25 hPa, or 1 atmosphere (atm),
+	// or 29.92 inches of mercury.
+	var want = 1013.25
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	// This will test for realistic values of atmospheric pressure:
+	if got < 0 || got > 10000 {
+		t.Errorf("got %f", got)
+	}
+
+	// This will test for pressures near to the accepted value of 1013.25hPa:
+	if math.Abs(got-want) > 1000 {
+		t.Errorf("got %f, wanted %f", got, want)
 	}
 
 	if telescope.Alpaca.ErrorNumber != 0 {
