@@ -222,3 +222,21 @@ func TestNewObservingConditionsGetPressure(t *testing.T) {
 		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewObservingConditionsGetRainRate(t *testing.T) {
+	conditions.SetConnected(true)
+
+	var got, err = conditions.GetRainRate()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 0 || got > 100 {
+		t.Errorf("got %f", got)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
