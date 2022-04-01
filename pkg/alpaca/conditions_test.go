@@ -71,11 +71,47 @@ func TestNewObservingConditionsSetConnectedOn(t *testing.T) {
 	}
 }
 
+func TestNewObservingConditionsIsConnectedOn(t *testing.T) {
+	var got, err = conditions.IsConnected()
+
+	var want = true
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %t, wanted %t", got, want)
+	}
+
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewObservingConditionsSetConnectedOff(t *testing.T) {
 	var err = conditions.SetConnected(false)
 
 	if err != nil {
 		t.Errorf("got %q", err)
+	}
+
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewObservingConditionsIsConnectedOff(t *testing.T) {
+	var got, err = conditions.IsConnected()
+
+	var want = false
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %t wanted %t", got, want)
 	}
 
 	if rotator.Alpaca.ErrorNumber != 0 {
