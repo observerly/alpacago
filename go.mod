@@ -1,4 +1,4 @@
-module github.com/observerly/camelopardalis
+module github.com/observerly/alpacago
 
 go 1.17
 
