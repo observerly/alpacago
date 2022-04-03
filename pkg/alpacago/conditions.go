@@ -127,3 +127,13 @@ func (c *ObservingConditions) GetSkyBrightness() (float64, error) {
 func (c *ObservingConditions) GetSkyQuality() (float64, error) {
 	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "skyquality")
 }
+
+/*
+	GetSkyTemperature()
+
+	@returns the the sky temperature(°C) at the observatory.
+	@see https://ascom-standards.org/api/#/ObservingConditions%20Specific%20Methods/get_observingconditions__device_number__skytemperature
+*/
+func (c *ObservingConditions) GetSkyTemperature() (float64, error) {
+	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "skytemperature")
+}

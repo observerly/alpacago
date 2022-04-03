@@ -276,3 +276,21 @@ func TestNewObservingConditionsGetSkyQuality(t *testing.T) {
 		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewObservingConditionsGetSkyTemperature(t *testing.T) {
+	conditions.SetConnected(true)
+
+	var got, err = conditions.GetSkyTemperature()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < -273.15 || got > 120 {
+		t.Errorf("got %f", got)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
