@@ -107,3 +107,13 @@ func (c *ObservingConditions) GetPressure() (float64, error) {
 func (c *ObservingConditions) GetRainRate() (float64, error) {
 	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "rainrate")
 }
+
+/*
+	GetSkyBrightness()
+
+	@returns the sky brightness (Lux) at the observatory
+	@see https://ascom-standards.org/api/#/ObservingConditions%20Specific%20Methods/get_observingconditions__device_number__skybrightness
+*/
+func (c *ObservingConditions) GetSkyBrightness() (float64, error) {
+	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "skybrightness")
+}
