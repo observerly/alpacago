@@ -147,3 +147,13 @@ func (c *ObservingConditions) GetSkyTemperature() (float64, error) {
 func (c *ObservingConditions) GetSeeingStarFWHM() (float64, error) {
 	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "starfwhm")
 }
+
+/*
+	GetTemperature()
+
+	@returns the temperature(°C) at the observatory.
+	@see https://ascom-standards.org/api/#/ObservingConditions%20Specific%20Methods/get_observingconditions__device_number__temperature
+*/
+func (c *ObservingConditions) GetTemperature() (float64, error) {
+	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "temperature")
+}

@@ -312,3 +312,21 @@ func TestNewObservingConditionsGetSeeingStarFWHM(t *testing.T) {
 		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewObservingConditionsGetTemperature(t *testing.T) {
+	conditions.SetConnected(true)
+
+	var got, err = conditions.GetTemperature()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < -273.15 || got > 120 {
+		t.Errorf("got %f", got)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
