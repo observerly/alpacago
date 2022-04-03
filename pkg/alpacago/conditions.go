@@ -137,3 +137,13 @@ func (c *ObservingConditions) GetSkyQuality() (float64, error) {
 func (c *ObservingConditions) GetSkyTemperature() (float64, error) {
 	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "skytemperature")
 }
+
+/*
+	GetSeeingStarFWHM()
+
+	@returns the seeing at the observatory measured as star full width half maximum (FWHM) in arc secs.
+	@see https://ascom-standards.org/api/#/ObservingConditions%20Specific%20Methods/get_observingconditions__device_number__starfwhm
+*/
+func (c *ObservingConditions) GetSeeingStarFWHM() (float64, error) {
+	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "starfwhm")
+}
