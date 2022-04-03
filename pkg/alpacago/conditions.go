@@ -117,3 +117,13 @@ func (c *ObservingConditions) GetRainRate() (float64, error) {
 func (c *ObservingConditions) GetSkyBrightness() (float64, error) {
 	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "skybrightness")
 }
+
+/*
+	GetSkyQuality()
+
+	@returns the sky quality (magnitudes per square arc second) at the observatory.
+	@see https://ascom-standards.org/api/#/ObservingConditions%20Specific%20Methods/get_observingconditions__device_number__skyquality
+*/
+func (c *ObservingConditions) GetSkyQuality() (float64, error) {
+	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "skyquality")
+}
