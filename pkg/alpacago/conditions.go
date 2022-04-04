@@ -157,3 +157,15 @@ func (c *ObservingConditions) GetSeeingStarFWHM() (float64, error) {
 func (c *ObservingConditions) GetTemperature() (float64, error) {
 	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "temperature")
 }
+
+/*
+	GetWindDirection()
+
+	@returns the the wind direction. The returned value must be between 0.0 and 360.0, interpreted according to the metereological standard,
+	where a special value of 0.0 is returned when the wind speed is 0.0. Wind direction is measured clockwise from north, through east,
+	where East=90.0, South=180.0, West=270.0 and North=360.0.
+	@see https://ascom-standards.org/api/#/ObservingConditions%20Specific%20Methods/get_observingconditions__device_number__winddirection
+*/
+func (c *ObservingConditions) GetWindDirection() (float64, error) {
+	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "winddirection")
+}
