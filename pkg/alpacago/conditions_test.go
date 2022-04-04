@@ -412,3 +412,17 @@ func TestNewObservingConditionsGetTimeSinceLastUpdate(t *testing.T) {
 		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewObservingConditionsSetRefresh(t *testing.T) {
+	conditions.SetConnected(true)
+
+	var err = conditions.SetRefresh()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
+	}
+}
