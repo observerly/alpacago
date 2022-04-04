@@ -384,3 +384,17 @@ func TestNewObservingConditionsGetWindSpeed(t *testing.T) {
 		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewObservingConditionsGetSensorDescription(t *testing.T) {
+	conditions.SetConnected(true)
+
+	var _, err = conditions.GetSensorDescription("Pressure")
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
+	}
+}
