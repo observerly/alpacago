@@ -56,3 +56,21 @@ func TestNewCameraDeviceNumber(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 }
+
+func TestNewCameraIsConnectedOn(t *testing.T) {
+	var got, err = camera.IsConnected()
+
+	var want = true
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %t, wanted %t", got, want)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
