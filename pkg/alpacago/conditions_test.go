@@ -348,3 +348,21 @@ func TestNewObservingConditionsGetWindDirection(t *testing.T) {
 		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewObservingConditionsGetWindGust(t *testing.T) {
+	conditions.SetConnected(true)
+
+	var got, err = conditions.GetWindGust()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 0 {
+		t.Errorf("got %f", got)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
