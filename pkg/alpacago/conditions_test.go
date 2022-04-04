@@ -67,7 +67,7 @@ func TestNewObservingConditionsSetConnectedOn(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if rotator.Alpaca.ErrorNumber != 0 {
+	if conditions.Alpaca.ErrorNumber != 0 {
 		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
@@ -85,7 +85,7 @@ func TestNewObservingConditionsIsConnectedOn(t *testing.T) {
 		t.Errorf("got %t, wanted %t", got, want)
 	}
 
-	if rotator.Alpaca.ErrorNumber != 0 {
+	if conditions.Alpaca.ErrorNumber != 0 {
 		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
@@ -97,7 +97,7 @@ func TestNewObservingConditionsSetConnectedOff(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if rotator.Alpaca.ErrorNumber != 0 {
+	if conditions.Alpaca.ErrorNumber != 0 {
 		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
@@ -115,7 +115,7 @@ func TestNewObservingConditionsIsConnectedOff(t *testing.T) {
 		t.Errorf("got %t wanted %t", got, want)
 	}
 
-	if rotator.Alpaca.ErrorNumber != 0 {
+	if conditions.Alpaca.ErrorNumber != 0 {
 		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
@@ -135,8 +135,8 @@ func TestNewObservingConditionsGetAveragePeriod(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %d", telescope.Alpaca.ErrorMessage, want)
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %d", conditions.Alpaca.ErrorMessage, want)
 	}
 }
 
@@ -153,8 +153,8 @@ func TestNewObservingConditionsGetCloudCoverage(t *testing.T) {
 		t.Errorf("got %f", got)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
 
@@ -171,8 +171,8 @@ func TestNewObservingConditionsGetDewPoint(t *testing.T) {
 		t.Errorf("got %f", got)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
 
@@ -189,8 +189,8 @@ func TestNewObservingConditionsGetHumidity(t *testing.T) {
 		t.Errorf("got %f", got)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
 
@@ -218,8 +218,8 @@ func TestNewObservingConditionsGetPressure(t *testing.T) {
 		t.Errorf("got %f, wanted %f", got, want)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
 
@@ -236,8 +236,8 @@ func TestNewObservingConditionsGetRainRate(t *testing.T) {
 		t.Errorf("got %f", got)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
 
@@ -254,8 +254,8 @@ func TestNewObservingConditionsGetSkyBrightness(t *testing.T) {
 		t.Errorf("got %f", got)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
 
@@ -272,8 +272,8 @@ func TestNewObservingConditionsGetSkyQuality(t *testing.T) {
 		t.Errorf("got %f", got)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
 
@@ -290,8 +290,8 @@ func TestNewObservingConditionsGetSkyTemperature(t *testing.T) {
 		t.Errorf("got %f", got)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
 
@@ -308,8 +308,8 @@ func TestNewObservingConditionsGetSeeingStarFWHM(t *testing.T) {
 		t.Errorf("got %f", got)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
 
@@ -326,8 +326,8 @@ func TestNewObservingConditionsGetTemperature(t *testing.T) {
 		t.Errorf("got %f", got)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
 
@@ -344,8 +344,8 @@ func TestNewObservingConditionsGetWindDirection(t *testing.T) {
 		t.Errorf("got %f", got)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
 
@@ -362,8 +362,8 @@ func TestNewObservingConditionsGetWindGust(t *testing.T) {
 		t.Errorf("got %f", got)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
 
@@ -380,8 +380,8 @@ func TestNewObservingConditionsGetWindSpeed(t *testing.T) {
 		t.Errorf("got %f", got)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
 
