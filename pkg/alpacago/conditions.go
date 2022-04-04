@@ -191,6 +191,23 @@ func (c *ObservingConditions) GetWindSpeed() (float64, error) {
 }
 
 /*
+	SetRefresh()
+
+	@returns an error or nil, if forces the driver to immediately query its attached hardware to refresh sensor values.
+	@see https://ascom-standards.org/api/#/ObservingConditions%20Specific%20Methods/put_observingconditions__device_number__refresh
+*/
+func (c *ObservingConditions) SetRefresh() error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("observingconditions", c.DeviceNumber, "refresh", form)
+}
+
+/*
 	GetSensorDescription()
 
 	@returns a description of the sensor with the name specified in the SensorName parameter
