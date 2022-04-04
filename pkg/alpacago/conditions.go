@@ -169,3 +169,13 @@ func (c *ObservingConditions) GetTemperature() (float64, error) {
 func (c *ObservingConditions) GetWindDirection() (float64, error) {
 	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "winddirection")
 }
+
+/*
+	GetWindGust()
+
+	@returns the peak 3 second wind gust(m/s) at the observatory over the last 2 minutes.
+	@see https://ascom-standards.org/api/#/ObservingConditions%20Specific%20Methods/get_observingconditions__device_number__windgust
+*/
+func (c *ObservingConditions) GetWindGust() (float64, error) {
+	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "windgust")
+}
