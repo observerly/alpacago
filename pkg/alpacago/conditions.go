@@ -219,3 +219,33 @@ func (c *ObservingConditions) GetSensorDescription(sensorName string) (string, e
 
 	return result.Value, nil
 }
+
+/*
+	GetTimeSinceLastUpdate()
+
+	@returns the time since the sensor specified in the SensorName parameter was last updated
+	@see https://ascom-standards.org/api/#/ObservingConditions%20Specific%20Methods/get_observingconditions__device_number__timesincelastupdate
+*/
+func (c *ObservingConditions) GetTimeSinceLastUpdate(sensorName string) (float64, error) {
+	url := c.Alpaca.getEndpoint("observingconditions", c.DeviceNumber, "timesincelastupdate")
+
+	querystring := fmt.Sprintf("sensorName=%v&%s", sensorName, c.Alpaca.getQueryString())
+
+	// Setup the resty client:
+	resp, err := c.Alpaca.Client.R().SetResult(&float64Response{}).SetQueryString(querystring).SetHeader("Accept", "application/json").Get(url)
+
+	if err != nil {
+		return 0., err
+	}
+
+	// If the response object has a REST error:
+	if resp.IsError() {
+		c.Alpaca.ErrorNumber = resp.StatusCode()
+		c.Alpaca.ErrorMessage = resp.String()
+	}
+
+	// Return the result:
+	result := (resp.Result().(*float64Response))
+
+	return result.Value, nil
+}

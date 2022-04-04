@@ -4,8 +4,8 @@ github.com/observerly/alpacago/pkg/alpacago/alpaca.go:28.2,30.35 2 32
 github.com/observerly/alpacago/pkg/alpacago/alpaca.go:34.2,41.16 2 32
 github.com/observerly/alpacago/pkg/alpacago/alpaca.go:24.13,26.3 1 26
 github.com/observerly/alpacago/pkg/alpacago/alpaca.go:30.35,32.3 1 6
-github.com/observerly/alpacago/pkg/alpacago/alpaca.go:51.56,53.2 1 96
-github.com/observerly/alpacago/pkg/alpacago/alpaca.go:62.104,64.2 1 165
+github.com/observerly/alpacago/pkg/alpacago/alpaca.go:51.56,53.2 1 97
+github.com/observerly/alpacago/pkg/alpacago/alpaca.go:62.104,64.2 1 167
 github.com/observerly/alpacago/pkg/alpacago/alpaca.go:79.119,86.16 3 6
 github.com/observerly/alpacago/pkg/alpacago/alpaca.go:91.2,91.20 1 6
 github.com/observerly/alpacago/pkg/alpacago/alpaca.go:97.2,99.26 2 6
@@ -36,10 +36,10 @@ github.com/observerly/alpacago/pkg/alpacago/alpaca.go:266.2,266.20 1 2
 github.com/observerly/alpacago/pkg/alpacago/alpaca.go:272.2,274.26 2 2
 github.com/observerly/alpacago/pkg/alpacago/alpaca.go:261.16,263.3 1 0
 github.com/observerly/alpacago/pkg/alpacago/alpaca.go:266.20,269.3 2 0
-github.com/observerly/alpacago/pkg/alpacago/alpaca.go:284.119,290.16 3 69
-github.com/observerly/alpacago/pkg/alpacago/alpaca.go:295.2,295.20 1 69
-github.com/observerly/alpacago/pkg/alpacago/alpaca.go:301.2,303.29 2 69
-github.com/observerly/alpacago/pkg/alpacago/alpaca.go:307.2,309.12 2 69
+github.com/observerly/alpacago/pkg/alpacago/alpaca.go:284.119,290.16 3 70
+github.com/observerly/alpacago/pkg/alpacago/alpaca.go:295.2,295.20 1 70
+github.com/observerly/alpacago/pkg/alpacago/alpaca.go:301.2,303.29 2 70
+github.com/observerly/alpacago/pkg/alpacago/alpaca.go:307.2,309.12 2 70
 github.com/observerly/alpacago/pkg/alpacago/alpaca.go:290.16,292.3 1 0
 github.com/observerly/alpacago/pkg/alpacago/alpaca.go:295.20,298.3 2 1
 github.com/observerly/alpacago/pkg/alpacago/alpaca.go:303.29,305.3 1 0
@@ -52,7 +52,7 @@ github.com/observerly/alpacago/pkg/alpacago/alpaca.go:374.94,376.2 1 1
 github.com/observerly/alpacago/pkg/alpacago/alpaca.go:384.108,386.2 1 1
 github.com/observerly/alpacago/pkg/alpacago/conditions.go:10.137,19.2 3 5
 github.com/observerly/alpacago/pkg/alpacago/conditions.go:27.59,29.2 1 2
-github.com/observerly/alpacago/pkg/alpacago/conditions.go:38.66,49.2 3 17
+github.com/observerly/alpacago/pkg/alpacago/conditions.go:38.66,49.2 3 18
 github.com/observerly/alpacago/pkg/alpacago/conditions.go:57.65,59.2 1 1
 github.com/observerly/alpacago/pkg/alpacago/conditions.go:67.64,69.2 1 1
 github.com/observerly/alpacago/pkg/alpacago/conditions.go:77.62,79.2 1 1
@@ -72,6 +72,11 @@ github.com/observerly/alpacago/pkg/alpacago/conditions.go:212.2,212.20 1 1
 github.com/observerly/alpacago/pkg/alpacago/conditions.go:218.2,220.26 2 1
 github.com/observerly/alpacago/pkg/alpacago/conditions.go:207.16,209.3 1 0
 github.com/observerly/alpacago/pkg/alpacago/conditions.go:212.20,215.3 2 0
+github.com/observerly/alpacago/pkg/alpacago/conditions.go:229.90,237.16 4 1
+github.com/observerly/alpacago/pkg/alpacago/conditions.go:242.2,242.20 1 1
+github.com/observerly/alpacago/pkg/alpacago/conditions.go:248.2,250.26 2 1
+github.com/observerly/alpacago/pkg/alpacago/conditions.go:237.16,239.3 1 0
+github.com/observerly/alpacago/pkg/alpacago/conditions.go:242.20,245.3 2 0
 github.com/observerly/alpacago/pkg/alpacago/filterwheel.go:10.121,19.2 3 5
 github.com/observerly/alpacago/pkg/alpacago/filterwheel.go:28.58,39.2 3 1
 github.com/observerly/alpacago/pkg/alpacago/filterwheel.go:47.59,49.2 1 1

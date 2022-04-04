@@ -398,3 +398,17 @@ func TestNewObservingConditionsGetSensorDescription(t *testing.T) {
 		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewObservingConditionsGetTimeSinceLastUpdate(t *testing.T) {
+	conditions.SetConnected(true)
+
+	var _, err = conditions.GetTimeSinceLastUpdate("Pressure")
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if conditions.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", conditions.Alpaca.ErrorMessage)
+	}
+}
