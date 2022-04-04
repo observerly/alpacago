@@ -189,3 +189,33 @@ func (c *ObservingConditions) GetWindGust() (float64, error) {
 func (c *ObservingConditions) GetWindSpeed() (float64, error) {
 	return c.Alpaca.GetFloat64Response("observingconditions", c.DeviceNumber, "windspeed")
 }
+
+/*
+	GetSensorDescription()
+
+	@returns a description of the sensor with the name specified in the SensorName parameter
+	@see https://ascom-standards.org/api/#/ObservingConditions%20Specific%20Methods/get_observingconditions__device_number__sensordescription
+*/
+func (c *ObservingConditions) GetSensorDescription(sensorName string) (string, error) {
+	url := c.Alpaca.getEndpoint("observingconditions", c.DeviceNumber, "sensordescription")
+
+	querystring := fmt.Sprintf("sensorName=%v&%s", sensorName, c.Alpaca.getQueryString())
+
+	// Setup the resty client:
+	resp, err := c.Alpaca.Client.R().SetResult(&stringResponse{}).SetQueryString(querystring).SetHeader("Accept", "application/json").Get(url)
+
+	if err != nil {
+		return "", err
+	}
+
+	// If the response object has a REST error:
+	if resp.IsError() {
+		c.Alpaca.ErrorNumber = resp.StatusCode()
+		c.Alpaca.ErrorMessage = resp.String()
+	}
+
+	// Return the result:
+	result := (resp.Result().(*stringResponse))
+
+	return result.Value, nil
+}
