@@ -57,3 +57,13 @@ func (c *Camera) SetConnected(connected bool) error {
 func (c *Camera) GetBayerOffsetX() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "bayeroffsetx")
 }
+
+/*
+	GetBayerOffsetY()
+
+	@returns the Y offset of the Bayer matrix, as defined in SensorType.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__bayeroffsety
+*/
+func (c *Camera) GetBayerOffsetY() (int32, error) {
+	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "bayeroffsety")
+}
