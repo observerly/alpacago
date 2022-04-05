@@ -116,3 +116,23 @@ func TestNewCameraIsConnectedOff(t *testing.T) {
 		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCameraGetBayerOffsetX(t *testing.T) {
+	camera.SetConnected(true)
+
+	var got, err = camera.GetBayerOffsetX()
+
+	var want int32 = 0
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %q wanted %q", got, want)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
