@@ -110,3 +110,13 @@ func (c *Camera) GetOperationalState() (OperationalState, error) {
 	state, err := c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "camerastate")
 	return OperationalState(state), err
 }
+
+/*
+	GetCCDSizeX()
+
+	@returns the width of the CCD camera chip in unbinned pixels.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__cameraxsize
+*/
+func (c *Camera) GetCCDSizeX() (int32, error) {
+	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "cameraxsize")
+}
