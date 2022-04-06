@@ -2,6 +2,17 @@ package alpacago
 
 import "fmt"
 
+type OperationalState int32
+
+const (
+	CameraIdle OperationalState = iota
+	CameraWaiting
+	CameraExposing
+	CameraReading
+	CameraDownload
+	CameraError
+)
+
 type Camera struct {
 	Alpaca       *ASCOMAlpacaAPIClient
 	DeviceNumber uint
@@ -86,4 +97,16 @@ func (c *Camera) GetBinX() (int32, error) {
 */
 func (c *Camera) GetBinY() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "biny")
+}
+
+/*
+	GetOperationalState()
+
+	@returns the current camera operational state (CameraIdle, CameraWaiting, CameraExposing, CameraReading, CameraDownload, CameraError)
+	The operational state is specified as an integer value from the OperationalState Enum.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__camerastate
+*/
+func (c *Camera) GetOperationalState() (OperationalState, error) {
+	state, err := c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "camerastate")
+	return OperationalState(state), err
 }

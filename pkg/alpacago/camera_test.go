@@ -196,3 +196,23 @@ func TestNewCameraGetBinY(t *testing.T) {
 		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCameraGetOperationalState(t *testing.T) {
+	camera.SetConnected(true)
+
+	var got, err = camera.GetOperationalState()
+
+	var want = CameraIdle
+
+	if err != nil {
+		t.Errorf("got %q, wanted %q", err, want)
+	}
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %d", telescope.Alpaca.ErrorMessage, want)
+	}
+}
