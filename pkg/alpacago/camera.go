@@ -77,3 +77,13 @@ func (c *Camera) GetBayerOffsetY() (int32, error) {
 func (c *Camera) GetBinX() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "binx")
 }
+
+/*
+	GetBinY()
+
+	@returns the binning factor for the Y axis.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__biny
+*/
+func (c *Camera) GetBinY() (int32, error) {
+	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "biny")
+}
