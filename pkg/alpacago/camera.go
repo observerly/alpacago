@@ -130,3 +130,13 @@ func (c *Camera) GetCCDSizeX() (int32, error) {
 func (c *Camera) GetCCDSizeY() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "cameraysize")
 }
+
+/*
+	CanAbortExposure()
+
+	@returns true if the camera can abort exposures; false if not.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__canabortexposure
+*/
+func (c *Camera) CanAbortExposure() (bool, error) {
+	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "canabortexposure")
+}
