@@ -180,3 +180,13 @@ func (c *Camera) CanGetCoolerPower() (bool, error) {
 func (c *Camera) CanPulseGuide() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "canpulseguide")
 }
+
+/*
+	CanSetCCDTemperature()
+
+	@returns true if the camera supports setting the CCD temperature.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__cansetccdtemperature
+*/
+func (c *Camera) CanSetCCDTemperature() (bool, error) {
+	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "cansetccdtemperature")
+}
