@@ -376,3 +376,23 @@ func TestNewCameraCanSetCCDTemperature(t *testing.T) {
 		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCameraCanStopExposure(t *testing.T) {
+	camera.SetConnected(true)
+
+	var got, err = camera.CanStopExposure()
+
+	var want bool = true
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %v wanted %v", got, want)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}

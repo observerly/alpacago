@@ -190,3 +190,13 @@ func (c *Camera) CanPulseGuide() (bool, error) {
 func (c *Camera) CanSetCCDTemperature() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "cansetccdtemperature")
 }
+
+/*
+	CanStopExposure()
+
+	@returns true if the camera can stop an exposure that is in progress
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__canstopexposure
+*/
+func (c *Camera) CanStopExposure() (bool, error) {
+	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "canstopexposure")
+}
