@@ -160,3 +160,13 @@ func (c *Camera) CanFastReadout() (bool, error) {
 func (c *Camera) CanAsymmetricBin() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "canasymmetricbin")
 }
+
+/*
+	CanGetCoolerPower()
+
+	@returns true if the camera's cooler power setting can be read.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__cangetcoolerpower
+*/
+func (c *Camera) CanGetCoolerPower() (bool, error) {
+	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "cangetcoolerpower")
+}
