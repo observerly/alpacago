@@ -722,8 +722,16 @@ func TestNewTelescopeSideOfPier(t *testing.T) {
 		t.Errorf("got %q, wanted %q", err, want)
 	}
 
-	if got != want {
-		t.Errorf("got %q, wanted %q", got, want)
+	if got != PierWest {
+		if got != PierEast {
+			t.Errorf("got %q, wanted %q", got, PierEast)
+		}
+	}
+
+	if got != PierEast {
+		if got != PierWest {
+			t.Errorf("got %q, wanted %q", got, PierWest)
+		}
 	}
 
 	if telescope.Alpaca.ErrorNumber != 0 {
