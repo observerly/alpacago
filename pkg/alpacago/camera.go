@@ -170,3 +170,13 @@ func (c *Camera) CanAsymmetricBin() (bool, error) {
 func (c *Camera) CanGetCoolerPower() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "cangetcoolerpower")
 }
+
+/*
+	CanPulseGuide()
+
+	@returns true if the camera supports pulse guiding.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__canpulseguide
+*/
+func (c *Camera) CanPulseGuide() (bool, error) {
+	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "canpulseguide")
+}
