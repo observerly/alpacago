@@ -150,3 +150,13 @@ func (c *Camera) CanAbortExposure() (bool, error) {
 func (c *Camera) CanFastReadout() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "canfastreadout")
 }
+
+/*
+	CanAsymmetricBin()
+
+	@returns true if the camera supports asymmetric binning
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__canasymmetricbin
+*/
+func (c *Camera) CanAsymmetricBin() (bool, error) {
+	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "canasymmetricbin")
+}
