@@ -140,3 +140,13 @@ func (c *Camera) GetCCDSizeY() (int32, error) {
 func (c *Camera) CanAbortExposure() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "canabortexposure")
 }
+
+/*
+	CanFastReadout()
+
+	@returns true if the camera has a fast readout mode.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__canfastreadout
+*/
+func (c *Camera) CanFastReadout() (bool, error) {
+	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "canfastreadout")
+}
