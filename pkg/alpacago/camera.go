@@ -210,3 +210,13 @@ func (c *Camera) CanStopExposure() (bool, error) {
 func (c *Camera) GetCCDTemperature() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "ccdtemperature")
 }
+
+/*
+	IsCoolerOn()
+
+	@returns true if the camera cooler is one, else false
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__cooleron
+*/
+func (c *Camera) IsCoolerOn() (bool, error) {
+	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "cooleron")
+}
