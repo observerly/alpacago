@@ -74,34 +74,34 @@ func TestNewFilterWheelSetConnected(t *testing.T) {
 func TestNewFilterWheelGetFocusOffsets(t *testing.T) {
 	var got, err = filterwheel.GetFocusOffsets()
 
-	want := [6]uint32{8252, 9206, 9383, 3507, 9420, 9163}
+	want := [6]uint32{8311, 2683, 7146, 4642, 365, 9518}
 
 	if err != nil {
-		t.Errorf("got %q, wanted %q", err, want)
+		t.Errorf("got %, wanted %q", err, want)
 	}
 
 	if got[0] != want[0] {
-		t.Errorf("got %d, wanted %q", got[0], want[0])
+		t.Errorf("got %v, wanted %v", got[0], want[0])
 	}
 
 	if got[1] != want[1] {
-		t.Errorf("got %d, wanted %q", got[1], want[1])
+		t.Errorf("got %v, wanted %v", got[1], want[1])
 	}
 
 	if got[2] != want[2] {
-		t.Errorf("got %d, wanted %q", got[2], want[2])
+		t.Errorf("got %v, wanted %v", got[2], want[2])
 	}
 
 	if got[3] != want[3] {
-		t.Errorf("got %d, wanted %q", got[3], want[3])
+		t.Errorf("got %v, wanted %v", got[3], want[3])
 	}
 
 	if got[4] != want[4] {
-		t.Errorf("got %d, wanted %q", got[4], want[4])
+		t.Errorf("got %v, wanted %v", got[4], want[4])
 	}
 
 	if got[5] != want[5] {
-		t.Errorf("got %d, wanted %q", got[5], want[5])
+		t.Errorf("got %v, wanted %v", got[5], want[5])
 	}
 
 	if telescope.Alpaca.ErrorNumber != 0 {
