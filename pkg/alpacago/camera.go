@@ -220,3 +220,13 @@ func (c *Camera) GetCCDTemperature() (float64, error) {
 func (c *Camera) IsCoolerOn() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "cooleron")
 }
+
+/*
+	GetCoolerPowerLevel()
+
+	@returns the present cooler power level, in percent.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__coolerpower
+*/
+func (c *Camera) GetCoolerPowerLevel() (float64, error) {
+	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "coolerpower")
+}
