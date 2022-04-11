@@ -230,3 +230,13 @@ func (c *Camera) IsCoolerOn() (bool, error) {
 func (c *Camera) GetCoolerPowerLevel() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "coolerpower")
 }
+
+/*
+	GetGainInElectronsPerADUnit()
+
+	@returns the gain of the camera in photoelectrons per A/D unit.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__electronsperadu
+*/
+func (c *Camera) GetGainInElectronsPerADUnit() (float64, error) {
+	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "electronsperadu")
+}
