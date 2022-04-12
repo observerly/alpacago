@@ -300,3 +300,13 @@ func (c *Camera) GetFullWellCapacity() (float64, error) {
 func (c *Camera) GetGain() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "gain")
 }
+
+/*
+	GetGainMax()
+
+	@returns the maximum value of Gain.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__gainmax
+*/
+func (c *Camera) GetGainMax() (int32, error) {
+	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "gainmax")
+}
