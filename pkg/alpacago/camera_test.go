@@ -580,3 +580,21 @@ func TestNewCameraGetGain(t *testing.T) {
 		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCameraGetGainMax(t *testing.T) {
+	camera.SetConnected(true)
+
+	var got, err = camera.GetGainMax()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 0 && got > 100 {
+		t.Errorf("got %v, but expected the maximum gain value to be a realistic value", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
