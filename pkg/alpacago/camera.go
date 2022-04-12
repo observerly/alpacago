@@ -280,3 +280,13 @@ func (c *Camera) GetExposureResolution() (float64, error) {
 func (c *Camera) IsFastReadoutEnabled() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "fastreadout")
 }
+
+/*
+	GetFullWellCapacity()
+
+	@returns the full well capacity of the camera in electrons, at the current camera settings (binning, SetupDialog settings, etc.).
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__fullwellcapacity
+*/
+func (c *Camera) GetFullWellCapacity() (float64, error) {
+	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "fullwellcapacity")
+}
