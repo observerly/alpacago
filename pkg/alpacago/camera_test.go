@@ -507,6 +507,24 @@ func TestNewCameraGetExposureMin(t *testing.T) {
 	}
 }
 
+func TestNewCameraGetExposureResolution(t *testing.T) {
+	camera.SetConnected(true)
+
+	var got, err = camera.GetExposureResolution()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 0 && got > 1 {
+		t.Errorf("got %v, but expected the exposure resolution value to be a realistic value", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewCameraIsFastReadoutEnabled(t *testing.T) {
 	camera.SetConnected(true)
 
