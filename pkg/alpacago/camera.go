@@ -290,3 +290,13 @@ func (c *Camera) IsFastReadoutEnabled() (bool, error) {
 func (c *Camera) GetFullWellCapacity() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "fullwellcapacity")
 }
+
+/*
+	GetGain()
+
+	@returns the camera's gain (GAIN VALUE MODE) OR the index of the selected camera gain description in the Gains array (GAINS INDEX MODE).
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__gain
+*/
+func (c *Camera) GetGain() (int32, error) {
+	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "gain")
+}
