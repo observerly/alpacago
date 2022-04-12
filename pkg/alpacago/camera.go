@@ -260,3 +260,13 @@ func (c *Camera) GetExposureMax() (float64, error) {
 func (c *Camera) GetExposureMin() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "exposuremin")
 }
+
+/*
+	GetExposureResolution()
+
+	@returns the smallest increment in exposure time supported by StartExposure.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__exposureresolution
+*/
+func (c *Camera) GetExposureResolution() (float64, error) {
+	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "exposureresolution")
+}
