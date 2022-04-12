@@ -260,3 +260,13 @@ func (c *Camera) GetExposureMax() (float64, error) {
 func (c *Camera) GetExposureMin() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "exposuremin")
 }
+
+/*
+	IsFastReadoutEnabled()
+
+	@returns whenther Fast Readout Mode is enabled.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__fastreadout
+*/
+func (c *Camera) IsFastReadoutEnabled() (bool, error) {
+	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "fastreadout")
+}
