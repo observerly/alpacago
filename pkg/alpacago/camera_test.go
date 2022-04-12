@@ -598,3 +598,45 @@ func TestNewCameraGetGainMax(t *testing.T) {
 		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCameraGetGainMin(t *testing.T) {
+	camera.SetConnected(true)
+
+	var got, err = camera.GetGainMin()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 0 && got > 10 {
+		t.Errorf("got %v, but expected the minimum gain value to be a realistic value", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewCameraGetGainMinMax(t *testing.T) {
+	camera.SetConnected(true)
+
+	var max, errMax = camera.GetGainMax()
+
+	var min, errMin = camera.GetGainMin()
+
+	if errMax != nil {
+		t.Errorf("got %q", errMax)
+	}
+
+	if errMin != nil {
+		t.Errorf("got %q", errMin)
+	}
+
+	if min > max {
+		t.Errorf("got %v, but expected the minimum gain value to be less than the maximum gain value", min)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
