@@ -250,3 +250,13 @@ func (c *Camera) GetGainInElectronsPerADUnit() (float64, error) {
 func (c *Camera) GetExposureMax() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "exposuremax")
 }
+
+/*
+	GetExposureMin()
+
+	@returns the maximum exposure time supported by StartExposure.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__exposuremin
+*/
+func (c *Camera) GetExposureMin() (float64, error) {
+	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "exposuremin")
+}
