@@ -330,3 +330,13 @@ func (c *Camera) GetGainMin() (int32, error) {
 func (c *Camera) GetGains() ([]string, error) {
 	return c.Alpaca.GetStringListResponse("camera", c.DeviceNumber, "gains")
 }
+
+/*
+	HasShutter()
+
+	@returns the true if this camera has a mechanical shutter.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__hasshutter
+*/
+func (c *Camera) HasShutter() (bool, error) {
+	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "hasshutter")
+}
