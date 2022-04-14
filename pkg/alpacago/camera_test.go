@@ -680,3 +680,21 @@ func TestNewCameraHasShutter(t *testing.T) {
 		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCameraGetHeatSinkTemperature(t *testing.T) {
+	camera.SetConnected(true)
+
+	var got, err = camera.GetHeatSinkTemperature()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 100 && got > 100 {
+		t.Errorf("got %v, but expected the heat sink temperature to be a realistic physical value", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}

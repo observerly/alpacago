@@ -340,3 +340,13 @@ func (c *Camera) GetGains() ([]string, error) {
 func (c *Camera) HasShutter() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "hasshutter")
 }
+
+/*
+	GetHeatSinkTemperature()
+
+	@returns the current heat sink temperature (called "ambient temperature" by some manufacturers) in degrees Celsius.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__heatsinktemperature
+*/
+func (c *Camera) GetHeatSinkTemperature() (float64, error) {
+	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "heatsinktemperature")
+}
