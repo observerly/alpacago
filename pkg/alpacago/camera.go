@@ -380,3 +380,13 @@ func (c *Camera) IsPulseGuiding() (bool, error) {
 func (c *Camera) GetLastExposureDuration() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "lastexposureduration")
 }
+
+/*
+	GetMaxADU()
+
+	@returns the maximum ADU value the camera can produce.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__maxadu
+*/
+func (c *Camera) GetMaxADU() (int32, error) {
+	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "maxadu")
+}
