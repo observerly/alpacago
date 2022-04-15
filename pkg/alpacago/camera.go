@@ -420,3 +420,13 @@ func (c *Camera) GetMaxBinY() (int32, error) {
 func (c *Camera) GetSubFrameWidth() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "numx")
 }
+
+/*
+	GetSubFrameHeight()
+
+	@returns the current subframe height, if binning is active, value is in binned pixels.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__numy
+*/
+func (c *Camera) GetSubFrameHeight() (int32, error) {
+	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "numy")
+}
