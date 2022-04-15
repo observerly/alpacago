@@ -390,3 +390,13 @@ func (c *Camera) GetLastExposureDuration() (float64, error) {
 func (c *Camera) GetMaxADU() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "maxadu")
 }
+
+/*
+	GetMaxBinX()
+
+	@returns the maximum allowed binning for the X camera axis.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__maxbinx
+*/
+func (c *Camera) GetMaxBinX() (int32, error) {
+	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "maxbinx")
+}
