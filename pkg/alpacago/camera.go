@@ -400,3 +400,13 @@ func (c *Camera) GetMaxADU() (int32, error) {
 func (c *Camera) GetMaxBinX() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "maxbinx")
 }
+
+/*
+	GetMaxBinY()
+
+	@returns the maximum allowed binning for the Y camera axis.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__maxbiny
+*/
+func (c *Camera) GetMaxBinY() (int32, error) {
+	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "maxbiny")
+}
