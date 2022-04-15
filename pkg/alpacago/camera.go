@@ -370,3 +370,13 @@ func (c *Camera) IsImageReady() (bool, error) {
 func (c *Camera) IsPulseGuiding() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "ispulseguiding")
 }
+
+/*
+	GetLastExposureDuration()
+
+	@returns the actual exposure duration in seconds (i.e. shutter open time).
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__lastexposureduration
+*/
+func (c *Camera) GetLastExposureDuration() (float64, error) {
+	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "lastexposureduration")
+}
