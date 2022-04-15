@@ -360,3 +360,13 @@ func (c *Camera) GetHeatSinkTemperature() (float64, error) {
 func (c *Camera) IsImageReady() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "imageready")
 }
+
+/*
+	IsPulseGuiding()
+
+	@returns true if the the camera is currrently in a PulseGuide operation.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__ispulseguiding
+*/
+func (c *Camera) IsPulseGuiding() (bool, error) {
+	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "ispulseguiding")
+}
