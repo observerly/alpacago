@@ -430,3 +430,14 @@ func (c *Camera) GetSubFrameWidth() (int32, error) {
 func (c *Camera) GetSubFrameHeight() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "numy")
 }
+
+/*
+	GetCurrentOperationPercentageComplete()
+
+	@returns the percentage of the current operation that is complete. If valid, returns an integer between 0 and
+	100, where 0 indicates 0% progress (function just started) and 100 indicates 100% progress (i.e. completion).
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__percentcompleted
+*/
+func (c *Camera) GetCurrentOperationPercentageComplete() (int32, error) {
+	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "percentcompleted")
+}
