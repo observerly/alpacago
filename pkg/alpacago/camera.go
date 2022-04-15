@@ -350,3 +350,13 @@ func (c *Camera) HasShutter() (bool, error) {
 func (c *Camera) GetHeatSinkTemperature() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "heatsinktemperature")
 }
+
+/*
+	IsImageReady()
+
+	@returns true if the image is ready to be downloaded from the camera
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__imageready
+*/
+func (c *Camera) IsImageReady() (bool, error) {
+	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "imageready")
+}
