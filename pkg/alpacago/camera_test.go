@@ -846,3 +846,21 @@ func TestNewCameraGetSubFrameHeight(t *testing.T) {
 		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCameraGetCurrentOperationPercentageComplete(t *testing.T) {
+	camera.SetConnected(true)
+
+	var got, err = camera.GetCurrentOperationPercentageComplete()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 0 && got > 100 {
+		t.Errorf("got %v, but expected the percentage completion to be between 0 and 100", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
