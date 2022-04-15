@@ -441,3 +441,13 @@ func (c *Camera) GetSubFrameHeight() (int32, error) {
 func (c *Camera) GetCurrentOperationPercentageComplete() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "percentcompleted")
 }
+
+/*
+	GetPixelSizeX()
+
+	@returns the width of the CCD chip pixels in microns.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__pixelsizex
+*/
+func (c *Camera) GetPixelSizeX() (float64, error) {
+	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "pixelsizex")
+}
