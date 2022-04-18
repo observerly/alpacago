@@ -481,3 +481,13 @@ func (c *Camera) GetReadOutMode() (int32, error) {
 func (c *Camera) GetReadOutModes() ([]string, error) {
 	return c.Alpaca.GetStringListResponse("camera", c.DeviceNumber, "readoutmodes")
 }
+
+/*
+	GetSensorName()
+
+	@returns the name of the sensor used within the camera.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__sensorname
+*/
+func (c *Camera) GetSensorName() (string, error) {
+	return c.Alpaca.GetStringResponse("camera", c.DeviceNumber, "sensorname")
+}
