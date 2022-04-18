@@ -1,6 +1,8 @@
 package alpacago
 
-import "testing"
+import (
+	"testing"
+)
 
 var camera = NewCamera(65535, true, "alpaca.observerly.com", "", -1, 0)
 
@@ -913,6 +915,26 @@ func TestNewCameraGetReadOutMode(t *testing.T) {
 	}
 
 	if got != want {
+		t.Errorf("got %v, but expected the read out mode to be the default value", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewCameraGetReadOutModes(t *testing.T) {
+	camera.SetConnected(true)
+
+	var got, err = camera.GetReadOutModes()
+
+	var want = []string{"Default"}
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got[0] != want[0] {
 		t.Errorf("got %v, but expected the read out mode to be the default value", got)
 	}
 
