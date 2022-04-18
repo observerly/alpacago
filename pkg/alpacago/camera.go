@@ -461,3 +461,13 @@ func (c *Camera) GetPixelSizeX() (float64, error) {
 func (c *Camera) GetPixelSizeY() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "pixelsizey")
 }
+
+/*
+	GetReadOutMode()
+
+	@returns an index into the array ReadoutModes and returns the desired readout mode for the camera. Defaults to 0 if not set.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__readoutmode
+*/
+func (c *Camera) GetReadOutMode() (int32, error) {
+	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "readoutmode")
+}
