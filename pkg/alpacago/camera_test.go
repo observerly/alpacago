@@ -942,3 +942,21 @@ func TestNewCameraGetReadOutModes(t *testing.T) {
 		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCameraGetSensorName(t *testing.T) {
+	camera.SetConnected(true)
+
+	var got, err = camera.GetSensorName()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != "CCD1" {
+		t.Errorf("got %v, but expected the sensor name to be a realistic value", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
