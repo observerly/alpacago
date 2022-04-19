@@ -960,3 +960,21 @@ func TestNewCameraGetSensorName(t *testing.T) {
 		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCameraGetSensorType(t *testing.T) {
+	camera.SetConnected(true)
+
+	var got, err = camera.GetSensorType()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != Monochrome {
+		t.Errorf("got %v, but expected the sensor type to be default to Monochrome", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
