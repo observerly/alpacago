@@ -523,3 +523,13 @@ func (c *Camera) GetSensorType() (SensorType, error) {
 func (c *Camera) GetCCDTemperatureCoolerSetPoint() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "setccdtemperature")
 }
+
+/*
+	GetStartX()
+
+	@returns the current subframe start X coordinate, if binning is active, value is in binned pixels.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__startx
+*/
+func (c *Camera) GetStartX() (int32, error) {
+	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "startx")
+}
