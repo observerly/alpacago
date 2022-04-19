@@ -978,3 +978,21 @@ func TestNewCameraGetSensorType(t *testing.T) {
 		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCameraGetCCDTemperatureCoolerSetPoint(t *testing.T) {
+	camera.SetConnected(true)
+
+	var got, err = camera.GetCCDTemperatureCoolerSetPoint()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < -273.15 && got > 1000 {
+		t.Errorf("got %v, but expected the CCD temperature cooler set point to be a realistic value", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
