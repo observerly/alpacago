@@ -4,6 +4,8 @@ import "fmt"
 
 type OperationalState int32
 
+type SensorType int32
+
 const (
 	CameraIdle OperationalState = iota
 	CameraWaiting
@@ -11,6 +13,15 @@ const (
 	CameraReading
 	CameraDownload
 	CameraError
+)
+
+const (
+	Monochrome SensorType = iota
+	ColourNotRequiringDecoding
+	RGGBBayerEncoding
+	CMYGBayerEncoding
+	CMYG2BayerEncoding
+	LRGBTRUESENSEBayerEncoding
 )
 
 type Camera struct {
@@ -490,4 +501,15 @@ func (c *Camera) GetReadOutModes() ([]string, error) {
 */
 func (c *Camera) GetSensorName() (string, error) {
 	return c.Alpaca.GetStringResponse("camera", c.DeviceNumber, "sensorname")
+}
+
+/*
+	GetSensorType()
+
+	@returns the sensor type, e.g., whether the sensor is monochrome, or what Bayer matrix it encodes. Where:
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__sensortype
+*/
+func (c *Camera) GetSensorType() (SensorType, error) {
+	sensor, err := c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "sensortype")
+	return SensorType(sensor), err
 }
