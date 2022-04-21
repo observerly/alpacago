@@ -543,3 +543,13 @@ func (c *Camera) GetStartX() (int32, error) {
 func (c *Camera) GetStartY() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "starty")
 }
+
+/*
+	GetSubExposureDuration()
+
+	@returns the sub exposure duration in seconds, *only available in Camera Interface Version 3 and later.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__subexposureduration
+*/
+func (c *Camera) GetSubExposureDuration() (float64, error) {
+	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "subexposureduration")
+}
