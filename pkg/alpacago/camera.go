@@ -129,6 +129,24 @@ func (c *Camera) GetBinY() (int32, error) {
 }
 
 /*
+	SetBinY()
+
+	@returns an error or nil, if nil it sets the binning factor for the Y axis.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__biny
+*/
+func (c *Camera) SetBinY(binY int32) error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"BinY":                fmt.Sprintf("%d", binY),
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "biny", form)
+}
+
+/*
 	GetOperationalState()
 
 	@returns the current camera operational state (CameraIdle, CameraWaiting, CameraExposing, CameraReading, CameraDownload, CameraError)
