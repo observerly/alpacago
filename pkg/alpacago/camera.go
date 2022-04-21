@@ -269,6 +269,25 @@ func (c *Camera) IsCoolerOn() (bool, error) {
 }
 
 /*
+	TurnCoolerOn()
+
+	@returns error if there was a problem turning the cooler on
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__cooleron
+*/
+func (c *Camera) TurnCoolerOn() error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Set True to turn the camera cooler on:
+		"CoolerOn":            fmt.Sprintf("%t", true),
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "cooleron", form)
+}
+
+/*
 	GetCoolerPowerLevel()
 
 	@returns the present cooler power level, in percent.
