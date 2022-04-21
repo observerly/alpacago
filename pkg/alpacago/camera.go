@@ -101,6 +101,24 @@ func (c *Camera) GetBinX() (int32, error) {
 }
 
 /*
+	SetBinX()
+
+	@returns an error or nil, if nil it sets the binning factor for the X axis.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__binx
+*/
+func (c *Camera) SetBinX(binX int32) error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"BinX":                fmt.Sprintf("%d", binX),
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "binx", form)
+}
+
+/*
 	GetBinY()
 
 	@returns the binning factor for the Y axis.
