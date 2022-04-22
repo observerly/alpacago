@@ -713,6 +713,26 @@ func TestNewCameraGetFullWellCapacity(t *testing.T) {
 	}
 }
 
+func TestNewCameraSetGain(t *testing.T) {
+	camera.SetConnected(true)
+
+	camera.SetGain(50)
+
+	var got, err = camera.GetGain()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 0 && got > 100 {
+		t.Errorf("got %v, but expected the gain value to be a realistic value", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewCameraGetGain(t *testing.T) {
 	camera.SetConnected(true)
 
