@@ -1019,6 +1019,26 @@ func TestNewCameraGetSubFrameWidth(t *testing.T) {
 	}
 }
 
+func TestNewCameraSetSubFrameHeight(t *testing.T) {
+	camera.SetConnected(true)
+
+	camera.SetSubFrameHeight(8000)
+
+	var got, err = camera.GetSubFrameHeight()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 0 && got > 10000 {
+		t.Errorf("got %v, but expected the subframe height value to be a realistic value", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewCameraGetSubFrameHeight(t *testing.T) {
 	camera.SetConnected(true)
 
