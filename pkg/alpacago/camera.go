@@ -386,6 +386,25 @@ func (c *Camera) EnableFastReadout() error {
 }
 
 /*
+	DisableFastReadout()
+
+	@returns an error or nil, if nil it disables the fast readout mode
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__fastreadout
+*/
+func (c *Camera) DisableFastReadout() error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Set False to disable fast readout mode:
+		"FastReadout":         fmt.Sprintf("%t", false),
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "fastreadout", form)
+}
+
+/*
 	GetFullWellCapacity()
 
 	@returns the full well capacity of the camera in electrons, at the current camera settings (binning, SetupDialog settings, etc.).
