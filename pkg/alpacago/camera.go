@@ -425,6 +425,25 @@ func (c *Camera) GetGain() (int32, error) {
 }
 
 /*
+	SetGain()
+
+	@returns an error or nil, if nil it sets the gain to the specified value.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__gain
+*/
+func (c *Camera) SetGain(gain int32) error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Set the gain (GAIN VALUE MODE) OR the index of the selected camera gain description in the Gains array (GAINS INDEX MODE).
+		"Gain":                fmt.Sprintf("%d", gain),
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "gain", form)
+}
+
+/*
 	GetGainMax()
 
 	@returns the maximum value of Gain.
