@@ -981,6 +981,26 @@ func TestNewCameraGetMaxBinY(t *testing.T) {
 	}
 }
 
+func TestNewCameraSetSubFrameWidth(t *testing.T) {
+	camera.SetConnected(true)
+
+	camera.SetSubFrameWidth(8000)
+
+	var got, err = camera.GetSubFrameWidth()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 0 && got > 10000 {
+		t.Errorf("got %v, but expected the subframe width value to be a realistic value", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewCameraGetSubFrameWidth(t *testing.T) {
 	camera.SetConnected(true)
 

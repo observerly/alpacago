@@ -564,6 +564,25 @@ func (c *Camera) GetSubFrameWidth() (int32, error) {
 }
 
 /*
+	SetSubFrameWidth()
+
+	@returns an error or nil, if the subframe width can be set.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__numx
+*/
+func (c *Camera) SetSubFrameWidth(numX int32) error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Set the subframe width in pixels.
+		"NumX":                fmt.Sprintf("%d", numX),
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "numx", form)
+}
+
+/*
 	GetSubFrameHeight()
 
 	@returns the current subframe height, if binning is active, value is in binned pixels.
