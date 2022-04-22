@@ -593,6 +593,25 @@ func (c *Camera) GetSubFrameHeight() (int32, error) {
 }
 
 /*
+	SetSubFrameHeight()
+
+	@returns an error or nil, if the subframe height can be set.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__numy
+*/
+func (c *Camera) SetSubFrameHeight(numY int32) error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Set the subframe height in pixels.
+		"NumY":                fmt.Sprintf("%d", numY),
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "numy", form)
+}
+
+/*
 	GetCurrentOperationPercentageComplete()
 
 	@returns the percentage of the current operation that is complete. If valid, returns an integer between 0 and
