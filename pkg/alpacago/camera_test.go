@@ -816,7 +816,7 @@ func TestNewCameraGetGains(t *testing.T) {
 
 	var got, err = camera.GetGains()
 
-	var want = []string{"ISO 100", "ISO 200", "ISO 400", "ISO 800", "ISO 1600"}
+	var want = []string{}
 
 	if err != nil {
 		t.Errorf("got %q", err)

@@ -170,7 +170,7 @@ func TestNewAlpacaAPIInt32Response(t *testing.T) {
 func TestNewAlpacaAPIInt32ListResponse(t *testing.T) {
 	got, err := client.GetUInt32ListResponse("filterwheel", 0, "focusoffsets")
 
-	var want []uint32 = []uint32{8311, 2683, 7146, 4642, 365, 9518}
+	var want []uint32 = []uint32{229, 5889, 1002, 9499, 3495, 2330}
 
 	if err != nil {
 		t.Errorf("got %q, wanted %d", err, want)
@@ -238,7 +238,7 @@ func TestNewAlpacaAPIDescription(t *testing.T) {
 func TestNewAlpacaAPIDriverInfo(t *testing.T) {
 	got, err := client.GetDriverInfo("telescope", 0)
 
-	var want string = "TelescopeSimulator, Version=0.1.1.0, Culture=neutral, PublicKeyToken=null"
+	var want string = "TelescopeSimulator, Version=0.1.3.0, Culture=neutral, PublicKeyToken=null"
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
