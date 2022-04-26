@@ -713,6 +713,24 @@ func (c *Camera) GetCCDTemperatureCoolerSetPoint() (float64, error) {
 }
 
 /*
+	SetCCDTemperatureCoolerSetPoint()
+
+	@returns an error or nil, if nil it sets the camera's cooler setpoint in degrees Celsius.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__setccdtemperature
+*/
+func (c *Camera) SetCCDTemperatureCoolerSetPoint(temperature float64) error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"SetCCDTemperature":   fmt.Sprintf("%f", temperature),
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "setccdtemperature", form)
+}
+
+/*
 	GetStartX()
 
 	@returns the current subframe start X coordinate, if binning is active, value is in binned pixels.
