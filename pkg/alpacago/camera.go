@@ -653,6 +653,25 @@ func (c *Camera) GetReadOutMode() (int32, error) {
 }
 
 /*
+	SetReadOutMode()
+
+	@returns an error or nil, if nil sets the readout mode.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__readoutmode
+*/
+func (c *Camera) SetReadOutMode(readOutMode int32) error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Set the readout mode for the camera.
+		"ReadoutMode":         fmt.Sprintf("%d", readOutMode),
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "readoutmode", form)
+}
+
+/*
 	GetReadOutModes()
 
 	@returns an array of strings, each of which describes an available readout mode of the camera. At least one string must be present in the list.

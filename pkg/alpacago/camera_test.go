@@ -1111,6 +1111,28 @@ func TestNewCameraGetPixelSizeY(t *testing.T) {
 	}
 }
 
+func TestNewCameraSetReadOutMode(t *testing.T) {
+	camera.SetConnected(true)
+
+	camera.SetReadOutMode(0)
+
+	var got, err = camera.GetReadOutMode()
+
+	var want int32 = 0
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %v, but expected the read out mode to be the default value", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewCameraGetReadOutMode(t *testing.T) {
 	camera.SetConnected(true)
 
