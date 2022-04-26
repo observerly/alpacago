@@ -404,7 +404,7 @@ func TestNewCameraCanSetCCDTemperature(t *testing.T) {
 
 	var got, err = camera.CanSetCCDTemperature()
 
-	var want bool = false
+	var want bool = true
 
 	if err != nil {
 		t.Errorf("got %q", err)
@@ -1220,6 +1220,32 @@ func TestNewCameraGetCCDTemperatureCoolerSetPoint(t *testing.T) {
 
 	if got < -273.15 && got > 1000 {
 		t.Errorf("got %v, but expected the CCD temperature cooler set point to be a realistic value", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewCameraSetCCDTemperatureCoolerSetPoint(t *testing.T) {
+	camera.SetConnected(true)
+
+	camera.SetCCDTemperatureCoolerSetPoint(4.5)
+
+	var got, err = camera.GetCCDTemperatureCoolerSetPoint()
+
+	var want float64 = 4.5
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < -273.15 && got > 1000 {
+		t.Errorf("got %v, but expected the CCD temperature cooler set point to be a realistic value", got)
+	}
+
+	if got != want {
+		t.Errorf("got %v, but expected the CCD temperature cooler set point to be set correctly", got)
 	}
 
 	if camera.Alpaca.ErrorNumber != 0 {
