@@ -769,6 +769,24 @@ func (c *Camera) GetStartY() (int32, error) {
 }
 
 /*
+	SetStartY()
+
+	@returns an error or nil, if nil sets the subframe start Y coordinate, if binning is active, value is in binned pixels.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__starty
+*/
+func (c *Camera) SetStartY(startY int32) error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"StartY":              fmt.Sprintf("%d", startY),
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "starty", form)
+}
+
+/*
 	GetSubExposureDuration()
 
 	@returns the sub exposure duration in seconds, *only available in Camera Interface Version 3 and later.
