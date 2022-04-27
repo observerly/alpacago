@@ -1253,6 +1253,30 @@ func TestNewCameraSetCCDTemperatureCoolerSetPoint(t *testing.T) {
 	}
 }
 
+func TestNewCameraSetStartX(t *testing.T) {
+	camera.SetConnected(true)
+
+	camera.SetStartX(1000)
+
+	var got, err = camera.GetStartX()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 0 && got > 10000 {
+		t.Errorf("got %v, but expected the subframe start position for the X axis value to be a realistic value", got)
+	}
+
+	if got != 1000 {
+		t.Errorf("got %v, but expected the subframe start position for the X axis value to be set correctly", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewCameraGetStartX(t *testing.T) {
 	camera.SetConnected(true)
 
