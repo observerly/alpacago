@@ -1295,6 +1295,30 @@ func TestNewCameraGetStartX(t *testing.T) {
 	}
 }
 
+func TestNewCameraSetStartY(t *testing.T) {
+	camera.SetConnected(true)
+
+	camera.SetStartY(1000)
+
+	var got, err = camera.GetStartY()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 0 && got > 10000 {
+		t.Errorf("got %v, but expected the subframe start position for the Y axis value to be a realistic value", got)
+	}
+
+	if got != 1000 {
+		t.Errorf("got %v, but expected the subframe start position for the Y axis value to be set correctly", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewCameraGetStartY(t *testing.T) {
 	camera.SetConnected(true)
 
