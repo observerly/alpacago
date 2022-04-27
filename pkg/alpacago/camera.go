@@ -741,6 +741,24 @@ func (c *Camera) GetStartX() (int32, error) {
 }
 
 /*
+	SetStartX()
+
+	@returns an error or nil, if nil sets the subframe start X coordinate, if binning is active, value is in binned pixels.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__startx
+*/
+func (c *Camera) SetStartX(startX int32) error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"StartX":              fmt.Sprintf("%d", startX),
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "startx", form)
+}
+
+/*
 	GetStartY()
 
 	@returns the current subframe start Y coordinate, if binning is active, value is in binned pixels.
