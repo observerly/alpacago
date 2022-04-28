@@ -849,3 +849,22 @@ func (c *Camera) SetPulseGuide(direction Direction, duration int32) error {
 
 	return c.Alpaca.Put("camera", c.DeviceNumber, "pulseguide", form)
 }
+
+/*
+	StartExposure()
+
+	@returns an error or nil, if nil starts an exposure (use IsImageReady to check when the exposure is complete.)
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__startexposure
+*/
+func (c *Camera) StartExposure(duration float64, light bool) error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"Duration":            fmt.Sprintf("%f", duration),
+		"Light":               fmt.Sprintf("%t", light),
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "startexposure", form)
+}
