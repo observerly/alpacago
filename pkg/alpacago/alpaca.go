@@ -9,6 +9,15 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
+type Direction int32
+
+const (
+	North Direction = iota
+	South
+	East
+	West
+)
+
 type ASCOMAlpacaAPIClient struct {
 	Client        *resty.Client
 	UrlBase       string
