@@ -384,7 +384,7 @@ func TestNewCameraCanPulseGuide(t *testing.T) {
 
 	var got, err = camera.CanPulseGuide()
 
-	var want bool = false
+	var want bool = true
 
 	if err != nil {
 		t.Errorf("got %q", err)
@@ -1383,6 +1383,20 @@ func TestNewCameraAbortExposure(t *testing.T) {
 	camera.SetConnected(true)
 
 	var err = camera.AbortExposure()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewCameraSetPulseGuide(t *testing.T) {
+	camera.SetConnected(true)
+
+	var err = camera.SetPulseGuide(1, 50)
 
 	if err != nil {
 		t.Errorf("got %q", err)
