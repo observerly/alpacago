@@ -1378,3 +1378,17 @@ func TestNewCameraSetSubExposureDuration(t *testing.T) {
 		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCameraAbortExposure(t *testing.T) {
+	camera.SetConnected(true)
+
+	var err = camera.AbortExposure()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
