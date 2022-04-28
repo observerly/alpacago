@@ -984,7 +984,7 @@ func TestNewCameraGetMaxBinY(t *testing.T) {
 func TestNewCameraSetSubFrameWidth(t *testing.T) {
 	camera.SetConnected(true)
 
-	camera.SetSubFrameWidth(8000)
+	camera.SetSubFrameWidth(800)
 
 	var got, err = camera.GetSubFrameWidth()
 
@@ -992,8 +992,8 @@ func TestNewCameraSetSubFrameWidth(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if got < 0 && got > 10000 {
-		t.Errorf("got %v, but expected the subframe width value to be a realistic value", got)
+	if got < 0 && got > 800 {
+		t.Errorf("got %v, but expected the subframe width value to be a realistic value. The valid range is: 1 to 800.", got)
 	}
 
 	if camera.Alpaca.ErrorNumber != 0 {
@@ -1010,8 +1010,8 @@ func TestNewCameraGetSubFrameWidth(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if got < 0 && got > 10000 {
-		t.Errorf("got %v, but expected the subframe width value to be a realistic value", got)
+	if got < 0 && got > 800 {
+		t.Errorf("got %v, but expected the subframe width value to be a realistic value. The valid range is: 1 to 800.", got)
 	}
 
 	if camera.Alpaca.ErrorNumber != 0 {
@@ -1022,7 +1022,7 @@ func TestNewCameraGetSubFrameWidth(t *testing.T) {
 func TestNewCameraSetSubFrameHeight(t *testing.T) {
 	camera.SetConnected(true)
 
-	camera.SetSubFrameHeight(8000)
+	camera.SetSubFrameHeight(600)
 
 	var got, err = camera.GetSubFrameHeight()
 
@@ -1030,8 +1030,8 @@ func TestNewCameraSetSubFrameHeight(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if got < 0 && got > 10000 {
-		t.Errorf("got %v, but expected the subframe height value to be a realistic value", got)
+	if got < 0 && got > 600 {
+		t.Errorf("got %v, but expected the subframe height value to be a realistic value. The valid range is: 1 to 600.", got)
 	}
 
 	if camera.Alpaca.ErrorNumber != 0 {
@@ -1048,8 +1048,8 @@ func TestNewCameraGetSubFrameHeight(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if got < 0 && got > 10000 {
-		t.Errorf("got %v, but expected the subframe height value to be a realistic value", got)
+	if got < 0 && got > 600 {
+		t.Errorf("got %v, but expected the subframe height value to be a realistic value. The valid range is: 1 to 600.", got)
 	}
 
 	if camera.Alpaca.ErrorNumber != 0 {
@@ -1256,7 +1256,7 @@ func TestNewCameraSetCCDTemperatureCoolerSetPoint(t *testing.T) {
 func TestNewCameraSetStartX(t *testing.T) {
 	camera.SetConnected(true)
 
-	camera.SetStartX(1000)
+	camera.SetStartX(400)
 
 	var got, err = camera.GetStartX()
 
@@ -1264,11 +1264,11 @@ func TestNewCameraSetStartX(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if got < 0 && got > 10000 {
-		t.Errorf("got %v, but expected the subframe start position for the X axis value to be a realistic value", got)
+	if got < 0 && got > 800 {
+		t.Errorf("got %v, but expected the subframe start position for the X axis value to be a realistic value. The valid range is: 0 to 800.", got)
 	}
 
-	if got != 1000 {
+	if got != 400 {
 		t.Errorf("got %v, but expected the subframe start position for the X axis value to be set correctly", got)
 	}
 
@@ -1286,8 +1286,8 @@ func TestNewCameraGetStartX(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if got < 0 && got > 10000 {
-		t.Errorf("got %v, but expected the subframe start position for the X axis value to be a realistic value", got)
+	if got < 0 && got > 800 {
+		t.Errorf("got %v, but expected the subframe start position for the X axis value to be a realistic value. The valid range is: 0 to 800.", got)
 	}
 
 	if camera.Alpaca.ErrorNumber != 0 {
@@ -1298,7 +1298,7 @@ func TestNewCameraGetStartX(t *testing.T) {
 func TestNewCameraSetStartY(t *testing.T) {
 	camera.SetConnected(true)
 
-	camera.SetStartY(1000)
+	camera.SetStartY(300)
 
 	var got, err = camera.GetStartY()
 
@@ -1306,11 +1306,11 @@ func TestNewCameraSetStartY(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if got < 0 && got > 10000 {
-		t.Errorf("got %v, but expected the subframe start position for the Y axis value to be a realistic value", got)
+	if got < 0 && got > 600 {
+		t.Errorf("got %v, but expected the subframe start position for the Y axis value to be a realistic value. The valid range is: 0 to 600.", got)
 	}
 
-	if got != 1000 {
+	if got != 300 {
 		t.Errorf("got %v, but expected the subframe start position for the Y axis value to be set correctly", got)
 	}
 
@@ -1328,8 +1328,8 @@ func TestNewCameraGetStartY(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if got < 0 && got > 10000 {
-		t.Errorf("got %v, but expected the subframe start position for the Y axis value to be a realistic value", got)
+	if got < 0 && got > 600 {
+		t.Errorf("got %v, but expected the subframe start position for the Y axis value to be a realistic value. The valid range is: 0 to 600.", got)
 	}
 
 	if camera.Alpaca.ErrorNumber != 0 {
