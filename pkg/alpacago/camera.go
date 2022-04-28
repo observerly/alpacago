@@ -795,3 +795,21 @@ func (c *Camera) SetStartY(startY int32) error {
 func (c *Camera) GetSubExposureDuration() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "subexposureduration")
 }
+
+/*
+	SetSubExposureDuration()
+
+	@returns an error or nil, if nil sets the sub exposure duration in seconds, *only available in Camera Interface Version 3 and later.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__subexposureduration
+*/
+func (c *Camera) SetSubExposureDuration(subExposureDuration float64) error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"SubExposureDuration": fmt.Sprintf("%f", subExposureDuration),
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "subexposureduration", form)
+}
