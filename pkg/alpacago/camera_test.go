@@ -1406,3 +1406,20 @@ func TestNewCameraSetPulseGuide(t *testing.T) {
 		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCameraStartExposure(t *testing.T) {
+	camera.SetConnected(true)
+
+	camera.SetStartX(0)
+	camera.SetStartY(0)
+
+	var err = camera.StartExposure(20, true)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
