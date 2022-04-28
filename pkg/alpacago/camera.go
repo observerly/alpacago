@@ -813,3 +813,20 @@ func (c *Camera) SetSubExposureDuration(subExposureDuration float64) error {
 
 	return c.Alpaca.Put("camera", c.DeviceNumber, "subexposureduration", form)
 }
+
+/*
+	AbortExposure()
+
+	@returns an error or nil, if nil aborts the current exposure, if any, and returns the camera to Idle state.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__abortexposure
+*/
+func (c *Camera) AbortExposure() error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "abortexposure", form)
+}
