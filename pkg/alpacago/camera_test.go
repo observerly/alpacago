@@ -1423,3 +1423,25 @@ func TestNewCameraStartExposure(t *testing.T) {
 		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCameraStopExposure(t *testing.T) {
+	camera.SetConnected(true)
+
+	var err = camera.StopExposure()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	var got, _ = camera.GetOperationalState()
+
+	var want = CameraIdle
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}

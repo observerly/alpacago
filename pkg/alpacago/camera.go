@@ -868,3 +868,20 @@ func (c *Camera) StartExposure(duration float64, light bool) error {
 
 	return c.Alpaca.Put("camera", c.DeviceNumber, "startexposure", form)
 }
+
+/*
+	StopExposure()
+
+	@returns an error or nil, if nil stops the current exposure, if any. If an exposure is in progress, the readout process is initiated. Ignored if readout is already in process.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__stopexposure
+*/
+func (c *Camera) StopExposure() error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "stopexposure", form)
+}
