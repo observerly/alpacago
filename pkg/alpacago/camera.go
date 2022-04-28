@@ -830,3 +830,22 @@ func (c *Camera) AbortExposure() error {
 
 	return c.Alpaca.Put("camera", c.DeviceNumber, "abortexposure", form)
 }
+
+/*
+	PulseGuide()
+
+	@returns an error or nil, if nil starts a pulse guide operation i.e., it activates the Camera's mount control sytem to instruct the mount to move in a particular direction for a given period of time
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__pulseguide
+*/
+func (c *Camera) SetPulseGuide(direction Direction, duration int32) error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"Direction":           fmt.Sprintf("%d", direction),
+		"Duration":            fmt.Sprintf("%d", duration),
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("camera", c.DeviceNumber, "pulseguide", form)
+}
