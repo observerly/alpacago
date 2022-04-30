@@ -74,7 +74,7 @@ func TestNewFilterWheelSetConnected(t *testing.T) {
 func TestNewFilterWheelGetFocusOffsets(t *testing.T) {
 	var got, err = filterwheel.GetFocusOffsets()
 
-	want := [6]uint32{229, 5889, 1002, 9499, 3495, 2330}
+	want := [6]uint32{1458, 2070, 1413, 9664, 3593, 826}
 
 	if err != nil {
 		t.Errorf("got %, wanted %q", err, want)
