@@ -1,6 +1,9 @@
 package alpacago
 
-import "fmt"
+import (
+	"fmt"
+	"net"
+)
 
 const (
 	ALPACA_DISCOVERY_VERSION = 1
@@ -14,6 +17,16 @@ type AlpacaDiscoveryMessage struct {
 	Reserved []byte
 }
 
+type AlpacaDiscoveryServer struct {
+	Packet        *net.PacketConn
+	UrlBase       string
+	Protocol      string
+	ClientId      uint32
+	TransactionId uint32
+	ErrorNumber   int
+	ErrorMessage  string
+}
+
 func NewDiscoveryMessage(version int) *AlpacaDiscoveryMessage {
 	a := AlpacaDiscoveryMessage{
 		Fixed:    []byte("alpacadiscovery"),
@@ -22,4 +35,25 @@ func NewDiscoveryMessage(version int) *AlpacaDiscoveryMessage {
 	}
 
 	return &a
+}
+
+func NewDiscoveryServer(clientId uint32, protocol string, domain string, ip string, port int32) *AlpacaDiscoveryServer {
+	if port < 1 || port > 65535 {
+		port = DEFAULT_PORT
+	}
+
+	var urlBase string = fmt.Sprintf("%s:%d", ip, port)
+
+	if port == -1 && len(domain) > 0 {
+		urlBase = domain
+	}
+
+	server := AlpacaDiscoveryServer{
+		UrlBase:       urlBase,
+		Protocol:      protocol,
+		ClientId:      clientId,
+		TransactionId: 0,
+	}
+
+	return &server
 }
