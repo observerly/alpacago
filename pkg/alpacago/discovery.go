@@ -2,6 +2,7 @@ package alpacago
 
 import (
 	"fmt"
+	"log"
 	"net"
 )
 
@@ -19,6 +20,7 @@ type AlpacaDiscoveryMessage struct {
 
 type AlpacaDiscoveryServer struct {
 	Packet        *net.PacketConn
+	Address       *net.UDPAddr
 	UrlBase       string
 	Protocol      string
 	ClientId      uint32
@@ -56,4 +58,22 @@ func NewDiscoveryServer(clientId uint32, protocol string, domain string, ip stri
 	}
 
 	return &server
+}
+
+/*
+	OpenSocket()
+
+	@returns A bound open a socket for discovery on the udp4 network protocol, i.e., announce on the local network address.
+	@see https://ascom-standards.org/Developer/ASCOM%20Alpaca%20API%20Reference.pdf
+*/
+func (s *AlpacaDiscoveryServer) OpenSocket() {
+	pc, err := net.ListenPacket("udp4", ":32227")
+
+	if err != nil {
+		log.Fatal(fmt.Errorf("unable to open ASCOM Alpaca API discovery listen socket: %s", err.Error()))
+	}
+
+	defer pc.Close()
+
+	s.Packet = &pc
 }
