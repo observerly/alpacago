@@ -67,13 +67,13 @@ func NewDiscoveryServer(clientId uint32, protocol string, domain string, ip stri
 	@see https://ascom-standards.org/Developer/ASCOM%20Alpaca%20API%20Reference.pdf
 */
 func (s *AlpacaDiscoveryServer) OpenSocket() {
-	pc, err := net.ListenPacket("udp4", ":32227")
+	packet, err := net.ListenPacket("udp4", ":32227")
 
 	if err != nil {
 		log.Fatal(fmt.Errorf("unable to open ASCOM Alpaca API discovery listen socket: %s", err.Error()))
 	}
 
-	defer pc.Close()
+	defer packet.Close()
 
-	s.Packet = &pc
+	s.Packet = &packet
 }
