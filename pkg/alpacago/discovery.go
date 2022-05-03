@@ -77,3 +77,19 @@ func (s *AlpacaDiscoveryServer) OpenSocket() {
 
 	s.Packet = &packet
 }
+
+/*
+	ResolveUDPAddress()
+
+	@returns A resolved UDP address broadcast by the server.
+	@see https://ascom-standards.org/Developer/ASCOM%20Alpaca%20API%20Reference.pdf
+*/
+func (s *AlpacaDiscoveryServer) ResolveUDPAddress() {
+	address, err := net.ResolveUDPAddr("udp4", ":32227")
+
+	if err != nil {
+		log.Fatal(fmt.Errorf("unable to resolve ASCOM Alpaca API discovery UDP broadcast address: %s", err.Error()))
+	}
+
+	s.Address = address
+}
