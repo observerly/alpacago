@@ -57,11 +57,37 @@ func TestNewDomeDeviceNumber(t *testing.T) {
 	}
 }
 
-func TestNewDomeIsConnectedOn(t *testing.T) {
-	var err = dome.SetConnected(true)
+func TestNewDomeIsConnected(t *testing.T) {
+	var got, err = dome.IsConnected()
+
+	var want = true
 
 	if err != nil {
 		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %v, wanted %v", got, want)
+	}
+
+	if dome.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", dome.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewDomeIsConnectedOn(t *testing.T) {
+	var err = dome.SetConnected(true)
+
+	var got, _ = dome.IsConnected()
+
+	var want = true
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %v, wanted %v", got, want)
 	}
 
 	if dome.Alpaca.ErrorNumber != 0 {
