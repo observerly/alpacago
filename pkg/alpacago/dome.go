@@ -47,3 +47,13 @@ func (d *Dome) SetConnected(connected bool) error {
 
 	return d.Alpaca.Put("dome", d.DeviceNumber, "connected", form)
 }
+
+/*
+	GetAltitude()
+
+	@returns The dome altitude (degrees, horizon zero and increasing positive to 90 zenith).
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/get_dome__device_number__altitude
+*/
+func (d *Dome) GetAltitude() (float64, error) {
+	return d.Alpaca.GetFloat64Response("dome", d.DeviceNumber, "altitude")
+}
