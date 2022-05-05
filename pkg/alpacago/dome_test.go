@@ -146,3 +146,19 @@ func TestNewDomeAtPark(t *testing.T) {
 		t.Errorf("got %q, wanted %t", dome.Alpaca.ErrorMessage, want)
 	}
 }
+
+func TestNewDomeAzimuth(t *testing.T) {
+	var got, err = dome.GetAzimuth()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 0 || got > 360 {
+		t.Errorf("got %f, but expected the dome azimuth to be between 0° and +360°", got)
+	}
+
+	if dome.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", dome.Alpaca.ErrorMessage)
+	}
+}
