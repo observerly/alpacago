@@ -94,3 +94,19 @@ func TestNewDomeIsConnectedOn(t *testing.T) {
 		t.Errorf("got %q", dome.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewDomeGetAltitude(t *testing.T) {
+	var got, err = dome.GetAltitude()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 0 || got > 90 {
+		t.Errorf("got %v, but expected the dome altitude to be between 0° and +90°", got)
+	}
+
+	if dome.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", dome.Alpaca.ErrorMessage)
+	}
+}
