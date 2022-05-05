@@ -70,3 +70,13 @@ func (d *Dome) GetAltitude() (float64, error) {
 func (d *Dome) IsAtHome() (bool, error) {
 	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "athome")
 }
+
+/*
+	IsAtPark()
+
+	@returns true if the dome is in the programmed park position. Set only following a Park() operation and reset with any slew operation.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/get_dome__device_number__atpark
+*/
+func (d *Dome) IsAtPark() (bool, error) {
+	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "atpark")
+}
