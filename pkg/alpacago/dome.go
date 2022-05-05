@@ -80,3 +80,13 @@ func (d *Dome) IsAtHome() (bool, error) {
 func (d *Dome) IsAtPark() (bool, error) {
 	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "atpark")
 }
+
+/*
+	GetAzimuth()
+
+	@returns the dome azimuth (degrees, North-referenced, positive East/clockwise, i.e., 90 East, 180 South, 270 West).
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/get_dome__device_number__azimuth
+*/
+func (d *Dome) GetAzimuth() (float64, error) {
+	return d.Alpaca.GetFloat64Response("dome", d.DeviceNumber, "azimuth")
+}
