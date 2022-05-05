@@ -57,3 +57,16 @@ func (d *Dome) SetConnected(connected bool) error {
 func (d *Dome) GetAltitude() (float64, error) {
 	return d.Alpaca.GetFloat64Response("dome", d.DeviceNumber, "altitude")
 }
+
+/*
+	IsAtHome()
+
+	@returns returns true if the dome is in the home position. This is normally used following a FindHome() operation.
+	The value is reset with any azimuth slew operation that moves the dome away from the home position. AtHome may
+	also become true durng normal slew operations, if the dome passes through the home position and the dome controller
+	hardware is capable of detecting that; or at the end of a slew operation if the dome comes to rest at the home position.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/get_dome__device_number__athome
+*/
+func (d *Dome) IsAtHome() (bool, error) {
+	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "athome")
+}
