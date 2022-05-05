@@ -1,7 +1,6 @@
 package alpacago
 
 import (
-	"math"
 	"testing"
 )
 
@@ -231,14 +230,12 @@ func TestNewFocuserIsTemperatureCompensationAvailable(t *testing.T) {
 func TestNewFocuserGetTemperature(t *testing.T) {
 	var got, err = focuser.GetTemperature()
 
-	var want = 24.34
-
 	if err != nil {
 		t.Errorf("got %q", err)
 	}
 
-	if math.Abs(got-want) > 100 {
-		t.Errorf("got %f, wanted %f", got, want)
+	if got < -273.15 || got > 120 {
+		t.Errorf("got %f, but expected the temperature of the focuser to be a realistic physical value", got)
 	}
 
 	if focuser.Alpaca.ErrorNumber != 0 {
