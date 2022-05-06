@@ -90,3 +90,13 @@ func (d *Dome) IsAtPark() (bool, error) {
 func (d *Dome) GetAzimuth() (float64, error) {
 	return d.Alpaca.GetFloat64Response("dome", d.DeviceNumber, "azimuth")
 }
+
+/*
+	CanFindHome()
+
+	@returns true if the dome can move to the home position.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/get_dome__device_number__canfindhome
+*/
+func (d *Dome) CanFindHome() (bool, error) {
+	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "canfindhome")
+}
