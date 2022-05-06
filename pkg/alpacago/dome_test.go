@@ -132,7 +132,7 @@ func TestNewDomeAtHome(t *testing.T) {
 func TestNewDomeAtPark(t *testing.T) {
 	var got, err = dome.IsAtPark()
 
-	var want bool = true
+	var want bool = false
 
 	if err != nil {
 		t.Errorf("got %q, wanted %t", err, want)
