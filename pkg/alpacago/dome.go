@@ -160,3 +160,13 @@ func (d *Dome) CanSetShutter() (bool, error) {
 func (d *Dome) CanSlave() (bool, error) {
 	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "canslave")
 }
+
+/*
+	CanSyncAzimuth()
+
+	@returns true if driver is capable of synchronizing the dome azimuth position using the SyncToAzimuth(Double) method.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/get_dome__device_number__cansyncazimuth
+*/
+func (d *Dome) CanSyncAzimuth() (bool, error) {
+	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "cansyncazimuth")
+}
