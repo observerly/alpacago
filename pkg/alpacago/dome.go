@@ -120,3 +120,13 @@ func (d *Dome) CanPark() (bool, error) {
 func (d *Dome) CanSetAltitude() (bool, error) {
 	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "cansetaltitude")
 }
+
+/*
+	CanSetAzimuth()
+
+	@returns true if driver is capable of setting the dome azimuth.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/get_dome__device_number__cansetazimuth
+*/
+func (d *Dome) CanSetAzimuth() (bool, error) {
+	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "cansetazimuth")
+}
