@@ -230,3 +230,21 @@ func (d *Dome) SetSlaved(slaved bool) error {
 func (d *Dome) IsSlewing() (bool, error) {
 	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "slewing")
 }
+
+/*
+	AbortSlew()
+
+	@returs error, or nil, if nil it aborts the current slew operation.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/put_dome__device_number__abortslew
+*/
+func (d *Dome) AbortSlew() error {
+
+	d.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", d.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", d.Alpaca.TransactionId),
+	}
+
+	return d.Alpaca.Put("dome", d.DeviceNumber, "abortslew", form)
+}

@@ -132,7 +132,7 @@ func TestNewDomeAtHome(t *testing.T) {
 func TestNewDomeAtPark(t *testing.T) {
 	var got, err = dome.IsAtPark()
 
-	var want bool = true
+	var want bool = false
 
 	if err != nil {
 		t.Errorf("got %q, wanted %t", err, want)
@@ -376,6 +376,18 @@ func TestNewDomeIsSlewing(t *testing.T) {
 
 	if got != want {
 		t.Errorf("got %t, wanted %t", got, want)
+	}
+
+	if dome.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", dome.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewDomeAbortSlew(t *testing.T) {
+	var err = dome.AbortSlew()
+
+	if err != nil {
+		t.Errorf("got %q", err)
 	}
 
 	if dome.Alpaca.ErrorNumber != 0 {
