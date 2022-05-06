@@ -382,3 +382,15 @@ func TestNewDomeIsSlewing(t *testing.T) {
 		t.Errorf("got %q", dome.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewDomeAbortSlew(t *testing.T) {
+	var err = dome.AbortSlew()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if dome.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", dome.Alpaca.ErrorMessage)
+	}
+}
