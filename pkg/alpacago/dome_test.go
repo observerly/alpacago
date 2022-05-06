@@ -180,3 +180,21 @@ func TestNewDomeCanFindHome(t *testing.T) {
 		t.Errorf("got %q", dome.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewDomeCanPark(t *testing.T) {
+	var got, err = dome.CanPark()
+
+	var want bool = true
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %t, wanted %t", got, want)
+	}
+
+	if dome.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", dome.Alpaca.ErrorMessage)
+	}
+}
