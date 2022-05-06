@@ -150,3 +150,13 @@ func (d *Dome) CanSetPark() (bool, error) {
 func (d *Dome) CanSetShutter() (bool, error) {
 	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "cansetshutter")
 }
+
+/*
+	CanSlave()
+
+	@returns true if driver is capable of slaving to a telescope.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/get_dome__device_number__canslave
+*/
+func (d *Dome) CanSlave() (bool, error) {
+	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "canslave")
+}
