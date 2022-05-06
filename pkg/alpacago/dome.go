@@ -140,3 +140,13 @@ func (d *Dome) CanSetAzimuth() (bool, error) {
 func (d *Dome) CanSetPark() (bool, error) {
 	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "cansetpark")
 }
+
+/*
+	CanSetShutter()
+
+	@returns true if driver is capable of setting the shutter state.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/get_dome__device_number__cansetshutter
+*/
+func (d *Dome) CanSetShutter() (bool, error) {
+	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "cansetshutter")
+}
