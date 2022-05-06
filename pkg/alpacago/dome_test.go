@@ -274,7 +274,7 @@ func TestNewDomeCanSetShutter(t *testing.T) {
 func TestNewDomeCanSlave(t *testing.T) {
 	var got, err = dome.CanSlave()
 
-	var want bool = true
+	var want bool = false
 
 	if err != nil {
 		t.Errorf("got %q", err)
