@@ -220,3 +220,13 @@ func (d *Dome) SetSlaved(slaved bool) error {
 
 	return d.Alpaca.Put("dome", d.DeviceNumber, "slaved", form)
 }
+
+/*
+	IsSlewing()
+
+	@return true if any part of the dome is currently moving, False if all dome components are steady.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/get_dome__device_number__slewing
+*/
+func (d *Dome) IsSlewing() (bool, error) {
+	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "slewing")
+}
