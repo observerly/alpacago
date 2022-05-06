@@ -110,3 +110,13 @@ func (d *Dome) CanFindHome() (bool, error) {
 func (d *Dome) CanPark() (bool, error) {
 	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "canpark")
 }
+
+/*
+	CanSetAltitude()
+
+	@returns true if driver is capable of setting the dome altitude.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/get_dome__device_number__cansetaltitude
+*/
+func (d *Dome) CanSetAltitude() (bool, error) {
+	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "cansetaltitude")
+}
