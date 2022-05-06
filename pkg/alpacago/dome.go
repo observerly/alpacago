@@ -191,3 +191,13 @@ func (d *Dome) GetShutterStatus() (ShutterStatus, error) {
 	status, err := d.Alpaca.GetInt32Response("dome", d.DeviceNumber, "shutterstatus")
 	return ShutterStatus(status), err
 }
+
+/*
+	IsSlaved()
+
+	@returns true if the dome is slaved to the telescope in its hardware, else false.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/get_dome__device_number__slaved
+*/
+func (d *Dome) IsSlaved() (bool, error) {
+	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "slaved")
+}
