@@ -7,6 +7,16 @@ type Dome struct {
 	DeviceNumber uint
 }
 
+type ShutterStatus int32
+
+const (
+	Open ShutterStatus = iota
+	Closed
+	Opening
+	Closing
+	Error
+)
+
 func NewDome(clientId uint32, secure bool, domain string, ip string, port int32, deviceNumber uint) *Dome {
 	alpaca := NewAlpacaAPI(clientId, secure, domain, ip, port)
 
@@ -169,4 +179,15 @@ func (d *Dome) CanSlave() (bool, error) {
 */
 func (d *Dome) CanSyncAzimuth() (bool, error) {
 	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "cansyncazimuth")
+}
+
+/*
+	GetShutterStatus()
+
+	@returns the status of the dome shutter or roll-off roof. 0 = Open, 1 = Closed, 2 = Opening, 3 = Closing, 4 = Shutter status error
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/get_dome__device_number__shutterstatus
+*/
+func (d *Dome) GetShutterStatus() (ShutterStatus, error) {
+	status, err := d.Alpaca.GetInt32Response("dome", d.DeviceNumber, "shutterstatus")
+	return ShutterStatus(status), err
 }
