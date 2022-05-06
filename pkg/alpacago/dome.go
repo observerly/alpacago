@@ -201,3 +201,22 @@ func (d *Dome) GetShutterStatus() (ShutterStatus, error) {
 func (d *Dome) IsSlaved() (bool, error) {
 	return d.Alpaca.GetBooleanResponse("dome", d.DeviceNumber, "slaved")
 }
+
+/*
+	SetSlaved()
+
+	@returns error, or nil, if nil it sets the salved state of the dome.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/put_dome__device_number__slaved
+*/
+func (d *Dome) SetSlaved(slaved bool) error {
+	d.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Set True if telescope is slaved to dome, otherwise False
+		"Slaved":              fmt.Sprintf("%t", slaved),
+		"ClientID":            fmt.Sprintf("%d", d.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", d.Alpaca.TransactionId),
+	}
+
+	return d.Alpaca.Put("dome", d.DeviceNumber, "slaved", form)
+}
