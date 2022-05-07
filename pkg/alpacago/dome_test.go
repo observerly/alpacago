@@ -394,3 +394,23 @@ func TestNewDomeAbortSlew(t *testing.T) {
 		t.Errorf("got %q", dome.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewDomeCloseShutter(t *testing.T) {
+	var err = dome.CloseShutter()
+
+	var got, _ = dome.GetShutterStatus()
+
+	var want = Closed
+
+	if err != nil {
+		t.Errorf("got %q, wanted %q", err, want)
+	}
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if dome.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %d", dome.Alpaca.ErrorMessage, want)
+	}
+}

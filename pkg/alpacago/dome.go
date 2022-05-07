@@ -238,7 +238,6 @@ func (d *Dome) IsSlewing() (bool, error) {
 	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/put_dome__device_number__abortslew
 */
 func (d *Dome) AbortSlew() error {
-
 	d.Alpaca.TransactionId++
 
 	var form map[string]string = map[string]string{
@@ -247,4 +246,21 @@ func (d *Dome) AbortSlew() error {
 	}
 
 	return d.Alpaca.Put("dome", d.DeviceNumber, "abortslew", form)
+}
+
+/*
+	CloseShutter()
+
+	@returns error, or nil, if nil it closes the shutter or otherwise shield telescope from the sky.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/put_dome__device_number__closeshutter
+*/
+func (d *Dome) CloseShutter() error {
+	d.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", d.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", d.Alpaca.TransactionId),
+	}
+
+	return d.Alpaca.Put("dome", d.DeviceNumber, "closeshutter", form)
 }
