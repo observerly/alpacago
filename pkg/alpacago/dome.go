@@ -353,3 +353,22 @@ func (d *Dome) SlewToAltitude(altitude float64) error {
 
 	return d.Alpaca.Put("dome", d.DeviceNumber, "slewtoaltitude", form)
 }
+
+/*
+	SlewToAzimuth()
+
+	@returns error, or nil, if nil it slews the dome to the given azimuth position.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/put_dome__device_number__slewtoazimuth
+*/
+func (d *Dome) SlewToAzimuth(azimuth float64) error {
+	d.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Target dome azimuth (degrees, North zero and increasing clockwise. i.e., 90 East, 180 South, 270 West)
+		"Azimuth":             fmt.Sprintf("%f", azimuth),
+		"ClientID":            fmt.Sprintf("%d", d.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", d.Alpaca.TransactionId),
+	}
+
+	return d.Alpaca.Put("dome", d.DeviceNumber, "slewtoazimuth", form)
+}
