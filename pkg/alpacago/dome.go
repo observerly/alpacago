@@ -282,3 +282,20 @@ func (d *Dome) FindHome() error {
 
 	return d.Alpaca.Put("dome", d.DeviceNumber, "findhome", form)
 }
+
+/*
+	OpenShutter()
+
+	@returns error, or nil, if nil it opens the shutter or otherwise expose telescope to the sky.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/put_dome__device_number__openshutter
+*/
+func (d *Dome) OpenShutter() error {
+	d.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", d.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", d.Alpaca.TransactionId),
+	}
+
+	return d.Alpaca.Put("dome", d.DeviceNumber, "openshutter", form)
+}
