@@ -299,3 +299,21 @@ func (d *Dome) OpenShutter() error {
 
 	return d.Alpaca.Put("dome", d.DeviceNumber, "openshutter", form)
 }
+
+/*
+	Park()
+
+	@returns error, or nil, if nil it rotates the dome in azimuth to park position.
+	@effects After assuming programmed park position, sets AtPark flag.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/put_dome__device_number__park
+*/
+func (d *Dome) Park() error {
+	d.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", d.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", d.Alpaca.TransactionId),
+	}
+
+	return d.Alpaca.Put("dome", d.DeviceNumber, "park", form)
+}
