@@ -469,3 +469,15 @@ func TestNewDomePark(t *testing.T) {
 		t.Errorf("got %q", dome.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewDomeSetAsPark(t *testing.T) {
+	var err = dome.SetAsPark()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if dome.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", dome.Alpaca.ErrorMessage)
+	}
+}
