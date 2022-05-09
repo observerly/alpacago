@@ -317,3 +317,20 @@ func (d *Dome) Park() error {
 
 	return d.Alpaca.Put("dome", d.DeviceNumber, "park", form)
 }
+
+/*
+	SetAsPark()
+
+	@returns error, or nil, if nil it sets the current azimuth, altitude position of dome to be the park position.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/put_dome__device_number__setpark
+*/
+func (d *Dome) SetAsPark() error {
+	d.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", d.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", d.Alpaca.TransactionId),
+	}
+
+	return d.Alpaca.Put("dome", d.DeviceNumber, "setpark", form)
+}
