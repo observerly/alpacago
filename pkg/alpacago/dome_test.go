@@ -1,6 +1,9 @@
 package alpacago
 
-import "testing"
+import (
+	"testing"
+	"time"
+)
 
 var dome = NewDome(65535, true, "alpaca.observerly.com", "", -1, 0)
 
@@ -310,18 +313,16 @@ func TestNewDomeCanSyncAzimuth(t *testing.T) {
 func TestNewDomeShutterStatus(t *testing.T) {
 	var got, err = dome.GetShutterStatus()
 
-	var want = Closed
-
 	if err != nil {
-		t.Errorf("got %q, wanted %q", err, want)
+		t.Errorf("got %q", err)
 	}
 
-	if got != want {
-		t.Errorf("got %q, wanted %q", got, want)
+	if got > 2 || got < 0 {
+		t.Errorf("got %q, wanted %q", got, "the shutter status to represnet an iota in range 0 to 2")
 	}
 
 	if dome.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %d", dome.Alpaca.ErrorMessage, want)
+		t.Errorf("got %q, wanted %q", dome.Alpaca.ErrorMessage, "the shutter status to represnet an iota in range 0 to 2")
 	}
 }
 
@@ -395,19 +396,39 @@ func TestNewDomeAbortSlew(t *testing.T) {
 	}
 }
 
+func TestNewDomeOpenShutter(t *testing.T) {
+	var err = dome.OpenShutter()
+
+	var got, _ = dome.GetShutterStatus()
+
+	var want = Open | Opening
+
+	if err != nil {
+		t.Errorf("got %q, wanted %q", err, "the dome to be either open, or opening")
+	}
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, "the dome to be either open, or opening")
+	}
+
+	if dome.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %d", dome.Alpaca.ErrorMessage, want)
+	}
+}
+
 func TestNewDomeCloseShutter(t *testing.T) {
 	var err = dome.CloseShutter()
 
 	var got, _ = dome.GetShutterStatus()
 
-	var want = Closed
+	var want = Closed | Closing
 
 	if err != nil {
-		t.Errorf("got %q, wanted %q", err, want)
+		t.Errorf("got %q, wanted %q", err, "the dome to be either close, or closing")
 	}
 
 	if got != want {
-		t.Errorf("got %q, wanted %q", got, want)
+		t.Errorf("got %q, wanted %q", err, "the dome to be either close, or closing")
 	}
 
 	if dome.Alpaca.ErrorNumber != 0 {
@@ -421,6 +442,8 @@ func TestNewDomeFindHome(t *testing.T) {
 	if err != nil {
 		t.Errorf("got %q", err)
 	}
+
+	time.Sleep(time.Second * 2)
 
 	var got, _ = dome.IsAtHome()
 
