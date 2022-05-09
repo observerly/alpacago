@@ -264,3 +264,21 @@ func (d *Dome) CloseShutter() error {
 
 	return d.Alpaca.Put("dome", d.DeviceNumber, "closeshutter", form)
 }
+
+/*
+	FindHome()
+
+	@returns error, or nil, if nil it starts operation to search for the dome home position.
+	@effects after home position is established initializes azimuth to the default value and sets the AtHome flag.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/put_dome__device_number__findhome
+*/
+func (d *Dome) FindHome() error {
+	d.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", d.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", d.Alpaca.TransactionId),
+	}
+
+	return d.Alpaca.Put("dome", d.DeviceNumber, "findhome", form)
+}
