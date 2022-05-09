@@ -135,7 +135,7 @@ func TestNewDomeAtHome(t *testing.T) {
 func TestNewDomeAtPark(t *testing.T) {
 	var got, err = dome.IsAtPark()
 
-	var want bool = true
+	var want bool = false
 
 	if err != nil {
 		t.Errorf("got %q, wanted %t", err, want)
@@ -488,6 +488,28 @@ func TestNewDomeSlewToAltitude(t *testing.T) {
 	var got, _ = dome.GetAltitude()
 
 	var want float64 = 45
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %v, wanted %v", got, want)
+	}
+
+	if dome.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", dome.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewDomeSlewToAzimuth(t *testing.T) {
+	var err = dome.SlewToAzimuth(60)
+
+	time.Sleep(time.Second * 6)
+
+	var got, _ = dome.GetAzimuth()
+
+	var want float64 = 60
 
 	if err != nil {
 		t.Errorf("got %q", err)
