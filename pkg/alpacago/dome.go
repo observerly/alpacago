@@ -372,3 +372,22 @@ func (d *Dome) SlewToAzimuth(azimuth float64) error {
 
 	return d.Alpaca.Put("dome", d.DeviceNumber, "slewtoazimuth", form)
 }
+
+/*
+	SyncToAzimuth()
+
+	@returns error, or nil, if nil it synchronizes the current position of the dome to the given azimuth.
+	@see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/put_dome__device_number__synctoazimuth
+*/
+func (d *Dome) SyncToAzimuth(azimuth float64) error {
+	d.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Target dome azimuth (degrees, North zero and increasing clockwise. i.e., 90 East, 180 South, 270 West)
+		"Azimuth":             fmt.Sprintf("%f", azimuth),
+		"ClientID":            fmt.Sprintf("%d", d.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", d.Alpaca.TransactionId),
+	}
+
+	return d.Alpaca.Put("dome", d.DeviceNumber, "synctoazimuth", form)
+}
