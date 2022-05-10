@@ -443,7 +443,7 @@ func TestNewDomeFindHome(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	time.Sleep(time.Second * 2)
+	time.Sleep(time.Second * 5)
 
 	var got, _ = dome.IsAtHome()
 
@@ -510,6 +510,28 @@ func TestNewDomeSlewToAzimuth(t *testing.T) {
 	var got, _ = dome.GetAzimuth()
 
 	var want float64 = 60
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %v, wanted %v", got, want)
+	}
+
+	if dome.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", dome.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewDomeSyncoAzimuth(t *testing.T) {
+	var err = dome.SyncToAzimuth(80)
+
+	time.Sleep(time.Second * 8)
+
+	var got, _ = dome.GetAzimuth()
+
+	var want float64 = 80
 
 	if err != nil {
 		t.Errorf("got %q", err)
