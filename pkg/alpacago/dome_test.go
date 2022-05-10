@@ -443,7 +443,7 @@ func TestNewDomeFindHome(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	time.Sleep(time.Second * 2)
+	time.Sleep(time.Second * 5)
 
 	var got, _ = dome.IsAtHome()
 
