@@ -2,6 +2,23 @@ package alpacago
 
 import "fmt"
 
+type CalibratorState int32
+
+const (
+	// This device does not have a calibration capability
+	CalibratorNotPresent CalibratorState = iota
+	// The calibrator is off
+	CalibratorOff
+	// The calibrator is stabilising or is not yet in the commanded state
+	CalibratorNotReady
+	// The calibrator is ready for use
+	CalibratorReady
+	// The calibrator state is unknown
+	CalibratorUnknown
+	// The calibrator encountered an error when changing state
+	CalibratorError
+)
+
 type CoverCalibrator struct {
 	Alpaca       *ASCOMAlpacaAPIClient
 	DeviceNumber uint
@@ -56,4 +73,16 @@ func (c *CoverCalibrator) SetConnected(connected bool) error {
 */
 func (c *CoverCalibrator) GetBrightness() (float64, error) {
 	return c.Alpaca.GetFloat64Response("covercalibrator", c.DeviceNumber, "brightness")
+}
+
+/*
+	GetStatus()
+
+	@returns the state of the calibration device, if present, otherwise returns "NotPresent". The calibrator state mode is specified as an integer value from the CalibratorStatus Enum.
+	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__calibratorstate
+	@see https://ascom-standards.org/Help/Platform/html/T_ASCOM_DeviceInterface_CalibratorStatus.htm
+*/
+func (c *CoverCalibrator) GetStatus() (CalibratorState, error) {
+	status, err := c.Alpaca.GetInt32Response("covercalibrator", c.DeviceNumber, "calibratorstate")
+	return CalibratorState(status), err
 }
