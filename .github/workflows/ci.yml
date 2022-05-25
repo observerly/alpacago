@@ -1,4 +1,4 @@
-name: camelopardalis/ci
+name: alpacago/ci
 
 on:
   pull_request:
