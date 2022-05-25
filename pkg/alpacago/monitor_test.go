@@ -76,3 +76,23 @@ func TestNewSafetyMonitorIsConnected(t *testing.T) {
 		t.Errorf("got %q", monitor.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewSafetyMonitorSetConnected(t *testing.T) {
+	monitor.SetConnected(true)
+
+	var got, err = monitor.IsConnected()
+
+	var want = true
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %v, wanted %v", got, want)
+	}
+
+	if monitor.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", monitor.Alpaca.ErrorMessage)
+	}
+}
