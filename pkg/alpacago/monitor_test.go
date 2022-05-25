@@ -1,0 +1,60 @@
+package alpacago
+
+import (
+	"testing"
+)
+
+var monitor = NewSafetyMonitor(65535, true, "alpaca.observerly.com", "", -1, 0)
+
+func TestNewSafetyMonitorBaseURL(t *testing.T) {
+	monitor := NewSafetyMonitor(65535, false, "", "0.0.0.0", 8000, 0)
+
+	var got string = monitor.Alpaca.UrlBase
+	var want string = "http://0.0.0.0:8000"
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+}
+
+func TestNewSafetyMonitorBaseURLForHost(t *testing.T) {
+	var got string = monitor.Alpaca.UrlBase
+	var want string = "https://alpaca.observerly.com"
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+}
+
+func TestNewSafetyMonitorClientID(t *testing.T) {
+	monitor := NewSafetyMonitor(65535, false, "", "0.0.0.0", 8000, 0)
+
+	var got uint32 = monitor.Alpaca.ClientId
+	var want uint32 = 65535
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+}
+
+func TestNewSafetyMonitorTransactionID(t *testing.T) {
+	monitor := NewSafetyMonitor(65535, false, "", "0.0.0.0", 8000, 0)
+
+	var got uint32 = monitor.Alpaca.TransactionId
+	var want uint32 = 0
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+}
+
+func TestNewSafetyMonitorDeviceNumber(t *testing.T) {
+	monitor := NewSafetyMonitor(65535, false, "", "0.0.0.0", 8000, 0)
+
+	var got uint = monitor.DeviceNumber
+	var want uint = 0
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+}
