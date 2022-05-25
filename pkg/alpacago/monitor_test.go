@@ -58,3 +58,21 @@ func TestNewSafetyMonitorDeviceNumber(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 }
+
+func TestNewSafetyMonitorIsConnected(t *testing.T) {
+	var got, err = dome.IsConnected()
+
+	var want = true
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %v, wanted %v", got, want)
+	}
+
+	if monitor.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", monitor.Alpaca.ErrorMessage)
+	}
+}
