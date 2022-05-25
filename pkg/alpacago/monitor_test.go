@@ -60,7 +60,7 @@ func TestNewSafetyMonitorDeviceNumber(t *testing.T) {
 }
 
 func TestNewSafetyMonitorIsConnected(t *testing.T) {
-	var got, err = dome.IsConnected()
+	var got, err = monitor.IsConnected()
 
 	var want = true
 
