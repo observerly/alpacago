@@ -94,6 +94,26 @@ func TestNewTelescopeIsConnected(t *testing.T) {
 	}
 }
 
+func TestNewTelescopeSetConnected(t *testing.T) {
+	telescope.SetConnected(true)
+
+	var got, err = telescope.IsConnected()
+
+	var want = true
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %v, wanted %v", got, want)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewTelescopeSetAbortSlew(t *testing.T) {
 	var err = telescope.SetAbortSlew()
 
