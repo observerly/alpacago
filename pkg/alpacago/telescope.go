@@ -99,7 +99,7 @@ func (t *Telescope) SetConnected(connected bool) error {
 		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
 	}
 
-	return t.Alpaca.Put("focuser", t.DeviceNumber, "connected", form)
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "connected", form)
 }
 
 /*
