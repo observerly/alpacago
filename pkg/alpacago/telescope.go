@@ -83,6 +83,26 @@ func (t *Telescope) IsConnected() (bool, error) {
 }
 
 /*
+	SetConnected() common method to all ASCOM Alpaca compliant devices
+
+	@param connected bool (set True to connect to the device hardware, set false to disconnect from the device hardware)
+	@returns the connected state of the device
+	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/put__device_type___device_number__connected
+*/
+func (t *Telescope) SetConnected(connected bool) error {
+	t.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		// Set True to connect to the device hardware, set False to disconnect from the device hardware
+		"Connected":           fmt.Sprintf("%t", connected),
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("focuser", t.DeviceNumber, "connected", form)
+}
+
+/*
 	SetAbortSlew()
 
 	@returns an error or nil, if nil immediately Stops a slew in progress.
