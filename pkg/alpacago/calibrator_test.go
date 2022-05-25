@@ -56,3 +56,21 @@ func TestNewCoverCalibratorDeviceNumber(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 }
+
+func TestNewCoverCalibratorIsConnected(t *testing.T) {
+	var got, err = calibrator.IsConnected()
+
+	var want = true
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %v, wanted %v", got, want)
+	}
+
+	if calibrator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", calibrator.Alpaca.ErrorMessage)
+	}
+}
