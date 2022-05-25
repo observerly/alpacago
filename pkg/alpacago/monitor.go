@@ -47,3 +47,13 @@ func (m *SafetyMonitor) SetConnected(connected bool) error {
 
 	return m.Alpaca.Put("safetymonitor", m.DeviceNumber, "connected", form)
 }
+
+/*
+	IsSafe()
+
+	@returns true if the state is safe, false if it is unsafe. Indicates whether the monitored state is safe for use.
+	@see https://ascom-standards.org/api/#/SafetyMonitor%20Specific%20Methods/get_safetymonitor__device_number__issafe
+*/
+func (m *SafetyMonitor) IsSafe() (bool, error) {
+	return m.Alpaca.GetBooleanResponse("safetymonitor", m.DeviceNumber, "issafe")
+}
