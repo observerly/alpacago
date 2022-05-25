@@ -47,3 +47,13 @@ func (c *CoverCalibrator) SetConnected(connected bool) error {
 
 	return c.Alpaca.Put("covercalibrator", c.DeviceNumber, "connected", form)
 }
+
+/*
+	GetBrightness()
+
+	@returns the current calibrator brightness in the range 0 (completely off) to MaxBrightness (fully on)
+	@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/get_covercalibrator__device_number__brightness
+*/
+func (c *CoverCalibrator) GetBrightness() (float64, error) {
+	return c.Alpaca.GetFloat64Response("covercalibrator", c.DeviceNumber, "brightness")
+}
