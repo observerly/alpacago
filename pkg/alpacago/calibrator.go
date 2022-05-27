@@ -144,3 +144,20 @@ func (c *CoverCalibrator) SetCalibratorOn(brightness int32) error {
 
 	return c.Alpaca.Put("covercalibrator", c.DeviceNumber, "calibratoron", form)
 }
+
+/*
+	SetCalibratorOff()
+
+	@turns the calibrator off if the device has calibration capability.
+	@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/put_covercalibrator__device_number__calibratoroff
+*/
+func (c *CoverCalibrator) SetCalibratorOff() error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("covercalibrator", c.DeviceNumber, "calibratoroff", form)
+}
