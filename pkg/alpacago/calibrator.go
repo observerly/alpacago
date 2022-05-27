@@ -161,3 +161,20 @@ func (c *CoverCalibrator) SetCalibratorOff() error {
 
 	return c.Alpaca.Put("covercalibrator", c.DeviceNumber, "calibratoroff", form)
 }
+
+/*
+	CloseCover()
+
+	@returns and error, or nil, if nil initiates cover closing if a cover is present.
+	@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/put_covercalibrator__device_number__closecover
+*/
+func (c *CoverCalibrator) CloseCover() error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("covercalibrator", c.DeviceNumber, "closecover", form)
+}
