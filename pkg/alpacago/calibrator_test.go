@@ -196,3 +196,17 @@ func TestNewCalibratorCoverSetCalibratorOff(t *testing.T) {
 		t.Errorf("got %q", calibrator.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCalibratorCoverCloseCover(t *testing.T) {
+	calibrator.SetConnected(true)
+
+	var err = calibrator.CloseCover()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if calibrator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", calibrator.Alpaca.ErrorMessage)
+	}
+}
