@@ -195,3 +195,20 @@ func (c *CoverCalibrator) HaltCover() error {
 
 	return c.Alpaca.Put("covercalibrator", c.DeviceNumber, "haltcover", form)
 }
+
+/*
+	OpenCover()
+
+	@returns and error, or nil, if nil initiates cover opening if a cover is present.
+	@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/put_covercalibrator__device_number__opencover
+*/
+func (c *CoverCalibrator) OpenCover() error {
+	c.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", c.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", c.Alpaca.TransactionId),
+	}
+
+	return c.Alpaca.Put("covercalibrator", c.DeviceNumber, "opencover", form)
+}
