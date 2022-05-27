@@ -114,13 +114,15 @@ func TestNewCoverCalibratorGetBrightness(t *testing.T) {
 func TestNewCalibratorCoverGetStatus(t *testing.T) {
 	calibrator.SetConnected(true)
 
+	calibrator.SetCalibratorOn(90)
+
 	var got, err = calibrator.GetStatus()
 
 	if err != nil {
 		t.Errorf("got %q", err)
 	}
 
-	if got != CalibratorReady {
+	if got != CalibratorReady && got != CalibratorNotReady {
 		t.Errorf("got %v, but expected the calibrator to be ready", got)
 	}
 
@@ -131,6 +133,8 @@ func TestNewCalibratorCoverGetStatus(t *testing.T) {
 
 func TestNewCalibratorCoverGetCoverStatus(t *testing.T) {
 	calibrator.SetConnected(true)
+
+	calibrator.SetCalibratorOn(90)
 
 	var got, err = calibrator.GetCoverStatus()
 
@@ -169,6 +173,20 @@ func TestNewCalibratorCoverSetCalibratorOn(t *testing.T) {
 	calibrator.SetConnected(true)
 
 	var err = calibrator.SetCalibratorOn(90)
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if calibrator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", calibrator.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewCalibratorCoverSetCalibratorOff(t *testing.T) {
+	calibrator.SetConnected(true)
+
+	var err = calibrator.SetCalibratorOff()
 
 	if err != nil {
 		t.Errorf("got %q", err)
