@@ -4,6 +4,8 @@ import "fmt"
 
 type CalibratorState int32
 
+type CoverState int32
+
 const (
 	// This device does not have a calibration capability
 	CalibratorNotPresent CalibratorState = iota
@@ -17,6 +19,21 @@ const (
 	CalibratorUnknown
 	// The calibrator encountered an error when changing state
 	CalibratorError
+)
+
+const (
+	// This device does not have a cover that can be closed independently
+	CoverNotPresent CoverState = iota
+	// The cover is closed
+	CoverClosed
+	// The cover is moving to a new position
+	CoverMoving
+	// The Cover is open
+	CoverOpen
+	// The Cover state is unknown
+	CoverUnknown
+	// The Cover encountered an error when changing state
+	CoverError
 )
 
 type CoverCalibrator struct {
@@ -85,4 +102,16 @@ func (c *CoverCalibrator) GetBrightness() (float64, error) {
 func (c *CoverCalibrator) GetStatus() (CalibratorState, error) {
 	status, err := c.Alpaca.GetInt32Response("covercalibrator", c.DeviceNumber, "calibratorstate")
 	return CalibratorState(status), err
+}
+
+/*
+	GetCoverStatus()
+
+	@returns the state of the device cover, if present, otherwise returns "NotPresent". The cover state mode is specified as an integer value from the CoverStatus Enum.
+	@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/get_covercalibrator__device_number__coverstate
+	@see https://ascom-standards.org/Help/Platform/html/T_ASCOM_DeviceInterface_CoverStatus.htm
+*/
+func (c *CoverCalibrator) GetCoverStatus() (CoverState, error) {
+	status, err := c.Alpaca.GetInt32Response("covercalibrator", c.DeviceNumber, "coverstate")
+	return CoverState(status), err
 }
