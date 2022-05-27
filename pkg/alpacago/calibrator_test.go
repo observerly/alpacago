@@ -146,3 +146,21 @@ func TestNewCalibratorCoverGetCoverStatus(t *testing.T) {
 		t.Errorf("got %q", calibrator.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCalibratorCoverGetMaxBrightness(t *testing.T) {
+	calibrator.SetConnected(true)
+
+	var got, err = calibrator.GetMaxBrightness()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got < 0 {
+		t.Errorf("got %v, but expected a physically realistic brightness value", got)
+	}
+
+	if calibrator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", calibrator.Alpaca.ErrorMessage)
+	}
+}

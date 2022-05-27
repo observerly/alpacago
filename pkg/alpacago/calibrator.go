@@ -115,3 +115,13 @@ func (c *CoverCalibrator) GetCoverStatus() (CoverState, error) {
 	status, err := c.Alpaca.GetInt32Response("covercalibrator", c.DeviceNumber, "coverstate")
 	return CoverState(status), err
 }
+
+/*
+	GetMaxBrightness()
+
+	@returns the brightness value that makes the calibrator deliver its maximum illumination.
+	@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/get_covercalibrator__device_number__maxbrightness
+*/
+func (c *CoverCalibrator) GetMaxBrightness() (int32, error) {
+	return c.Alpaca.GetInt32Response("covercalibrator", c.DeviceNumber, "maxbrightness")
+}
