@@ -128,3 +128,21 @@ func TestNewCalibratorCoverGetStatus(t *testing.T) {
 		t.Errorf("got %q", calibrator.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCalibratorCoverGetCoverStatus(t *testing.T) {
+	calibrator.SetConnected(true)
+
+	var got, err = calibrator.GetCoverStatus()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != CoverClosed {
+		t.Errorf("got %v, but expected the calibrator to be ready", got)
+	}
+
+	if calibrator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", calibrator.Alpaca.ErrorMessage)
+	}
+}
