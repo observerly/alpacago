@@ -59,6 +59,24 @@ func TestNewFilterWheelDeviceNumber(t *testing.T) {
 	}
 }
 
+func TestNewFilterWheelIsConnected(t *testing.T) {
+	var got, err = filterwheel.IsConnected()
+
+	var want = true
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %v, wanted %v", got, want)
+	}
+
+	if filterwheel.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", filterwheel.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewFilterWheelSetConnected(t *testing.T) {
 	var err = filterwheel.SetConnected(true)
 
