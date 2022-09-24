@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-var dome = NewDome(65535, true, "alpaca.observerly.com", "", -1, 0)
+var dome = NewDome(65535, false, "100.80.84.116", "", -1, 0)
 
 func TestNewDomeBaseURL(t *testing.T) {
 	dome := NewDome(65535, false, "", "0.0.0.0", 8000, 0)
@@ -20,7 +20,7 @@ func TestNewDomeBaseURL(t *testing.T) {
 
 func TestNewDomeBaseURLForHost(t *testing.T) {
 	var got string = dome.Alpaca.UrlBase
-	var want string = "https://alpaca.observerly.com"
+	var want string = "http://100.80.84.116"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)
@@ -399,36 +399,18 @@ func TestNewDomeAbortSlew(t *testing.T) {
 func TestNewDomeOpenShutter(t *testing.T) {
 	var err = dome.OpenShutter()
 
+	time.Sleep(time.Second * 5)
+
 	var got, _ = dome.GetShutterStatus()
 
-	var want = Open | Opening
+	var want = Open
 
 	if err != nil {
-		t.Errorf("got %q, wanted %q", err, "the dome to be either open, or opening")
+		t.Errorf("got %v, wanted %q", err, "the dome to be either open, or opening")
 	}
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, "the dome to be either open, or opening")
-	}
-
-	if dome.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %d", dome.Alpaca.ErrorMessage, want)
-	}
-}
-
-func TestNewDomeCloseShutter(t *testing.T) {
-	var err = dome.CloseShutter()
-
-	var got, _ = dome.GetShutterStatus()
-
-	var want = Closed | Closing
-
-	if err != nil {
-		t.Errorf("got %q, wanted %q", err, "the dome to be either close, or closing")
-	}
-
-	if got != want {
-		t.Errorf("got %q, wanted %q", err, "the dome to be either close, or closing")
 	}
 
 	if dome.Alpaca.ErrorNumber != 0 {
@@ -443,7 +425,7 @@ func TestNewDomeFindHome(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	time.Sleep(time.Second * 5)
+	time.Sleep(time.Second * 10)
 
 	var got, _ = dome.IsAtHome()
 
@@ -485,6 +467,8 @@ func TestNewDomeSetAsPark(t *testing.T) {
 func TestNewDomeSlewToAltitude(t *testing.T) {
 	var err = dome.SlewToAltitude(45)
 
+	time.Sleep(time.Second * 8)
+
 	var got, _ = dome.GetAltitude()
 
 	var want float64 = 45
@@ -505,7 +489,7 @@ func TestNewDomeSlewToAltitude(t *testing.T) {
 func TestNewDomeSlewToAzimuth(t *testing.T) {
 	var err = dome.SlewToAzimuth(60)
 
-	time.Sleep(time.Second * 6)
+	time.Sleep(time.Second * 8)
 
 	var got, _ = dome.GetAzimuth()
 
@@ -543,5 +527,25 @@ func TestNewDomeSyncoAzimuth(t *testing.T) {
 
 	if dome.Alpaca.ErrorNumber != 0 {
 		t.Errorf("got %q", dome.Alpaca.ErrorMessage)
+	}
+}
+
+func TestNewDomeCloseShutter(t *testing.T) {
+	var err = dome.CloseShutter()
+
+	var got, _ = dome.GetShutterStatus()
+
+	var want = Closed | Closing
+
+	if err != nil {
+		t.Errorf("got %q, wanted %q", err, "the dome to be either close, or closing")
+	}
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", err, "the dome to be either close, or closing")
+	}
+
+	if dome.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %d", dome.Alpaca.ErrorMessage, want)
 	}
 }
