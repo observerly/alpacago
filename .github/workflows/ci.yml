@@ -29,5 +29,10 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
 
+      - name: Tailscale
+        uses: tailscale/github-action@v1
+        with:
+          authkey: ${{ secrets.TAILSCALE_EPHEMERAL_AUTH_KEY }}
+
       - name: Go Test
         run: go test ./... -race -coverprofile=coverage.txt -covermode=atomic
