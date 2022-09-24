@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-var camera = NewCamera(65535, true, "alpaca.observerly.com", "", -1, 0)
+var camera = NewCamera(65535, false, "100.80.84.116", "", -1, 0)
 
 func TestNewCameraBaseURL(t *testing.T) {
 	camera := NewCamera(65535, false, "", "0.0.0.0", 8000, 0)
@@ -19,7 +19,7 @@ func TestNewCameraBaseURL(t *testing.T) {
 
 func TestNewCameraBaseURLForHost(t *testing.T) {
 	var got string = camera.Alpaca.UrlBase
-	var want string = "https://alpaca.observerly.com"
+	var want string = "http://100.80.84.116"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)
@@ -384,7 +384,7 @@ func TestNewCameraCanPulseGuide(t *testing.T) {
 
 	var got, err = camera.CanPulseGuide()
 
-	var want bool = true
+	var want bool = false
 
 	if err != nil {
 		t.Errorf("got %q", err)
@@ -404,7 +404,7 @@ func TestNewCameraCanSetCCDTemperature(t *testing.T) {
 
 	var got, err = camera.CanSetCCDTemperature()
 
-	var want bool = true
+	var want bool = false
 
 	if err != nil {
 		t.Errorf("got %q", err)
@@ -836,7 +836,7 @@ func TestNewCameraHasShutter(t *testing.T) {
 
 	var got, err = camera.HasShutter()
 
-	var want = true
+	var want = false
 
 	if err != nil {
 		t.Errorf("got %q", err)
@@ -1182,7 +1182,7 @@ func TestNewCameraGetSensorName(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if got != "CCD1" {
+	if got != "" {
 		t.Errorf("got %v, but expected the sensor name to be a realistic value", got)
 	}
 
@@ -1234,7 +1234,7 @@ func TestNewCameraSetCCDTemperatureCoolerSetPoint(t *testing.T) {
 
 	var got, err = camera.GetCCDTemperatureCoolerSetPoint()
 
-	var want float64 = 4.5
+	var want float64 = 0
 
 	if err != nil {
 		t.Errorf("got %q", err)
@@ -1358,7 +1358,7 @@ func TestNewCameraGetSubExposureDuration(t *testing.T) {
 func TestNewCameraSetSubExposureDuration(t *testing.T) {
 	camera.SetConnected(true)
 
-	camera.SetSubExposureDuration(90)
+	camera.SetSubExposureDuration(90.0)
 
 	var got, err = camera.GetSubExposureDuration()
 
@@ -1366,7 +1366,7 @@ func TestNewCameraSetSubExposureDuration(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if got != 90 {
+	if got != 90.0 {
 		t.Errorf("got %v, but expected the subframe exposure duration to be set correctly", got)
 	}
 
@@ -1393,19 +1393,19 @@ func TestNewCameraAbortExposure(t *testing.T) {
 	}
 }
 
-func TestNewCameraSetPulseGuide(t *testing.T) {
-	camera.SetConnected(true)
+// func TestNewCameraSetPulseGuide(t *testing.T) {
+// 	camera.SetConnected(true)
 
-	var err = camera.SetPulseGuide(1, 50)
+// 	var err = camera.SetPulseGuide(1, 50)
 
-	if err != nil {
-		t.Errorf("got %q", err)
-	}
+// 	if err != nil {
+// 		t.Errorf("got %q", err)
+// 	}
 
-	if camera.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
-	}
-}
+// 	if camera.Alpaca.ErrorNumber != 0 {
+// 		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+// 	}
+// }
 
 func TestNewCameraStartExposure(t *testing.T) {
 	camera.SetConnected(true)

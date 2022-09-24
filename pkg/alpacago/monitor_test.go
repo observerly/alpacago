@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-var monitor = NewSafetyMonitor(65535, true, "alpaca.observerly.com", "", -1, 0)
+var monitor = NewSafetyMonitor(65535, false, "100.80.84.116", "", -1, 0)
 
 func TestNewSafetyMonitorBaseURL(t *testing.T) {
 	monitor := NewSafetyMonitor(65535, false, "", "0.0.0.0", 8000, 0)
@@ -19,7 +19,7 @@ func TestNewSafetyMonitorBaseURL(t *testing.T) {
 
 func TestNewSafetyMonitorBaseURLForHost(t *testing.T) {
 	var got string = monitor.Alpaca.UrlBase
-	var want string = "https://alpaca.observerly.com"
+	var want string = "http://100.80.84.116"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)
@@ -100,7 +100,7 @@ func TestNewSafetyMonitorSetConnected(t *testing.T) {
 func TestNewSafetyMonitorIsSafe(t *testing.T) {
 	var got, err = monitor.IsSafe()
 
-	var want = true
+	var want = false
 
 	if err != nil {
 		t.Errorf("got %q", err)

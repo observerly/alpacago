@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-var focuser = NewFocuser(65535, true, "alpaca.observerly.com", "", -1, 0)
+var focuser = NewFocuser(65535, false, "100.80.84.116", "", -1, 0)
 
 func TestNewFocuserBaseURL(t *testing.T) {
 	focuser := NewFocuser(65535, false, "", "0.0.0.0", 8000, 0)
@@ -19,7 +19,7 @@ func TestNewFocuserBaseURL(t *testing.T) {
 
 func TestNewFocuserBaseURLForHost(t *testing.T) {
 	var got string = focuser.Alpaca.UrlBase
-	var want string = "https://alpaca.observerly.com"
+	var want string = "http://100.80.84.116"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)
@@ -164,14 +164,14 @@ func TestNewFocuserGetPosition(t *testing.T) {
 func TestNewFocuserGetStepSize(t *testing.T) {
 	var got, err = focuser.GetStepSize()
 
-	var want int32 = 20
+	var want float64 = 20.0
 
 	if err != nil {
 		t.Errorf("got %q", err)
 	}
 
 	if got != want {
-		t.Errorf("got %d, wanted %d", got, want)
+		t.Errorf("got %f, wanted %f", got, want)
 	}
 
 	if focuser.Alpaca.ErrorNumber != 0 {

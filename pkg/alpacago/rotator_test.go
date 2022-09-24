@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-var rotator = NewRotator(65535, true, "alpaca.observerly.com", "", -1, 0)
+var rotator = NewRotator(65535, false, "100.80.84.116", "", -1, 0)
 
 func TestNewRotatorBaseURL(t *testing.T) {
 	rotator := NewRotator(65535, false, "", "0.0.0.0", 8000, 0)
@@ -20,7 +20,7 @@ func TestNewRotatorBaseURL(t *testing.T) {
 
 func TestNewRotatorBaseURLForHost(t *testing.T) {
 	var got string = rotator.Alpaca.UrlBase
-	var want string = "https://alpaca.observerly.com"
+	var want string = "http://100.80.84.116"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)

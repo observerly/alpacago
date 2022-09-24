@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-var client = NewAlpacaAPI(65535, true, "alpaca.observerly.com", "", -1)
+var client = NewAlpacaAPI(65535, false, "100.80.84.116", "", -1)
 
 func TestNewAlpacaAPIBaseURL(t *testing.T) {
 	client := NewAlpacaAPI(65535, false, "", "0.0.0.0", 8000)
@@ -20,7 +20,7 @@ func TestNewAlpacaAPIBaseURL(t *testing.T) {
 
 func TestNewAlpacaAPIBaseURLForHost(t *testing.T) {
 	var got string = client.UrlBase
-	var want string = "https://alpaca.observerly.com"
+	var want string = "http://100.80.84.116"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)
@@ -170,7 +170,7 @@ func TestNewAlpacaAPIInt32Response(t *testing.T) {
 func TestNewAlpacaAPIInt32ListResponse(t *testing.T) {
 	got, err := client.GetUInt32ListResponse("filterwheel", 0, "focusoffsets")
 
-	want := [6]uint32{1458, 2070, 1413, 9664, 3593, 826}
+	want := [6]uint32{2295, 9177, 3053, 5430, 2965, 4952}
 
 	if err != nil {
 		t.Errorf("got %q, wanted %d", err, want)
@@ -238,7 +238,7 @@ func TestNewAlpacaAPIDescription(t *testing.T) {
 func TestNewAlpacaAPIDriverInfo(t *testing.T) {
 	got, err := client.GetDriverInfo("telescope", 0)
 
-	var want string = "TelescopeSimulator, Version=0.1.3.0, Culture=neutral, PublicKeyToken=null"
+	var want string = "ASCOM.Simulator.Telescope, Version=6.6.0.0, Culture=neutral, PublicKeyToken=565de7938946fba7"
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
@@ -256,7 +256,7 @@ func TestNewAlpacaAPIDriverInfo(t *testing.T) {
 func TestNewAlpacaAPIDriverVersion(t *testing.T) {
 	got, err := client.GetDriverVersion("telescope", 0)
 
-	var want string = "0.1"
+	var want string = "6.6"
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
@@ -292,7 +292,7 @@ func TestNewAlpacaAPIInterfaceVersion(t *testing.T) {
 func TestNewAlpacaAPIName(t *testing.T) {
 	got, err := client.GetName("telescope", 0)
 
-	var want string = "Alpaca Telescope Sim"
+	var want string = "Simulator"
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)

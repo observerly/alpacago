@@ -10,7 +10,7 @@ var latitude float64 = 19.820611
 
 var longitude float64 = -155.468094
 
-var telescope = NewTelescope(65535, true, "alpaca.observerly.com", "", -1, 0, 1)
+var telescope = NewTelescope(65535, false, "100.80.84.116", "", -1, 0, 1)
 
 func TestNewTelescopeBaseURL(t *testing.T) {
 	telescope := NewTelescope(65535, false, "", "0.0.0.0", 8000, 0, 1)
@@ -25,7 +25,7 @@ func TestNewTelescopeBaseURL(t *testing.T) {
 
 func TestNewTelescopeBaseURLForHost(t *testing.T) {
 	var got string = telescope.Alpaca.UrlBase
-	var want string = "https://alpaca.observerly.com"
+	var want string = "http://100.80.84.116"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)

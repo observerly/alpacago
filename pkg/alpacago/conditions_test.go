@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-var conditions = NewObservingConditions(65535, true, "alpaca.observerly.com", "", -1, 0)
+var conditions = NewObservingConditions(65535, false, "100.80.84.116", "", -1, 0)
 
 func TestNewObservingConditionsBaseURL(t *testing.T) {
 	conditions := NewObservingConditions(65535, false, "", "0.0.0.0", 8000, 0)
@@ -20,7 +20,7 @@ func TestNewObservingConditionsBaseURL(t *testing.T) {
 
 func TestNewObservingConditionsBaseURLForHost(t *testing.T) {
 	var got string = conditions.Alpaca.UrlBase
-	var want string = "https://alpaca.observerly.com"
+	var want string = "http://100.80.84.116"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)
@@ -125,18 +125,18 @@ func TestNewObservingConditionsGetAveragePeriod(t *testing.T) {
 
 	var got, err = conditions.GetAveragePeriod()
 
-	var want int32 = 0
+	var want float64 = 0.0
 
 	if err != nil {
-		t.Errorf("got %q, wanted %q", err, want)
+		t.Errorf("got %q, wanted %f", err, want)
 	}
 
 	if got != want {
-		t.Errorf("got %q, wanted %q", got, want)
+		t.Errorf("got %f, wanted %f", got, want)
 	}
 
 	if conditions.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %d", conditions.Alpaca.ErrorMessage, want)
+		t.Errorf("got %q, wanted %f", conditions.Alpaca.ErrorMessage, want)
 	}
 }
 
@@ -202,7 +202,7 @@ func TestNewObservingConditionsGetPressure(t *testing.T) {
 	// The average pressure at mean sea-level (MSL) in the International
 	// Standard Atmosphere (ISA) is 1013.25 hPa, or 1 atmosphere (atm),
 	// or 29.92 inches of mercury.
-	var want = 1013.25
+	var want = 1020.500
 
 	if err != nil {
 		t.Errorf("got %q", err)
