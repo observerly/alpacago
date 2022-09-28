@@ -1,6 +1,9 @@
 package alpacago
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 type Dome struct {
 	Alpaca       *ASCOMAlpacaAPIClient
@@ -16,6 +19,19 @@ const (
 	Closing
 	Error
 )
+
+func (s ShutterStatus) String() string {
+	name := []string{"open", "closed", "opening", "closing", "error"}
+
+	i := uint8(s)
+
+	switch {
+	case i <= uint8(Error):
+		return name[i]
+	default:
+		return strconv.Itoa(int(i))
+	}
+}
 
 func NewDome(clientId uint32, secure bool, domain string, ip string, port int32, deviceNumber uint) *Dome {
 	alpaca := NewAlpacaAPI(clientId, secure, domain, ip, port)

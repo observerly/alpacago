@@ -326,6 +326,24 @@ func TestNewDomeShutterStatus(t *testing.T) {
 	}
 }
 
+func TestNewDomeShutterStatusToStringRepresentation(t *testing.T) {
+	var got, err = dome.GetShutterStatus()
+
+	var status = ShutterStatus.String(got)
+
+	if status == "" {
+		t.Errorf("got %q, wanted %q", status, "the shutter status to represnet an iota in range 0 to 2")
+	}
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if dome.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", dome.Alpaca.ErrorMessage, "the shutter status to represnet an iota in range 0 to 2")
+	}
+}
+
 func TestNewDomeIsSlaved(t *testing.T) {
 	dome.SetSlaved(false)
 
