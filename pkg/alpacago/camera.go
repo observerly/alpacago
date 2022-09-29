@@ -1,10 +1,11 @@
 package alpacago
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 type OperationalState int32
-
-type SensorType int32
 
 const (
 	CameraIdle OperationalState = iota
@@ -14,6 +15,21 @@ const (
 	CameraDownload
 	CameraError
 )
+
+func (s OperationalState) String() string {
+	name := []string{"idle", "waiting", "exposing", "reading", "download", "error"}
+
+	i := uint8(s)
+
+	switch {
+	case i <= uint8(Error):
+		return name[i]
+	default:
+		return strconv.Itoa(int(i))
+	}
+}
+
+type SensorType int32
 
 const (
 	Monochrome SensorType = iota
