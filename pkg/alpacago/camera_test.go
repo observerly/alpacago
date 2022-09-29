@@ -259,6 +259,26 @@ func TestNewCameraGetOperationalState(t *testing.T) {
 	}
 }
 
+func TestNewCameraGetOperationalStateToStringRepresentation(t *testing.T) {
+	camera.SetConnected(true)
+
+	var got, err = camera.GetOperationalState()
+
+	var state = OperationalState.String(got)
+
+	if state == "" {
+		t.Errorf("got %q, wanted %q", state, "the operational status to represnet an iota in range 0 to 5")
+	}
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewCameraGetCCDSizeX(t *testing.T) {
 	camera.SetConnected(true)
 
