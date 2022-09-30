@@ -929,6 +929,24 @@ func TestNewCameraIsPulseGuiding(t *testing.T) {
 	}
 }
 
+func TestNewCameraGetLastExposureStartTime(t *testing.T) {
+	camera.SetConnected(true)
+
+	var got, err = camera.GetLastExposureStartTime()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != nil && got.Unix() < 1621033200 {
+		t.Errorf("got %v, but expected the last exposure start time to be a realistic value", got)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewCameraGetLastExposureDuration(t *testing.T) {
 	camera.SetConnected(true)
 
@@ -938,7 +956,7 @@ func TestNewCameraGetLastExposureDuration(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if got < 0 && got > 1 {
+	if got < 0 && got > 3600 {
 		t.Errorf("got %v, but expected exposure duration value to be a realistic value", got)
 	}
 
