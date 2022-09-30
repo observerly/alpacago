@@ -3,6 +3,7 @@ package alpacago
 import (
 	"fmt"
 	"strconv"
+	"time"
 )
 
 type OperationalState int32
@@ -527,6 +528,32 @@ func (c *Camera) IsImageReady() (bool, error) {
 */
 func (c *Camera) IsPulseGuiding() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "ispulseguiding")
+}
+
+/*
+	GetLastExposureStartTime()
+
+	@returns the actual exposure start in the FITS-standard CCYY-MM-DDThh:mm:ss[.sss...] format.
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__lastexposurestarttime
+*/
+func (c *Camera) GetLastExposureStartTime() (*time.Time, error) {
+	starttime, err := c.Alpaca.GetStringResponse("camera", c.DeviceNumber, "lastexposurestarttime")
+
+	if err != nil {
+		return nil, err
+	}
+
+	if starttime == "" {
+		return nil, nil
+	}
+
+	t, err := time.Parse("2006-01-02T15:04:05", starttime)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &t, nil
 }
 
 /*
