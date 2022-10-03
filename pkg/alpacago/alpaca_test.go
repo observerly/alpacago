@@ -205,6 +205,18 @@ func TestNewAlpacaAPIInt32ListResponse(t *testing.T) {
 	}
 }
 
+func TestNewAlpacaAPIInt32Rank2ArrayResponse(t *testing.T) {
+	_, rank, err := client.GetUInt32Rank2ArrayResponse("camera", 0, "imagearray")
+
+	if rank != 2 {
+		t.Errorf("got %v, but expected the rank to be 2", rank)
+	}
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+}
+
 func TestNewAlpacaAPIConnected(t *testing.T) {
 	_, err := client.IsConnected("telescope", 0)
 

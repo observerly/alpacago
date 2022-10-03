@@ -283,6 +283,42 @@ func (a *ASCOMAlpacaAPIClient) GetUInt32ListResponse(deviceType string, deviceNu
 	return result.Value, nil
 }
 
+type uint32Rank2ArrayResponse struct {
+	Value               [][]uint32 `json:"Value"`
+	Rank                uint32     `json:"Rank"`
+	ClientTransactionID int32      `json:"ClientTransactionID"`
+	ServerTransactionID int32      `json:"ServerTransactionID"`
+	ErrorNumber         int32      `json:"ErrorNumber"`
+	ErrorMessage        string     `json:"ErrorMessage"`
+}
+
+/*
+	GetUInt32RankArrayResponse()
+
+	Global public method to work with calls returning a uint32Rank2ArrayResponse
+*/
+func (a *ASCOMAlpacaAPIClient) GetUInt32Rank2ArrayResponse(deviceType string, deviceNumber uint, method string) ([][]uint32, uint32, error) {
+	// Build the ASCOM endpoint:
+	url := a.getEndpoint(deviceType, deviceNumber, method)
+
+	resp, err := a.Client.R().SetResult(&uint32Rank2ArrayResponse{}).SetQueryString(a.getQueryString()).SetHeader("Accept", "application/json").Get(url)
+
+	if err != nil {
+		return [][]uint32{}, 0, err
+	}
+
+	// If the response object has a REST error:
+	if resp.IsError() {
+		a.ErrorNumber = resp.StatusCode()
+		a.ErrorMessage = resp.String()
+	}
+
+	// Return the result:
+	result := (resp.Result().(*uint32Rank2ArrayResponse))
+
+	return result.Value, result.Rank, nil
+}
+
 type putResponse struct {
 	ClientTransactionID uint32 `json:"ClientTransactionID"`
 	ServerTransactionID uint32 `json:"ServerTransactionID"`
