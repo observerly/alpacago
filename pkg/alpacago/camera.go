@@ -357,6 +357,27 @@ func (c *Camera) GetGainInElectronsPerADUnit() (float64, error) {
 }
 
 /*
+	GetExposure()
+
+	@returns Returns an array of 32bit integers containing the pixel values from the last exposure. This
+	call can return either a 2 dimension (monochrome images) or 3 dimension (colour or multi-plane images)
+	array of size NumX * NumY or NumX * NumY * NumPlanes. Where applicable, the size of NumPlanes has
+	to be determined by inspection of the returned Array.
+
+	Since 32bit integers are always returned by this call, the returned JSON Type value (0 = Unknown, 1 = short(16bit),
+	2 = int(32bit), 3 = Double) is always 2. The number of planes is given in the returned Rank value.
+
+	When de-serialising to an object it is essential to know the array Rank beforehand so that the correct data
+	class can be used. This can be achieved through a regular expression or by direct parsing of the returned
+	JSON string to extract the Type and Rank values before de-serialising.
+
+	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__imagearray
+*/
+func (c *Camera) GetExposure() ([][]uint32, uint32, error) {
+	return c.Alpaca.GetUInt32Rank2ArrayResponse("camera", c.DeviceNumber, "imagearray")
+}
+
+/*
 	GetExposureMax()
 
 	@returns the maximum exposure time supported by StartExposure.
