@@ -1501,3 +1501,33 @@ func TestNewCameraStopExposure(t *testing.T) {
 		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
 	}
 }
+
+func TestNewCameraGetExposure(t *testing.T) {
+	camera.SetConnected(true)
+
+	var got, rank, err = camera.GetExposure()
+
+	ysize := len(got[0])
+
+	xsize := len(got)
+
+	if xsize != 800 {
+		t.Errorf("got %v, but expected the CCD width to be 800 pixels", xsize)
+	}
+
+	if ysize != 600 {
+		t.Errorf("got %v, but expected the CCD height to be 600 pixels", ysize)
+	}
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if rank > 3 {
+		t.Errorf("got %v, but expected the rank of the array to be a realiostic value", rank)
+	}
+
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", camera.Alpaca.ErrorMessage)
+	}
+}
