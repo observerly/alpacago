@@ -41,6 +41,19 @@ const (
 	LRGBTRUESENSEBayerEncoding
 )
 
+func (s SensorType) String() string {
+	name := []string{"Monochrome", "Colour", "RGGB", "CMYG", "CMYG2", "LRGB"}
+
+	i := uint8(s)
+
+	switch {
+	case i <= uint8(Monochrome):
+		return name[i]
+	default:
+		return strconv.Itoa(int(i))
+	}
+}
+
 type Camera struct {
 	Alpaca       *ASCOMAlpacaAPIClient
 	DeviceNumber uint
