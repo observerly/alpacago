@@ -6,9 +6,9 @@ import (
 	"time"
 )
 
-var latitude float64 = 19.820611
+var latitude float64 = 19.820667
 
-var longitude float64 = -155.468094
+var longitude float64 = -155.468167
 
 var telescope = NewTelescope(65535, false, "100.80.84.116", "", -1, 0, 1)
 
@@ -870,7 +870,7 @@ func TestNewTelescopeSiteElevationPutUnrealisticallyLow(t *testing.T) {
 func TestNewTelescopeSiteLatitude(t *testing.T) {
 	var got, err = telescope.GetSiteLatitude()
 
-	var want float64 = 19.820611
+	var want float64 = 19.820667
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
@@ -912,7 +912,7 @@ func TestNewTelescopeSiteLatitudePut(t *testing.T) {
 func TestNewTelescopeSiteLongitude(t *testing.T) {
 	var got, err = telescope.GetSiteLongitude()
 
-	var want float64 = -155.468094
+	var want float64 = -155.468167
 
 	if err != nil {
 		t.Errorf("got %q, wanted %f", err, want)
