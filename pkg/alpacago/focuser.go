@@ -19,6 +19,16 @@ func NewFocuser(clientId uint32, secure bool, domain string, ip string, port int
 }
 
 /*
+	IsConnected() common method to all ASCOM Alpaca compliant devices
+
+	@returns the connected state of the device
+	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__connected
+*/
+func (f *Focuser) IsConnected() (bool, error) {
+	return f.Alpaca.GetBooleanResponse("focuser", f.DeviceNumber, "connected")
+}
+
+/*
 	SetConnected() common method to all ASCOM Alpaca compliant devices
 
 	@param connected bool (set True to connect to the device hardware, set false to disconnect from the device hardware)

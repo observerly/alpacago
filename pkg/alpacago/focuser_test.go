@@ -59,6 +59,24 @@ func TestNewFocuserDeviceNumber(t *testing.T) {
 	}
 }
 
+func TestNewFocuserIsConnected(t *testing.T) {
+	var got, err = focuser.IsConnected()
+
+	var want = true
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %v, wanted %v", got, want)
+	}
+
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewFocuserSetConnected(t *testing.T) {
 	var err = focuser.SetConnected(true)
 
