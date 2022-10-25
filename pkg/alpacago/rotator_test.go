@@ -60,6 +60,24 @@ func TestNewRotatorDeviceNumber(t *testing.T) {
 	}
 }
 
+func TestNewRotatorGetDescription(t *testing.T) {
+	var got, err = rotator.GetDescription()
+
+	var want = "ASCOM Rotator Driver for RotatorSimulator"
+
+	if err != nil {
+		t.Errorf("got %q, wanted %q", err, want)
+	}
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", telescope.Alpaca.ErrorMessage, want)
+	}
+}
+
 func TestNewRotatorSetConnected(t *testing.T) {
 	var err = rotator.SetConnected(true)
 
