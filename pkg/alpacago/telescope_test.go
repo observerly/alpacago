@@ -76,6 +76,24 @@ func TestNewTelescopeTrackingMode(t *testing.T) {
 	}
 }
 
+func TestNewTelescopeGetDescription(t *testing.T) {
+	var got, err = telescope.GetDescription()
+
+	var want = "Software Telescope Simulator for ASCOM"
+
+	if err != nil {
+		t.Errorf("got %q, wanted %q", err, want)
+	}
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if telescope.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", telescope.Alpaca.ErrorMessage, want)
+	}
+}
+
 func TestNewTelescopeIsConnected(t *testing.T) {
 	var got, err = telescope.IsConnected()
 

@@ -73,6 +73,16 @@ func NewTelescope(clientId uint32, secure bool, domain string, ip string, port i
 }
 
 /*
+	GetDescription() common method to all ASCOM Alpaca compliant devices
+
+	@returns the description of the device
+	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__description
+*/
+func (t *Telescope) GetDescription() (string, error) {
+	return t.Alpaca.GetDescription("telescope", t.DeviceNumber)
+}
+
+/*
 	IsConnected() common method to all ASCOM Alpaca compliant devices
 
 	@returns the connected state of the device
