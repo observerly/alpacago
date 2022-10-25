@@ -59,6 +59,24 @@ func TestNewFilterWheelDeviceNumber(t *testing.T) {
 	}
 }
 
+func TestNewFilterWheelGetDescription(t *testing.T) {
+	var got, err = filterwheel.GetDescription()
+
+	var want string = "Simulator description"
+
+	if err != nil {
+		t.Errorf("got %q, wanted %q", err, want)
+	}
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if filterwheel.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", filterwheel.Alpaca.ErrorNumber, 0)
+	}
+}
+
 func TestNewFilterWheelIsConnected(t *testing.T) {
 	var got, err = filterwheel.IsConnected()
 
