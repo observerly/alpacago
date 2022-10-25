@@ -100,7 +100,7 @@ func TestNewSafetyMonitorSetConnected(t *testing.T) {
 func TestNewSafetyMonitorIsSafe(t *testing.T) {
 	var got, err = monitor.IsSafe()
 
-	var want = false
+	var want = true
 
 	if err != nil {
 		t.Errorf("got %q", err)
