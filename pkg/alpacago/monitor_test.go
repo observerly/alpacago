@@ -59,6 +59,24 @@ func TestNewSafetyMonitorDeviceNumber(t *testing.T) {
 	}
 }
 
+func TestNewSafetyMonitorGetDescription(t *testing.T) {
+	var got, err = monitor.GetDescription()
+
+	var want = "ASCOM SafetyMonitor Simulator Driver"
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if monitor.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", monitor.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewSafetyMonitorIsConnected(t *testing.T) {
 	var got, err = monitor.IsConnected()
 
