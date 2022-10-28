@@ -59,6 +59,24 @@ func TestNewFocuserDeviceNumber(t *testing.T) {
 	}
 }
 
+func TestNewFocuerGetDescription(t *testing.T) {
+	var got, err = focuser.GetDescription()
+
+	var want = "ASCOM Focuser Simulator Driver"
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %q, wanted %q", got, want)
+	}
+
+	if focuser.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", focuser.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewFocuserIsConnected(t *testing.T) {
 	var got, err = focuser.IsConnected()
 
