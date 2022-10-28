@@ -78,6 +78,24 @@ func TestNewRotatorGetDescription(t *testing.T) {
 	}
 }
 
+func TestNewRotatorIsConnected(t *testing.T) {
+	var got, err = rotator.IsConnected()
+
+	var want = true
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if got != want {
+		t.Errorf("got %v, wanted %v", got, want)
+	}
+
+	if rotator.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q", rotator.Alpaca.ErrorMessage)
+	}
+}
+
 func TestNewRotatorSetConnected(t *testing.T) {
 	var err = rotator.SetConnected(true)
 
