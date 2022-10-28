@@ -29,6 +29,16 @@ func (r *Rotator) GetDescription() (string, error) {
 }
 
 /*
+	IsConnected() common method to all ASCOM Alpaca compliant devices
+
+	@returns the connected state of the device
+	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__connected
+*/
+func (r *Rotator) IsConnected() (bool, error) {
+	return r.Alpaca.GetBooleanResponse("rotator", r.DeviceNumber, "connected")
+}
+
+/*
 	SetConnected() common method to all ASCOM Alpaca compliant devices
 
 	@param connected bool (set True to connect to the device hardware, set false to disconnect from the device hardware)
