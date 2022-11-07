@@ -1265,6 +1265,32 @@ func TestNewCameraGetSensorTypeString(t *testing.T) {
 	}
 }
 
+func TestNewCameraGetSensorTypeStringIota(t *testing.T) {
+	if SensorType.String(0) != "Monochrome" {
+		t.Errorf("Expected the sensor type to be default to Monochrome")
+	}
+
+	if SensorType.String(1) != "Color" {
+		t.Errorf("Expected the sensor type to be default to Color")
+	}
+
+	if SensorType.String(2) != "RGGB" {
+		t.Errorf("Expected the sensor type to be default to RGGB")
+	}
+
+	if SensorType.String(3) != "CMYG" {
+		t.Errorf("Expected the sensor type to be default to CMYG")
+	}
+
+	if SensorType.String(4) != "CMYG2" {
+		t.Errorf("Expected the sensor type to be default to CMYG2")
+	}
+
+	if SensorType.String(5) != "LRGB" {
+		t.Errorf("Expected the sensor type to be default to LRGB")
+	}
+}
+
 func TestNewCameraGetCCDTemperatureCoolerSetPoint(t *testing.T) {
 	camera.SetConnected(true)
 
