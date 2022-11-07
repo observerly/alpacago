@@ -42,12 +42,12 @@ const (
 )
 
 func (s SensorType) String() string {
-	name := []string{"Monochrome", "Colour", "RGGB", "CMYG", "CMYG2", "LRGB"}
+	name := []string{"Monochrome", "Color", "RGGB", "CMYG", "CMYG2", "LRGB"}
 
 	i := uint8(s)
 
 	switch {
-	case i <= uint8(Monochrome):
+	case i <= uint8(LRGBTRUESENSEBayerEncoding):
 		return name[i]
 	default:
 		return strconv.Itoa(int(i))
