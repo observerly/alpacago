@@ -284,7 +284,7 @@ func TestNewCameraGetCCDSizeX(t *testing.T) {
 
 	var got, err = camera.GetCCDSizeX()
 
-	var want int32 = 800
+	var want int32 = 1463
 
 	if err != nil {
 		t.Errorf("got %q", err)
@@ -304,7 +304,7 @@ func TestNewCameraGetCCDSizeY(t *testing.T) {
 
 	var got, err = camera.GetCCDSizeY()
 
-	var want int32 = 600
+	var want int32 = 1168
 
 	if err != nil {
 		t.Errorf("got %q", err)
