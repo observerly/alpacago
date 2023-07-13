@@ -73,31 +73,31 @@ func NewTelescope(clientId uint32, secure bool, domain string, ip string, port i
 }
 
 /*
-	GetDescription() common method to all ASCOM Alpaca compliant devices
+GetDescription() common method to all ASCOM Alpaca compliant devices
 
-	@returns the description of the device
-	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__description
+@returns the description of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__description
 */
 func (t *Telescope) GetDescription() (string, error) {
 	return t.Alpaca.GetDescription("telescope", t.DeviceNumber)
 }
 
 /*
-	IsConnected() common method to all ASCOM Alpaca compliant devices
+IsConnected() common method to all ASCOM Alpaca compliant devices
 
-	@returns the connected state of the device
-	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__connected
+@returns the connected state of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__connected
 */
 func (t *Telescope) IsConnected() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "connected")
 }
 
 /*
-	SetConnected() common method to all ASCOM Alpaca compliant devices
+SetConnected() common method to all ASCOM Alpaca compliant devices
 
-	@param connected bool (set True to connect to the device hardware, set false to disconnect from the device hardware)
-	@returns the connected state of the device
-	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/put__device_type___device_number__connected
+@param connected bool (set True to connect to the device hardware, set false to disconnect from the device hardware)
+@returns the connected state of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/put__device_type___device_number__connected
 */
 func (t *Telescope) SetConnected(connected bool) error {
 	t.Alpaca.TransactionId++
@@ -113,10 +113,10 @@ func (t *Telescope) SetConnected(connected bool) error {
 }
 
 /*
-	SetAbortSlew()
+SetAbortSlew()
 
-	@returns an error or nil, if nil immediately Stops a slew in progress.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__abortslew
+@returns an error or nil, if nil immediately Stops a slew in progress.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__abortslew
 */
 func (t *Telescope) SetAbortSlew() error {
 	t.Alpaca.TransactionId++
@@ -130,12 +130,12 @@ func (t *Telescope) SetAbortSlew() error {
 }
 
 /*
-	GetAlignmentMode()
+GetAlignmentMode()
 
-	@returns the alignment mode of the mount (Alt/Az, Polar, German Polar).
-	The alignment mode is specified as an integer value from the
-	AlignmentModes Enum.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__alignmentmode
+@returns the alignment mode of the mount (Alt/Az, Polar, German Polar).
+The alignment mode is specified as an integer value from the
+AlignmentModes Enum.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__alignmentmode
 */
 func (t *Telescope) GetAlignmentMode() (AlignmentMode, error) {
 	mode, err := t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "alignmentmode")
@@ -143,40 +143,40 @@ func (t *Telescope) GetAlignmentMode() (AlignmentMode, error) {
 }
 
 /*
-	GetAltitude()
+GetAltitude()
 
-	@returns the altitude above the local horizon of the mount's current position (degrees, positive up)
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__altitude
+@returns the altitude above the local horizon of the mount's current position (degrees, positive up)
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__altitude
 */
 func (t *Telescope) GetAltitude() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "altitude")
 }
 
 /*
-	GetApertureArea()
+GetApertureArea()
 
-	@returns the area of the telescope's aperture, taking into account any obstructions (square meters)
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__aperturearea
+@returns the area of the telescope's aperture, taking into account any obstructions (square meters)
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__aperturearea
 */
 func (t *Telescope) GetApertureArea() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "aperturearea")
 }
 
 /*
-	GetApertureDiameter()
+GetApertureDiameter()
 
-	@returns the telescope's effective aperture diameter (meters)
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__aperturediameter
+@returns the telescope's effective aperture diameter (meters)
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__aperturediameter
 */
 func (t *Telescope) GetApertureDiameter() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "aperturearea")
 }
 
 /*
-	GetAxisRates()
+GetAxisRates()
 
-	@returns the rates at which the telescope may be moved about the specified axis by the MoveAxis(TelescopeAxes, Double) method.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__axisrates
+@returns the rates at which the telescope may be moved about the specified axis by the MoveAxis(TelescopeAxes, Double) method.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__axisrates
 */
 func (t *Telescope) GetAxisRates(axis AxisType) (map[string]float64, error) {
 	url := t.Alpaca.getEndpoint("telescope", t.DeviceNumber, "axisrates")
@@ -198,50 +198,50 @@ func (t *Telescope) GetAxisRates(axis AxisType) (map[string]float64, error) {
 }
 
 /*
-	IsAtHome()
+IsAtHome()
 
-	@returns true if the mount is stopped in the Home position. This property will alwayts be false if the telescope does not support homing.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__athome
+@returns true if the mount is stopped in the Home position. This property will alwayts be false if the telescope does not support homing.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__athome
 */
 func (t *Telescope) IsAtHome() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "athome")
 }
 
 /*
-	IsAtPark()
+IsAtPark()
 
-	@returns true if the telescope has been put into the parked state by the seee Park() method.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__atpark
+@returns true if the telescope has been put into the parked state by the seee Park() method.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__atpark
 */
 func (t *Telescope) IsAtPark() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "atpark")
 }
 
 /*
-	GetAzimuth()
+GetAzimuth()
 
-	@returns the azimuth at the local horizon of the mount's current position (degrees, North-referenced, positive East/clockwise).
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__azimuth
+@returns the azimuth at the local horizon of the mount's current position (degrees, North-referenced, positive East/clockwise).
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__azimuth
 */
 func (t *Telescope) GetAzimuth() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "azimuth")
 }
 
 /*
-	CanFindHome()
+CanFindHome()
 
-	@returns true if this telescope is capable of programmed finding its home position (FindHome() method).
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canfindhome
+@returns true if this telescope is capable of programmed finding its home position (FindHome() method).
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canfindhome
 */
 func (t *Telescope) CanFindHome() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canfindhome")
 }
 
 /*
-	CanMoveAxis()
+CanMoveAxis()
 
-	@returns true if this telescope can move the requested axis.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canmoveaxis
+@returns true if this telescope can move the requested axis.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canmoveaxis
 */
 func (t *Telescope) CanMoveAxis(axis AxisType) (bool, error) {
 	url := t.Alpaca.getEndpoint("telescope", t.DeviceNumber, "canmoveaxis")
@@ -268,160 +268,160 @@ func (t *Telescope) CanMoveAxis(axis AxisType) (bool, error) {
 }
 
 /*
-	CanPark()
+CanPark()
 
-	@returns true if this telescope is capable of programmed parking (Park() method)
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canpark
+@returns true if this telescope is capable of programmed parking (Park() method)
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canpark
 */
 func (t *Telescope) CanPark() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canpark")
 }
 
 /*
-	CanPulseGuide()
+CanPulseGuide()
 
-	@returns true if this telescope is capable of software-pulsed guiding (via the PulseGuide(GuideDirections, Int32) method)
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canpulseguide
+@returns true if this telescope is capable of software-pulsed guiding (via the PulseGuide(GuideDirections, Int32) method)
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canpulseguide
 */
 func (t *Telescope) CanPulseGuide() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canpulseguide")
 }
 
 /*
-	CanSetDeclinationRate()
+CanSetDeclinationRate()
 
-	@returns true if the DeclinationRate property can be changed to provide offset tracking in the declination axis.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetdeclinationrate
+@returns true if the DeclinationRate property can be changed to provide offset tracking in the declination axis.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetdeclinationrate
 */
 func (t *Telescope) CanSetDeclinationRate() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetdeclinationrate")
 }
 
 /*
-	CanSetGuideRates()
+CanSetGuideRates()
 
-	@returns true if the guide rate properties used for PulseGuide(GuideDirections, Int32) can ba adjusted.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetguiderates
+@returns true if the guide rate properties used for PulseGuide(GuideDirections, Int32) can ba adjusted.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetguiderates
 */
 func (t *Telescope) CanSetGuideRates() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetguiderates")
 }
 
 /*
-	CanSetPark()
+CanSetPark()
 
-	@returns true if this telescope is capable of programmed parking (Park() method)
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetpark
+@returns true if this telescope is capable of programmed parking (Park() method)
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetpark
 */
 func (t *Telescope) CanSetPark() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetpark")
 }
 
 /*
-	CanSetPierSide()
+CanSetPierSide()
 
-	@returns true if the SideOfPier property can be set, meaning that the mount can be forced to flip.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetpierside
+@returns true if the SideOfPier property can be set, meaning that the mount can be forced to flip.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetpierside
 */
 func (t *Telescope) CanSetPierSide() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetpierside")
 }
 
 /*
-	CanSetRightAscensionRate()
+CanSetRightAscensionRate()
 
-	@returns true if the RightAscensionRate property can be changed to provide offset tracking in the right ascension axis.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetrightascensionrate
+@returns true if the RightAscensionRate property can be changed to provide offset tracking in the right ascension axis.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansetrightascensionrate
 */
 func (t *Telescope) CanSetRightAscensionRate() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansetrightascensionrate")
 }
 
 /*
-	CanSetTracking()
+CanSetTracking()
 
-	@returns true if the Tracking property can be changed, turning telescope sidereal tracking on and off.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansettracking
+@returns true if the Tracking property can be changed, turning telescope sidereal tracking on and off.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansettracking
 */
 func (t *Telescope) CanSetTracking() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansettracking")
 }
 
 /*
-	CanSlew()
+CanSlew()
 
-	@returns true if this telescope is capable of programmed slewing (synchronous or asynchronous) to equatorial coordinates
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canslew
+@returns true if this telescope is capable of programmed slewing (synchronous or asynchronous) to equatorial coordinates
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canslew
 */
 func (t *Telescope) CanSlew() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canslew")
 }
 
 /*
-	CanSlewAltAz()
+CanSlewAltAz()
 
-	@returns true if this telescope is capable of programmed slewing (synchronous or asynchronous) to local horizontal coordinates
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canslewaltaz
+@returns true if this telescope is capable of programmed slewing (synchronous or asynchronous) to local horizontal coordinates
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canslewaltaz
 */
 func (t *Telescope) CanSlewAltAz() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canslewaltaz")
 }
 
 /*
-	CanSlewAltAzAsync()
+CanSlewAltAzAsync()
 
-	@returns true if this telescope is capable of programmed asynchronous slewing to local horizontal coordinates
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canslewaltazasync
+@returns true if this telescope is capable of programmed asynchronous slewing to local horizontal coordinates
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canslewaltazasync
 */
 func (t *Telescope) CanSlewAltAzAsync() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canslewaltazasync")
 }
 
 /*
-	CanSlewAsync()
+CanSlewAsync()
 
-	@returns true if this telescope is capable of programmed asynchronous slewing to equatorial coordinates
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canslewasync
+@returns true if this telescope is capable of programmed asynchronous slewing to equatorial coordinates
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canslewasync
 */
 func (t *Telescope) CanSlewAsync() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canslewasync")
 }
 
 /*
-	CanSync()
+CanSync()
 
-	@returns true if this telescope is capable of programmed synching to equatorial coordinates
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansync
+@returns true if this telescope is capable of programmed synching to equatorial coordinates
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansync
 */
 func (t *Telescope) CanSync() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansync")
 }
 
 /*
-	CanSyncAltAz()
+CanSyncAltAz()
 
-	@returns true if this telescope is capable of programmed synching to local horizontal coordinates
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansyncaltaz
+@returns true if this telescope is capable of programmed synching to local horizontal coordinates
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__cansyncaltaz
 */
 func (t *Telescope) CanSyncAltAz() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "cansyncaltaz")
 }
 
 /*
-	CanUnPark()
+CanUnPark()
 
-	@returns true if this telescope is capable of programmed unparking (UnPark() method)
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canunpark
+@returns true if this telescope is capable of programmed unparking (UnPark() method)
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__canunpark
 */
 func (t *Telescope) CanUnPark() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "canunpark")
 }
 
 /*
-	SetUnPark()
+SetUnPark()
 
-	@returns an error or nil, if nil it takes telescope out of the Parked state.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__unpark
+@returns an error or nil, if nil it takes telescope out of the Parked state.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__unpark
 */
 func (t *Telescope) SetUnPark() error {
 	t.Alpaca.TransactionId++
@@ -435,32 +435,32 @@ func (t *Telescope) SetUnPark() error {
 }
 
 /*
-	GetDeclination()
+GetDeclination()
 
-	@returns the declination (degrees) of the mount's current equatorial coordinates, in the coordinate
-	system given by the EquatorialSystem property. Reading the property will raise an error if the value
-	is unavailable.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__declination
+@returns the declination (degrees) of the mount's current equatorial coordinates, in the coordinate
+system given by the EquatorialSystem property. Reading the property will raise an error if the value
+is unavailable.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__declination
 */
 func (t *Telescope) GetDeclination() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "declination")
 }
 
 /*
-	GetDeclinationRate()
+GetDeclinationRate()
 
-	@returns the declination tracking rate (arcseconds per second, default = 0.0)
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__declinationrate
+@returns the declination tracking rate (arcseconds per second, default = 0.0)
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__declinationrate
 */
 func (t *Telescope) GetDeclinationRate() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "declinationrate")
 }
 
 /*
-	SetDeclinationRate()
+SetDeclinationRate()
 
-	@returns an error or nil, if nil it sets the declination tracking rate (arcseconds per second)
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__declinationrate
+@returns an error or nil, if nil it sets the declination tracking rate (arcseconds per second)
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__declinationrate
 */
 func (t *Telescope) SetDeclinationRate(declinationRate float64) error {
 	t.Alpaca.TransactionId++
@@ -475,22 +475,22 @@ func (t *Telescope) SetDeclinationRate(declinationRate float64) error {
 }
 
 /*
-	DoesRefraction()
+DoesRefraction()
 
-	@returns true if the telescope or driver applies atmospheric refraction to coordinates
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__doesrefraction
+@returns true if the telescope or driver applies atmospheric refraction to coordinates
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__doesrefraction
 */
 func (t *Telescope) DoesRefraction() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "doesrefraction")
 }
 
 /*
-	SetDoesRefraction()
+SetDoesRefraction()
 
-	Determines whether atmospheric refraction is applied to coordinates.
+Determines whether atmospheric refraction is applied to coordinates.
 
-	@returns an error or nil, if nil causes the rotator to move Position degrees relative to the current position value.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__doesrefraction
+@returns an error or nil, if nil causes the rotator to move Position degrees relative to the current position value.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__doesrefraction
 */
 func (t *Telescope) SetDoesRefraction(doesRefraction bool) error {
 	t.Alpaca.TransactionId++
@@ -505,10 +505,10 @@ func (t *Telescope) SetDoesRefraction(doesRefraction bool) error {
 }
 
 /*
-	GetEquatorialSystem()
+GetEquatorialSystem()
 
-	@returns the current equatorial coordinate system used by this telescope (e.g. Topocentric or J2000).
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__equatorialsystem
+@returns the current equatorial coordinate system used by this telescope (e.g. Topocentric or J2000).
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__equatorialsystem
 */
 func (t *Telescope) GetEquatorialSystem() (EquatorialSystem, error) {
 	system, err := t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "equatorialsystem")
@@ -516,51 +516,51 @@ func (t *Telescope) GetEquatorialSystem() (EquatorialSystem, error) {
 }
 
 /*
-	GetFocalLength()
+GetFocalLength()
 
-	@returns the telescope's focal length in meters
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__focallength
+@returns the telescope's focal length in meters
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__focallength
 */
 func (t *Telescope) GetFocalLength() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "focallength")
 }
 
 /*
-	IsPulseGuiding()
+IsPulseGuiding()
 
-	@returns true if a PulseGuide(GuideDirections, Int32) command is in progress, false otherwise
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__ispulseguiding
+@returns true if a PulseGuide(GuideDirections, Int32) command is in progress, false otherwise
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__ispulseguiding
 */
 func (t *Telescope) IsPulseGuiding() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "ispulseguiding")
 }
 
 /*
-	GetRightAscension()
+GetRightAscension()
 
-	@returns the right ascension (hours) of the mount's current equatorial coordinates, in the coordinate
-	system given by the EquatorialSystem property
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__rightascension
+@returns the right ascension (hours) of the mount's current equatorial coordinates, in the coordinate
+system given by the EquatorialSystem property
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__rightascension
 */
 func (t *Telescope) GetRightAscension() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "rightascension")
 }
 
 /*
-	GetRightAscensionRate()
+GetRightAscensionRate()
 
-	@returns the right ascension tracking rate (arcseconds per second, default = 0.0)
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__rightascensionrate
+@returns the right ascension tracking rate (arcseconds per second, default = 0.0)
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__rightascensionrate
 */
 func (t *Telescope) GetRightAscensionRate() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "rightascensionrate")
 }
 
 /*
-	SetRightAscensionRate()
+SetRightAscensionRate()
 
-	@returns an error or nil, if nil it sets the right ascension tracking rate (arcseconds per second)
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__rightascensionrate
+@returns an error or nil, if nil it sets the right ascension tracking rate (arcseconds per second)
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__rightascensionrate
 */
 func (t *Telescope) SetRightAscensionRate(rightAscensionRate float64) error {
 	t.Alpaca.TransactionId++
@@ -575,10 +575,10 @@ func (t *Telescope) SetRightAscensionRate(rightAscensionRate float64) error {
 }
 
 /*
-	GetSideOfPier()
+GetSideOfPier()
 
-	@returns the pointing state of the mount. 0 = pierEast, 1 = pierWest, -1= pierUnknown
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__sideofpier
+@returns the pointing state of the mount. 0 = pierEast, 1 = pierWest, -1= pierUnknown
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__sideofpier
 */
 func (t *Telescope) GetSideOfPier() (PierPointingMode, error) {
 	mode, err := t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "sideofpier")
@@ -586,10 +586,10 @@ func (t *Telescope) GetSideOfPier() (PierPointingMode, error) {
 }
 
 /*
-	SetSideOfPier()
+SetSideOfPier()
 
-	@returns an error or nil, if nil it sets the pointing state of the mount. 0 = pierEast, 1 = pierWest
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__sideofpier
+@returns an error or nil, if nil it sets the pointing state of the mount. 0 = pierEast, 1 = pierWest
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__sideofpier
 */
 func (t *Telescope) SetSideOfPier(sideOfPier PierPointingMode) error {
 	t.Alpaca.TransactionId++
@@ -608,31 +608,31 @@ func (t *Telescope) SetSideOfPier(sideOfPier PierPointingMode) error {
 }
 
 /*
-	GetSiderealTime()
+GetSiderealTime()
 
-	@returns the local apparent sidereal time from the telescope's internal clock (hours, sidereal).
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__siderealtime
+@returns the local apparent sidereal time from the telescope's internal clock (hours, sidereal).
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__siderealtime
 */
 func (t *Telescope) GetSiderealTime() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "siderealtime")
 }
 
 /*
-	GetSiteElevation()
+GetSiteElevation()
 
-	@returns the elevation above mean sea level (meters) of the site at which the telescope is located.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__siteelevation
+@returns the elevation above mean sea level (meters) of the site at which the telescope is located.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__siteelevation
 */
 func (t *Telescope) GetSiteElevation() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "siteelevation")
 }
 
 /*
-	SetSiteElevation()
+SetSiteElevation()
 
-	@params siteElevation - the site elevation above mean sea level (metres).
-	@returns an error or nil, if nil it sets the elevation above mean sea level (metres) of the site at which the telescope is located.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__siteelevation
+@params siteElevation - the site elevation above mean sea level (metres).
+@returns an error or nil, if nil it sets the elevation above mean sea level (metres) of the site at which the telescope is located.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__siteelevation
 */
 func (t *Telescope) SetSiteElevation(siteElevation float64) error {
 	t.Alpaca.TransactionId++
@@ -651,20 +651,20 @@ func (t *Telescope) SetSiteElevation(siteElevation float64) error {
 }
 
 /*
-	GetSiteLatitude()
+GetSiteLatitude()
 
-	@returns the geodetic(map) latitude (degrees, positive North, WGS84) of the site at which the telescope is located.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__sitelatitude
+@returns the geodetic(map) latitude (degrees, positive North, WGS84) of the site at which the telescope is located.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__sitelatitude
 */
 func (t *Telescope) GetSiteLatitude() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "sitelatitude")
 }
 
 /*
-	SetSiteLatitude()
+SetSiteLatitude()
 
-	@returns an error or nil, if nil it sets the observing site's latitude (degrees).
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__sitelatitude
+@returns an error or nil, if nil it sets the observing site's latitude (degrees).
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__sitelatitude
 */
 func (t *Telescope) SetSiteLatitude(siteLatitude float64) error {
 	t.Alpaca.TransactionId++
@@ -683,20 +683,20 @@ func (t *Telescope) SetSiteLatitude(siteLatitude float64) error {
 }
 
 /*
-	GetSiteLongitude()
+GetSiteLongitude()
 
-	@returns the geodetic(map) longitude (degrees, positive East, WGS84) of the site at which the telescope is located.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__sitelongitude
+@returns the geodetic(map) longitude (degrees, positive East, WGS84) of the site at which the telescope is located.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__sitelongitude
 */
 func (t *Telescope) GetSiteLongitude() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "sitelongitude")
 }
 
 /*
-	SetSiteLongitude()
+SetSiteLongitude()
 
-	@returns an error or nil, if nil it sets the observing site's longitude (degrees, positive East, WGS84).
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__sitelongitude
+@returns an error or nil, if nil it sets the observing site's longitude (degrees, positive East, WGS84).
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__sitelongitude
 */
 func (t *Telescope) SetSiteLongitude(siteLongitude float64) error {
 	t.Alpaca.TransactionId++
@@ -715,31 +715,31 @@ func (t *Telescope) SetSiteLongitude(siteLongitude float64) error {
 }
 
 /*
-	IsSlewing()
+IsSlewing()
 
-	@returns true  if telescope is currently moving in response to one of the Slew methods or the MoveAxis(TelescopeAxes,
-	Double) method, false at all other times.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__slewing
+@returns true  if telescope is currently moving in response to one of the Slew methods or the MoveAxis(TelescopeAxes,
+Double) method, false at all other times.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__slewing
 */
 func (t *Telescope) IsSlewing() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "slewing")
 }
 
 /*
-	GetSlewSettleTime()
+GetSlewSettleTime()
 
-	@returns the post-slew settling time (in seconds).
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__slewsettletime
+@returns the post-slew settling time (in seconds).
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__slewsettletime
 */
 func (t *Telescope) GetSlewSettleTime() (int32, error) {
 	return t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "slewsettletime")
 }
 
 /*
-	SetSlewSettleTime()
+SetSlewSettleTime()
 
-	@returns an error or nil, if nil it sets the post-slew settling time (integer sec.).
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewsettletime
+@returns an error or nil, if nil it sets the post-slew settling time (integer sec.).
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewsettletime
 */
 func (t *Telescope) SetSlewSettleTime(slewSettleTime int32) error {
 	t.Alpaca.TransactionId++
@@ -754,10 +754,10 @@ func (t *Telescope) SetSlewSettleTime(slewSettleTime int32) error {
 }
 
 /*
-	SetSlewToAltAz
+SetSlewToAltAz
 
-	@returns an error or nil, if nil it moves the telescope to the given local horizontal coordinates, return when slew is complete
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtoaltaz
+@returns an error or nil, if nil it moves the telescope to the given local horizontal coordinates, return when slew is complete
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtoaltaz
 */
 func (t *Telescope) SetSlewToAltAz(altitude float64, azimuth float64) error {
 	t.Alpaca.TransactionId++
@@ -783,11 +783,11 @@ func (t *Telescope) SetSlewToAltAz(altitude float64, azimuth float64) error {
 }
 
 /*
-	SetSlewToAltAzAsync
+SetSlewToAltAzAsync
 
-	@returns an error or nil, if nil it moves the telescope to the given local horizontal coordinates, return immediatley after
-	the slew starts. The client can poll the Slewing method to determine when the mount reaches the intended coordinates.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtoaltazasync
+@returns an error or nil, if nil it moves the telescope to the given local horizontal coordinates, return immediatley after
+the slew starts. The client can poll the Slewing method to determine when the mount reaches the intended coordinates.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtoaltazasync
 */
 func (t *Telescope) SetSlewToAltAzAsync(altitude float64, azimuth float64) error {
 	t.Alpaca.TransactionId++
@@ -813,11 +813,11 @@ func (t *Telescope) SetSlewToAltAzAsync(altitude float64, azimuth float64) error
 }
 
 /*
-	SetSlewToCoordinates
+SetSlewToCoordinates
 
-	@returns an error or nil, if nil it moves the telescope to the given local horizontal coordinates, return immediatley after
-	the slew starts. The client can poll the Slewing method to determine when the mount reaches the intended coordinates.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtocoordinates
+@returns an error or nil, if nil it moves the telescope to the given local horizontal coordinates, return immediatley after
+the slew starts. The client can poll the Slewing method to determine when the mount reaches the intended coordinates.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtocoordinates
 */
 func (t *Telescope) SetSlewToCoordinates(rightAscension float64, declination float64) error {
 	t.Alpaca.TransactionId++
@@ -845,11 +845,11 @@ func (t *Telescope) SetSlewToCoordinates(rightAscension float64, declination flo
 }
 
 /*
-	SetSlewToCoordinatesAsync
+SetSlewToCoordinatesAsync
 
-	@returns an error or nil, if nil it moves the telescope to the given equatorial coordinates, return immediatley after
-	the slew starts. The client can poll the Slewing method to determine when the mount reaches the intended coordinates.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtocoordinatesasync
+@returns an error or nil, if nil it moves the telescope to the given equatorial coordinates, return immediatley after
+the slew starts. The client can poll the Slewing method to determine when the mount reaches the intended coordinates.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtocoordinatesasync
 */
 func (t *Telescope) SetSlewToCoordinatesAsync(rightAscension float64, declination float64) error {
 	t.Alpaca.TransactionId++
@@ -877,11 +877,11 @@ func (t *Telescope) SetSlewToCoordinatesAsync(rightAscension float64, declinatio
 }
 
 /*
-	SetSlewToTarget
+SetSlewToTarget
 
-	@returns an error or nil, if nil it moves the telescope to the TargetRightAscension and TargetDeclination
-	equatorial coordinates, return when slew is complete
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtotarget
+@returns an error or nil, if nil it moves the telescope to the TargetRightAscension and TargetDeclination
+equatorial coordinates, return when slew is complete
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtotarget
 */
 func (t *Telescope) SetSlewToTarget() error {
 	t.Alpaca.TransactionId++
@@ -897,12 +897,12 @@ func (t *Telescope) SetSlewToTarget() error {
 }
 
 /*
-	SetSlewToTargetAsync
+SetSlewToTargetAsync
 
-	@returns an error or nil, if nil it moves the telescope to the TargetRightAscension and TargetDeclination equatorial coordinates,
-	return immediatley after the slew starts. The client can poll the Slewing method to determine when the mount reaches the
-	intended coordinates.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtotargetasync
+@returns an error or nil, if nil it moves the telescope to the TargetRightAscension and TargetDeclination equatorial coordinates,
+return immediatley after the slew starts. The client can poll the Slewing method to determine when the mount reaches the
+intended coordinates.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtotargetasync
 */
 func (t *Telescope) SetSlewToTargetAsync() error {
 	t.Alpaca.TransactionId++
@@ -918,20 +918,20 @@ func (t *Telescope) SetSlewToTargetAsync() error {
 }
 
 /*
-	GetTargetDeclination()
+GetTargetDeclination()
 
-	@returns the declination (degrees, positive North) for the target of an equatorial slew or sync operation.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__targetdeclination
+@returns the declination (degrees, positive North) for the target of an equatorial slew or sync operation.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__targetdeclination
 */
 func (t *Telescope) GetTargetDeclination() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "targetdeclination")
 }
 
 /*
-	SetTargetDeclination()
+SetTargetDeclination()
 
-	@returns an error or nil, if nil it sets the declination (degrees, positive North) for the target of an equatorial slew or sync operation.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__targetdeclination
+@returns an error or nil, if nil it sets the declination (degrees, positive North) for the target of an equatorial slew or sync operation.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__targetdeclination
 */
 func (t *Telescope) SetTargetDeclination(targetDeclination float64) error {
 	t.Alpaca.TransactionId++
@@ -946,20 +946,20 @@ func (t *Telescope) SetTargetDeclination(targetDeclination float64) error {
 }
 
 /*
-	GetTargetRightAscension()
+GetTargetRightAscension()
 
-	@returns the right ascension (hours) for the target of an equatorial slew or sync operation
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__targetrightascension
+@returns the right ascension (hours) for the target of an equatorial slew or sync operation
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__targetrightascension
 */
 func (t *Telescope) GetTargetRightAscension() (float64, error) {
 	return t.Alpaca.GetFloat64Response("telescope", t.DeviceNumber, "targetrightascension")
 }
 
 /*
-	SetTargetRightAscension()
+SetTargetRightAscension()
 
-	@returns  an error or nil, if nil it the right ascension (hours) for the target of an equatorial slew or sync operation
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__targetrightascension
+@returns  an error or nil, if nil it the right ascension (hours) for the target of an equatorial slew or sync operation
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__targetrightascension
 */
 func (t *Telescope) SetTargetRightAscension(targetRightAscension float64) error {
 	t.Alpaca.TransactionId++
@@ -974,20 +974,20 @@ func (t *Telescope) SetTargetRightAscension(targetRightAscension float64) error 
 }
 
 /*
-	IsTracking()
+IsTracking()
 
-	@returns the state of the telescope's sidereal tracking drive.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__tracking
+@returns the state of the telescope's sidereal tracking drive.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__tracking
 */
 func (t *Telescope) IsTracking() (bool, error) {
 	return t.Alpaca.GetBooleanResponse("telescope", t.DeviceNumber, "tracking")
 }
 
 /*
-	SetTracking()
+SetTracking()
 
-	@returns an error or nil, if nil it sets the state of the telescope's sidereal tracking drive.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__tracking
+@returns an error or nil, if nil it sets the state of the telescope's sidereal tracking drive.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__tracking
 */
 func (t *Telescope) SetTracking(tracking bool) error {
 	t.Alpaca.TransactionId++
@@ -1002,23 +1002,23 @@ func (t *Telescope) SetTracking(tracking bool) error {
 }
 
 /*
-	GetTrackingRate()
+GetTrackingRate()
 
-	@returns the current tracking rate of the telescope's sidereal drive.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__trackingrate
+@returns the current tracking rate of the telescope's sidereal drive.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__trackingrate
 */
 func (t *Telescope) GetTrackingRate() (int32, error) {
 	return t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "trackingrate")
 }
 
 /*
-	GetUTCDate()
+GetUTCDate()
 
-	@returns the UTC date/time of the telescope's internal clock in ISO 8601 format including fractional
-	seconds. The general format (in Microsoft custom date format style) is yyyy-MM-ddTHH:mm:ss.fffffffZ
-	e.g. 2016-03-04T17:45:31.1234567Z or 2016-11-14T07:03:08.1234567Z Please note the compulsary trailing
-	Z indicating the 'Zulu', UTC time zone.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__utcdate
+@returns the UTC date/time of the telescope's internal clock in ISO 8601 format including fractional
+seconds. The general format (in Microsoft custom date format style) is yyyy-MM-ddTHH:mm:ss.fffffffZ
+e.g. 2016-03-04T17:45:31.1234567Z or 2016-11-14T07:03:08.1234567Z Please note the compulsary trailing
+Z indicating the 'Zulu', UTC time zone.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__utcdate
 */
 func (t *Telescope) GetUTCDate() (time.Time, error) {
 	utc, err := t.Alpaca.GetStringResponse("telescope", t.DeviceNumber, "utcdate")
@@ -1027,13 +1027,13 @@ func (t *Telescope) GetUTCDate() (time.Time, error) {
 }
 
 /*
-	SetUTCDate()
+SetUTCDate()
 
-	@returns an error or nil, if nil it sets the UTC date/time of the telescope's internal clock in ISO 8601 format including fractional
-	seconds. The general format (in Microsoft custom date format style) is yyyy-MM-ddTHH:mm:ss.fffffffZ
-	e.g. 2016-03-04T17:45:31.1234567Z or 2016-11-14T07:03:08.1234567Z Please note the compulsary trailing
-	Z indicating the 'Zulu', UTC time zone.
-	@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__utcdate
+@returns an error or nil, if nil it sets the UTC date/time of the telescope's internal clock in ISO 8601 format including fractional
+seconds. The general format (in Microsoft custom date format style) is yyyy-MM-ddTHH:mm:ss.fffffffZ
+e.g. 2016-03-04T17:45:31.1234567Z or 2016-11-14T07:03:08.1234567Z Please note the compulsary trailing
+Z indicating the 'Zulu', UTC time zone.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__utcdate
 */
 func (t *Telescope) SetUTCDate(UTCDate time.Time) error {
 	t.Alpaca.TransactionId++

@@ -19,31 +19,31 @@ func NewSafetyMonitor(clientId uint32, secure bool, domain string, ip string, po
 }
 
 /*
-	GetDescription() common method to all ASCOM Alpaca compliant devices
+GetDescription() common method to all ASCOM Alpaca compliant devices
 
-	@returns the description of the device
-	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__description
+@returns the description of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__description
 */
 func (m *SafetyMonitor) GetDescription() (string, error) {
 	return m.Alpaca.GetDescription("safetymonitor", m.DeviceNumber)
 }
 
 /*
-	IsConnected() common method to all ASCOM Alpaca compliant devices
+IsConnected() common method to all ASCOM Alpaca compliant devices
 
-	@returns the connected state of the device
-	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__connected
+@returns the connected state of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__connected
 */
 func (m *SafetyMonitor) IsConnected() (bool, error) {
 	return m.Alpaca.GetBooleanResponse("safetymonitor", m.DeviceNumber, "connected")
 }
 
 /*
-	SetConnected() common method to all ASCOM Alpaca compliant devices
+SetConnected() common method to all ASCOM Alpaca compliant devices
 
-	@param connected bool (set True to connect to the device hardware, set false to disconnect from the device hardware)
-	@returns the connected state of the device
-	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/put__device_type___device_number__connected
+@param connected bool (set True to connect to the device hardware, set false to disconnect from the device hardware)
+@returns the connected state of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/put__device_type___device_number__connected
 */
 func (m *SafetyMonitor) SetConnected(connected bool) error {
 	m.Alpaca.TransactionId++
@@ -59,10 +59,10 @@ func (m *SafetyMonitor) SetConnected(connected bool) error {
 }
 
 /*
-	IsSafe()
+IsSafe()
 
-	@returns true if the state is safe, false if it is unsafe. Indicates whether the monitored state is safe for use.
-	@see https://ascom-standards.org/api/#/SafetyMonitor%20Specific%20Methods/get_safetymonitor__device_number__issafe
+@returns true if the state is safe, false if it is unsafe. Indicates whether the monitored state is safe for use.
+@see https://ascom-standards.org/api/#/SafetyMonitor%20Specific%20Methods/get_safetymonitor__device_number__issafe
 */
 func (m *SafetyMonitor) IsSafe() (bool, error) {
 	return m.Alpaca.GetBooleanResponse("safetymonitor", m.DeviceNumber, "issafe")

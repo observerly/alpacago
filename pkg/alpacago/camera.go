@@ -71,21 +71,21 @@ func NewCamera(clientId uint32, secure bool, domain string, ip string, port int3
 }
 
 /*
-	IsConnected() common method to all ASCOM Alpaca compliant devices
+IsConnected() common method to all ASCOM Alpaca compliant devices
 
-	@returns the connected state of the device
-	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__connected
+@returns the connected state of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__connected
 */
 func (c *Camera) IsConnected() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "connected")
 }
 
 /*
-	SetConnected() common method to all ASCOM Alpaca compliant devices
+SetConnected() common method to all ASCOM Alpaca compliant devices
 
-	@param connected bool (set True to connect to the device hardware, set false to disconnect from the device hardware)
-	@returns the connected state of the device
-	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/put__device_type___device_number__connected
+@param connected bool (set True to connect to the device hardware, set false to disconnect from the device hardware)
+@returns the connected state of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/put__device_type___device_number__connected
 */
 func (c *Camera) SetConnected(connected bool) error {
 	c.Alpaca.TransactionId++
@@ -101,40 +101,40 @@ func (c *Camera) SetConnected(connected bool) error {
 }
 
 /*
-	GetBayerOffsetX()
+GetBayerOffsetX()
 
-	@returns the X offset of the Bayer matrix, as defined in SensorType.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__bayeroffsetx
+@returns the X offset of the Bayer matrix, as defined in SensorType.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__bayeroffsetx
 */
 func (c *Camera) GetBayerOffsetX() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "bayeroffsetx")
 }
 
 /*
-	GetBayerOffsetY()
+GetBayerOffsetY()
 
-	@returns the Y offset of the Bayer matrix, as defined in SensorType.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__bayeroffsety
+@returns the Y offset of the Bayer matrix, as defined in SensorType.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__bayeroffsety
 */
 func (c *Camera) GetBayerOffsetY() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "bayeroffsety")
 }
 
 /*
-	GetBinX()
+GetBinX()
 
-	@returns the binning factor for the X axis.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__binx
+@returns the binning factor for the X axis.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__binx
 */
 func (c *Camera) GetBinX() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "binx")
 }
 
 /*
-	SetBinX()
+SetBinX()
 
-	@returns an error or nil, if nil it sets the binning factor for the X axis.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__binx
+@returns an error or nil, if nil it sets the binning factor for the X axis.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__binx
 */
 func (c *Camera) SetBinX(binX int32) error {
 	c.Alpaca.TransactionId++
@@ -149,20 +149,20 @@ func (c *Camera) SetBinX(binX int32) error {
 }
 
 /*
-	GetBinY()
+GetBinY()
 
-	@returns the binning factor for the Y axis.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__biny
+@returns the binning factor for the Y axis.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__biny
 */
 func (c *Camera) GetBinY() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "biny")
 }
 
 /*
-	SetBinY()
+SetBinY()
 
-	@returns an error or nil, if nil it sets the binning factor for the Y axis.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__biny
+@returns an error or nil, if nil it sets the binning factor for the Y axis.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__biny
 */
 func (c *Camera) SetBinY(binY int32) error {
 	c.Alpaca.TransactionId++
@@ -177,11 +177,11 @@ func (c *Camera) SetBinY(binY int32) error {
 }
 
 /*
-	GetOperationalState()
+GetOperationalState()
 
-	@returns the current camera operational state (CameraIdle, CameraWaiting, CameraExposing, CameraReading, CameraDownload, CameraError)
-	The operational state is specified as an integer value from the OperationalState Enum.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__camerastate
+@returns the current camera operational state (CameraIdle, CameraWaiting, CameraExposing, CameraReading, CameraDownload, CameraError)
+The operational state is specified as an integer value from the OperationalState Enum.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__camerastate
 */
 func (c *Camera) GetOperationalState() (OperationalState, error) {
 	state, err := c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "camerastate")
@@ -189,120 +189,120 @@ func (c *Camera) GetOperationalState() (OperationalState, error) {
 }
 
 /*
-	GetCCDSizeX()
+GetCCDSizeX()
 
-	@returns the width of the CCD camera chip in unbinned pixels.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__cameraxsize
+@returns the width of the CCD camera chip in unbinned pixels.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__cameraxsize
 */
 func (c *Camera) GetCCDSizeX() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "cameraxsize")
 }
 
 /*
-	GetCCDSizeY()
+GetCCDSizeY()
 
-	@returns the width of the CCD camera chip in unbinned pixels.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__cameraysize
+@returns the width of the CCD camera chip in unbinned pixels.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__cameraysize
 */
 func (c *Camera) GetCCDSizeY() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "cameraysize")
 }
 
 /*
-	CanAbortExposure()
+CanAbortExposure()
 
-	@returns true if the camera can abort exposures; false if not.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__canabortexposure
+@returns true if the camera can abort exposures; false if not.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__canabortexposure
 */
 func (c *Camera) CanAbortExposure() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "canabortexposure")
 }
 
 /*
-	CanFastReadout()
+CanFastReadout()
 
-	@returns true if the camera has a fast readout mode.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__canfastreadout
+@returns true if the camera has a fast readout mode.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__canfastreadout
 */
 func (c *Camera) CanFastReadout() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "canfastreadout")
 }
 
 /*
-	CanAsymmetricBin()
+CanAsymmetricBin()
 
-	@returns true if the camera supports asymmetric binning
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__canasymmetricbin
+@returns true if the camera supports asymmetric binning
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__canasymmetricbin
 */
 func (c *Camera) CanAsymmetricBin() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "canasymmetricbin")
 }
 
 /*
-	CanGetCoolerPower()
+CanGetCoolerPower()
 
-	@returns true if the camera's cooler power setting can be read.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__cangetcoolerpower
+@returns true if the camera's cooler power setting can be read.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__cangetcoolerpower
 */
 func (c *Camera) CanGetCoolerPower() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "cangetcoolerpower")
 }
 
 /*
-	CanPulseGuide()
+CanPulseGuide()
 
-	@returns true if the camera supports pulse guiding.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__canpulseguide
+@returns true if the camera supports pulse guiding.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__canpulseguide
 */
 func (c *Camera) CanPulseGuide() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "canpulseguide")
 }
 
 /*
-	CanSetCCDTemperature()
+CanSetCCDTemperature()
 
-	@returns true if the camera supports setting the CCD temperature.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__cansetccdtemperature
+@returns true if the camera supports setting the CCD temperature.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__cansetccdtemperature
 */
 func (c *Camera) CanSetCCDTemperature() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "cansetccdtemperature")
 }
 
 /*
-	CanStopExposure()
+CanStopExposure()
 
-	@returns true if the camera can stop an exposure that is in progress
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__canstopexposure
+@returns true if the camera can stop an exposure that is in progress
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__canstopexposure
 */
 func (c *Camera) CanStopExposure() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "canstopexposure")
 }
 
 /*
-	GetCCDTemperature()
+GetCCDTemperature()
 
-	@returns true if the camera can stop an exposure that is in progress
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__ccdtemperature
+@returns true if the camera can stop an exposure that is in progress
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__ccdtemperature
 */
 func (c *Camera) GetCCDTemperature() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "ccdtemperature")
 }
 
 /*
-	IsCoolerOn()
+IsCoolerOn()
 
-	@returns true if the camera cooler is one, else false
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__cooleron
+@returns true if the camera cooler is one, else false
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__cooleron
 */
 func (c *Camera) IsCoolerOn() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "cooleron")
 }
 
 /*
-	TurnCoolerOn()
+TurnCoolerOn()
 
-	@returns error if there was a problem turning the cooler on
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__cooleron
+@returns error if there was a problem turning the cooler on
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__cooleron
 */
 func (c *Camera) TurnCoolerOn() error {
 	c.Alpaca.TransactionId++
@@ -318,10 +318,10 @@ func (c *Camera) TurnCoolerOn() error {
 }
 
 /*
-	TurnCoolerOff()
+TurnCoolerOff()
 
-	@returns error if there was a problem turning the cooler off
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__cooleron
+@returns error if there was a problem turning the cooler off
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__cooleron
 */
 func (c *Camera) TurnCoolerOff() error {
 	c.Alpaca.TransactionId++
@@ -337,91 +337,91 @@ func (c *Camera) TurnCoolerOff() error {
 }
 
 /*
-	GetCoolerPowerLevel()
+GetCoolerPowerLevel()
 
-	@returns the present cooler power level, in percent.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__coolerpower
+@returns the present cooler power level, in percent.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__coolerpower
 */
 func (c *Camera) GetCoolerPowerLevel() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "coolerpower")
 }
 
 /*
-	GetGainInElectronsPerADUnit()
+GetGainInElectronsPerADUnit()
 
-	@returns the gain of the camera in photoelectrons per A/D unit.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__electronsperadu
+@returns the gain of the camera in photoelectrons per A/D unit.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__electronsperadu
 */
 func (c *Camera) GetGainInElectronsPerADUnit() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "electronsperadu")
 }
 
 /*
-	GetExposure()
+GetExposure()
 
-	@returns Returns an array of 32bit integers containing the pixel values from the last exposure. This
-	call can return either a 2 dimension (monochrome images) or 3 dimension (colour or multi-plane images)
-	array of size NumX * NumY or NumX * NumY * NumPlanes. Where applicable, the size of NumPlanes has
-	to be determined by inspection of the returned Array.
+@returns Returns an array of 32bit integers containing the pixel values from the last exposure. This
+call can return either a 2 dimension (monochrome images) or 3 dimension (colour or multi-plane images)
+array of size NumX * NumY or NumX * NumY * NumPlanes. Where applicable, the size of NumPlanes has
+to be determined by inspection of the returned Array.
 
-	Since 32bit integers are always returned by this call, the returned JSON Type value (0 = Unknown, 1 = short(16bit),
-	2 = int(32bit), 3 = Double) is always 2. The number of planes is given in the returned Rank value.
+Since 32bit integers are always returned by this call, the returned JSON Type value (0 = Unknown, 1 = short(16bit),
+2 = int(32bit), 3 = Double) is always 2. The number of planes is given in the returned Rank value.
 
-	When de-serialising to an object it is essential to know the array Rank beforehand so that the correct data
-	class can be used. This can be achieved through a regular expression or by direct parsing of the returned
-	JSON string to extract the Type and Rank values before de-serialising.
+When de-serialising to an object it is essential to know the array Rank beforehand so that the correct data
+class can be used. This can be achieved through a regular expression or by direct parsing of the returned
+JSON string to extract the Type and Rank values before de-serialising.
 
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__imagearray
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__imagearray
 */
 func (c *Camera) GetExposure() ([][]uint32, uint32, error) {
 	return c.Alpaca.GetUInt32Rank2ArrayResponse("camera", c.DeviceNumber, "imagearray")
 }
 
 /*
-	GetExposureMax()
+GetExposureMax()
 
-	@returns the maximum exposure time supported by StartExposure.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__exposuremax
+@returns the maximum exposure time supported by StartExposure.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__exposuremax
 */
 func (c *Camera) GetExposureMax() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "exposuremax")
 }
 
 /*
-	GetExposureMin()
+GetExposureMin()
 
-	@returns the maximum exposure time supported by StartExposure.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__exposuremin
+@returns the maximum exposure time supported by StartExposure.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__exposuremin
 */
 func (c *Camera) GetExposureMin() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "exposuremin")
 }
 
 /*
-	GetExposureResolution()
+GetExposureResolution()
 
-	@returns the smallest increment in exposure time supported by StartExposure.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__exposureresolution
+@returns the smallest increment in exposure time supported by StartExposure.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__exposureresolution
 */
 func (c *Camera) GetExposureResolution() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "exposureresolution")
 }
 
 /*
-	IsFastReadoutEnabled()
+IsFastReadoutEnabled()
 
-	@returns whenther Fast Readout Mode is enabled.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__fastreadout
+@returns whenther Fast Readout Mode is enabled.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__fastreadout
 */
 func (c *Camera) IsFastReadoutEnabled() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "fastreadout")
 }
 
 /*
-	EnableFastReadout()
+EnableFastReadout()
 
-	@returns an error or nil, if nil it enables the fast readout mode
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__fastreadout
+@returns an error or nil, if nil it enables the fast readout mode
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__fastreadout
 */
 func (c *Camera) EnableFastReadout() error {
 	c.Alpaca.TransactionId++
@@ -437,10 +437,10 @@ func (c *Camera) EnableFastReadout() error {
 }
 
 /*
-	DisableFastReadout()
+DisableFastReadout()
 
-	@returns an error or nil, if nil it disables the fast readout mode
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__fastreadout
+@returns an error or nil, if nil it disables the fast readout mode
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__fastreadout
 */
 func (c *Camera) DisableFastReadout() error {
 	c.Alpaca.TransactionId++
@@ -456,30 +456,30 @@ func (c *Camera) DisableFastReadout() error {
 }
 
 /*
-	GetFullWellCapacity()
+GetFullWellCapacity()
 
-	@returns the full well capacity of the camera in electrons, at the current camera settings (binning, SetupDialog settings, etc.).
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__fullwellcapacity
+@returns the full well capacity of the camera in electrons, at the current camera settings (binning, SetupDialog settings, etc.).
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__fullwellcapacity
 */
 func (c *Camera) GetFullWellCapacity() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "fullwellcapacity")
 }
 
 /*
-	GetGain()
+GetGain()
 
-	@returns the camera's gain (GAIN VALUE MODE) OR the index of the selected camera gain description in the Gains array (GAINS INDEX MODE).
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__gain
+@returns the camera's gain (GAIN VALUE MODE) OR the index of the selected camera gain description in the Gains array (GAINS INDEX MODE).
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__gain
 */
 func (c *Camera) GetGain() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "gain")
 }
 
 /*
-	SetGain()
+SetGain()
 
-	@returns an error or nil, if nil it sets the gain to the specified value.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__gain
+@returns an error or nil, if nil it sets the gain to the specified value.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__gain
 */
 func (c *Camera) SetGain(gain int32) error {
 	c.Alpaca.TransactionId++
@@ -495,80 +495,80 @@ func (c *Camera) SetGain(gain int32) error {
 }
 
 /*
-	GetGainMax()
+GetGainMax()
 
-	@returns the maximum value of Gain.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__gainmax
+@returns the maximum value of Gain.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__gainmax
 */
 func (c *Camera) GetGainMax() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "gainmax")
 }
 
 /*
-	GetGainMin()
+GetGainMin()
 
-	@returns the minimum value of Gain.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__gainmin
+@returns the minimum value of Gain.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__gainmin
 */
 func (c *Camera) GetGainMin() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "gainmin")
 }
 
 /*
-	GetGains()
+GetGains()
 
-	@returns the Gains supported by the camera.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__gains
+@returns the Gains supported by the camera.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__gains
 */
 func (c *Camera) GetGains() ([]string, error) {
 	return c.Alpaca.GetStringListResponse("camera", c.DeviceNumber, "gains")
 }
 
 /*
-	HasShutter()
+HasShutter()
 
-	@returns the true if this camera has a mechanical shutter.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__hasshutter
+@returns the true if this camera has a mechanical shutter.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__hasshutter
 */
 func (c *Camera) HasShutter() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "hasshutter")
 }
 
 /*
-	GetHeatSinkTemperature()
+GetHeatSinkTemperature()
 
-	@returns the current heat sink temperature (called "ambient temperature" by some manufacturers) in degrees Celsius.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__heatsinktemperature
+@returns the current heat sink temperature (called "ambient temperature" by some manufacturers) in degrees Celsius.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__heatsinktemperature
 */
 func (c *Camera) GetHeatSinkTemperature() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "heatsinktemperature")
 }
 
 /*
-	IsImageReady()
+IsImageReady()
 
-	@returns true if the image is ready to be downloaded from the camera
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__imageready
+@returns true if the image is ready to be downloaded from the camera
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__imageready
 */
 func (c *Camera) IsImageReady() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "imageready")
 }
 
 /*
-	IsPulseGuiding()
+IsPulseGuiding()
 
-	@returns true if the the camera is currrently in a PulseGuide operation.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__ispulseguiding
+@returns true if the the camera is currrently in a PulseGuide operation.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__ispulseguiding
 */
 func (c *Camera) IsPulseGuiding() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("camera", c.DeviceNumber, "ispulseguiding")
 }
 
 /*
-	GetLastExposureStartTime()
+GetLastExposureStartTime()
 
-	@returns the actual exposure start in the FITS-standard CCYY-MM-DDThh:mm:ss[.sss...] format.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__lastexposurestarttime
+@returns the actual exposure start in the FITS-standard CCYY-MM-DDThh:mm:ss[.sss...] format.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__lastexposurestarttime
 */
 func (c *Camera) GetLastExposureStartTime() (*time.Time, error) {
 	starttime, err := c.Alpaca.GetStringResponse("camera", c.DeviceNumber, "lastexposurestarttime")
@@ -591,60 +591,60 @@ func (c *Camera) GetLastExposureStartTime() (*time.Time, error) {
 }
 
 /*
-	GetLastExposureDuration()
+GetLastExposureDuration()
 
-	@returns the actual exposure duration in seconds (i.e. shutter open time).
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__lastexposureduration
+@returns the actual exposure duration in seconds (i.e. shutter open time).
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__lastexposureduration
 */
 func (c *Camera) GetLastExposureDuration() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "lastexposureduration")
 }
 
 /*
-	GetMaxADU()
+GetMaxADU()
 
-	@returns the maximum ADU value the camera can produce.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__maxadu
+@returns the maximum ADU value the camera can produce.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__maxadu
 */
 func (c *Camera) GetMaxADU() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "maxadu")
 }
 
 /*
-	GetMaxBinX()
+GetMaxBinX()
 
-	@returns the maximum allowed binning for the X camera axis.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__maxbinx
+@returns the maximum allowed binning for the X camera axis.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__maxbinx
 */
 func (c *Camera) GetMaxBinX() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "maxbinx")
 }
 
 /*
-	GetMaxBinY()
+GetMaxBinY()
 
-	@returns the maximum allowed binning for the Y camera axis.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__maxbiny
+@returns the maximum allowed binning for the Y camera axis.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__maxbiny
 */
 func (c *Camera) GetMaxBinY() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "maxbiny")
 }
 
 /*
-	GetSubFrameWidth()
+GetSubFrameWidth()
 
-	@returns the current subframe width, if binning is active, value is in binned pixels.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__numx
+@returns the current subframe width, if binning is active, value is in binned pixels.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__numx
 */
 func (c *Camera) GetSubFrameWidth() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "numx")
 }
 
 /*
-	SetSubFrameWidth()
+SetSubFrameWidth()
 
-	@returns an error or nil, if the subframe width can be set.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__numx
+@returns an error or nil, if the subframe width can be set.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__numx
 */
 func (c *Camera) SetSubFrameWidth(numX int32) error {
 	c.Alpaca.TransactionId++
@@ -660,20 +660,20 @@ func (c *Camera) SetSubFrameWidth(numX int32) error {
 }
 
 /*
-	GetSubFrameHeight()
+GetSubFrameHeight()
 
-	@returns the current subframe height, if binning is active, value is in binned pixels.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__numy
+@returns the current subframe height, if binning is active, value is in binned pixels.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__numy
 */
 func (c *Camera) GetSubFrameHeight() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "numy")
 }
 
 /*
-	SetSubFrameHeight()
+SetSubFrameHeight()
 
-	@returns an error or nil, if the subframe height can be set.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__numy
+@returns an error or nil, if the subframe height can be set.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__numy
 */
 func (c *Camera) SetSubFrameHeight(numY int32) error {
 	c.Alpaca.TransactionId++
@@ -689,51 +689,51 @@ func (c *Camera) SetSubFrameHeight(numY int32) error {
 }
 
 /*
-	GetCurrentOperationPercentageComplete()
+GetCurrentOperationPercentageComplete()
 
-	@returns the percentage of the current operation that is complete. If valid, returns an integer between 0 and
-	100, where 0 indicates 0% progress (function just started) and 100 indicates 100% progress (i.e. completion).
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__percentcompleted
+@returns the percentage of the current operation that is complete. If valid, returns an integer between 0 and
+100, where 0 indicates 0% progress (function just started) and 100 indicates 100% progress (i.e. completion).
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__percentcompleted
 */
 func (c *Camera) GetCurrentOperationPercentageComplete() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "percentcompleted")
 }
 
 /*
-	GetPixelSizeX()
+GetPixelSizeX()
 
-	@returns the width of the CCD chip pixels in microns.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__pixelsizex
+@returns the width of the CCD chip pixels in microns.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__pixelsizex
 */
 func (c *Camera) GetPixelSizeX() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "pixelsizex")
 }
 
 /*
-	GetPixelSizeY()
+GetPixelSizeY()
 
-	@returns the width of the CCD chip pixels in microns.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__pixelsizey
+@returns the width of the CCD chip pixels in microns.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__pixelsizey
 */
 func (c *Camera) GetPixelSizeY() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "pixelsizey")
 }
 
 /*
-	GetReadOutMode()
+GetReadOutMode()
 
-	@returns an index into the array ReadoutModes and returns the desired readout mode for the camera. Defaults to 0 if not set.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__readoutmode
+@returns an index into the array ReadoutModes and returns the desired readout mode for the camera. Defaults to 0 if not set.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__readoutmode
 */
 func (c *Camera) GetReadOutMode() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "readoutmode")
 }
 
 /*
-	SetReadOutMode()
+SetReadOutMode()
 
-	@returns an error or nil, if nil sets the readout mode.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__readoutmode
+@returns an error or nil, if nil sets the readout mode.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__readoutmode
 */
 func (c *Camera) SetReadOutMode(readOutMode int32) error {
 	c.Alpaca.TransactionId++
@@ -749,30 +749,30 @@ func (c *Camera) SetReadOutMode(readOutMode int32) error {
 }
 
 /*
-	GetReadOutModes()
+GetReadOutModes()
 
-	@returns an array of strings, each of which describes an available readout mode of the camera. At least one string must be present in the list.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__readoutmodes
+@returns an array of strings, each of which describes an available readout mode of the camera. At least one string must be present in the list.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__readoutmodes
 */
 func (c *Camera) GetReadOutModes() ([]string, error) {
 	return c.Alpaca.GetStringListResponse("camera", c.DeviceNumber, "readoutmodes")
 }
 
 /*
-	GetSensorName()
+GetSensorName()
 
-	@returns the name of the sensor used within the camera.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__sensorname
+@returns the name of the sensor used within the camera.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__sensorname
 */
 func (c *Camera) GetSensorName() (string, error) {
 	return c.Alpaca.GetStringResponse("camera", c.DeviceNumber, "sensorname")
 }
 
 /*
-	GetSensorType()
+GetSensorType()
 
-	@returns the sensor type, e.g., whether the sensor is monochrome, or what Bayer matrix it encodes. Where:
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__sensortype
+@returns the sensor type, e.g., whether the sensor is monochrome, or what Bayer matrix it encodes. Where:
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__sensortype
 */
 func (c *Camera) GetSensorType() (SensorType, error) {
 	sensor, err := c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "sensortype")
@@ -780,20 +780,20 @@ func (c *Camera) GetSensorType() (SensorType, error) {
 }
 
 /*
-	GetCCDTemperatureCoolerSetPoint()
+GetCCDTemperatureCoolerSetPoint()
 
-	@returns the current temperature setpoint of the CCD cooler in degrees Celsius.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__setccdtemperature
+@returns the current temperature setpoint of the CCD cooler in degrees Celsius.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__setccdtemperature
 */
 func (c *Camera) GetCCDTemperatureCoolerSetPoint() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "setccdtemperature")
 }
 
 /*
-	SetCCDTemperatureCoolerSetPoint()
+SetCCDTemperatureCoolerSetPoint()
 
-	@returns an error or nil, if nil it sets the camera's cooler setpoint in degrees Celsius.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__setccdtemperature
+@returns an error or nil, if nil it sets the camera's cooler setpoint in degrees Celsius.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__setccdtemperature
 */
 func (c *Camera) SetCCDTemperatureCoolerSetPoint(temperature float64) error {
 	c.Alpaca.TransactionId++
@@ -808,20 +808,20 @@ func (c *Camera) SetCCDTemperatureCoolerSetPoint(temperature float64) error {
 }
 
 /*
-	GetStartX()
+GetStartX()
 
-	@returns the current subframe start X coordinate, if binning is active, value is in binned pixels.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__startx
+@returns the current subframe start X coordinate, if binning is active, value is in binned pixels.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__startx
 */
 func (c *Camera) GetStartX() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "startx")
 }
 
 /*
-	SetStartX()
+SetStartX()
 
-	@returns an error or nil, if nil sets the subframe start X coordinate, if binning is active, value is in binned pixels.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__startx
+@returns an error or nil, if nil sets the subframe start X coordinate, if binning is active, value is in binned pixels.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__startx
 */
 func (c *Camera) SetStartX(startX int32) error {
 	c.Alpaca.TransactionId++
@@ -836,20 +836,20 @@ func (c *Camera) SetStartX(startX int32) error {
 }
 
 /*
-	GetStartY()
+GetStartY()
 
-	@returns the current subframe start Y coordinate, if binning is active, value is in binned pixels.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__starty
+@returns the current subframe start Y coordinate, if binning is active, value is in binned pixels.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__starty
 */
 func (c *Camera) GetStartY() (int32, error) {
 	return c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "starty")
 }
 
 /*
-	SetStartY()
+SetStartY()
 
-	@returns an error or nil, if nil sets the subframe start Y coordinate, if binning is active, value is in binned pixels.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__starty
+@returns an error or nil, if nil sets the subframe start Y coordinate, if binning is active, value is in binned pixels.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__starty
 */
 func (c *Camera) SetStartY(startY int32) error {
 	c.Alpaca.TransactionId++
@@ -864,20 +864,20 @@ func (c *Camera) SetStartY(startY int32) error {
 }
 
 /*
-	GetSubExposureDuration()
+GetSubExposureDuration()
 
-	@returns the sub exposure duration in seconds, *only available in Camera Interface Version 3 and later.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__subexposureduration
+@returns the sub exposure duration in seconds, *only available in Camera Interface Version 3 and later.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__subexposureduration
 */
 func (c *Camera) GetSubExposureDuration() (float64, error) {
 	return c.Alpaca.GetFloat64Response("camera", c.DeviceNumber, "subexposureduration")
 }
 
 /*
-	SetSubExposureDuration()
+SetSubExposureDuration()
 
-	@returns an error or nil, if nil sets the sub exposure duration in seconds, *only available in Camera Interface Version 3 and later.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__subexposureduration
+@returns an error or nil, if nil sets the sub exposure duration in seconds, *only available in Camera Interface Version 3 and later.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__subexposureduration
 */
 func (c *Camera) SetSubExposureDuration(subExposureDuration float64) error {
 	c.Alpaca.TransactionId++
@@ -892,10 +892,10 @@ func (c *Camera) SetSubExposureDuration(subExposureDuration float64) error {
 }
 
 /*
-	AbortExposure()
+AbortExposure()
 
-	@returns an error or nil, if nil aborts the current exposure, if any, and returns the camera to Idle state.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__abortexposure
+@returns an error or nil, if nil aborts the current exposure, if any, and returns the camera to Idle state.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__abortexposure
 */
 func (c *Camera) AbortExposure() error {
 	c.Alpaca.TransactionId++
@@ -909,10 +909,10 @@ func (c *Camera) AbortExposure() error {
 }
 
 /*
-	PulseGuide()
+PulseGuide()
 
-	@returns an error or nil, if nil starts a pulse guide operation i.e., it activates the Camera's mount control sytem to instruct the mount to move in a particular direction for a given period of time
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__pulseguide
+@returns an error or nil, if nil starts a pulse guide operation i.e., it activates the Camera's mount control sytem to instruct the mount to move in a particular direction for a given period of time
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__pulseguide
 */
 func (c *Camera) SetPulseGuide(direction Direction, duration int32) error {
 	c.Alpaca.TransactionId++
@@ -928,10 +928,10 @@ func (c *Camera) SetPulseGuide(direction Direction, duration int32) error {
 }
 
 /*
-	StartExposure()
+StartExposure()
 
-	@returns an error or nil, if nil starts an exposure (use IsImageReady to check when the exposure is complete.)
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__startexposure
+@returns an error or nil, if nil starts an exposure (use IsImageReady to check when the exposure is complete.)
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__startexposure
 */
 func (c *Camera) StartExposure(duration float64, light bool) error {
 	c.Alpaca.TransactionId++
@@ -947,10 +947,10 @@ func (c *Camera) StartExposure(duration float64, light bool) error {
 }
 
 /*
-	StopExposure()
+StopExposure()
 
-	@returns an error or nil, if nil stops the current exposure, if any. If an exposure is in progress, the readout process is initiated. Ignored if readout is already in process.
-	@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__stopexposure
+@returns an error or nil, if nil stops the current exposure, if any. If an exposure is in progress, the readout process is initiated. Ignored if readout is already in process.
+@see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__stopexposure
 */
 func (c *Camera) StopExposure() error {
 	c.Alpaca.TransactionId++

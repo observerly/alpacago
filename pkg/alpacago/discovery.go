@@ -61,10 +61,10 @@ func NewDiscoveryServer(clientId uint32, protocol string, domain string, ip stri
 }
 
 /*
-	OpenSocket()
+OpenSocket()
 
-	@returns A bound open a socket for discovery on the udp4 network protocol, i.e., announce on the local network address.
-	@see https://ascom-standards.org/Developer/ASCOM%20Alpaca%20API%20Reference.pdf
+@returns A bound open a socket for discovery on the udp4 network protocol, i.e., announce on the local network address.
+@see https://ascom-standards.org/Developer/ASCOM%20Alpaca%20API%20Reference.pdf
 */
 func (s *AlpacaDiscoveryServer) OpenSocket() {
 	packet, err := net.ListenPacket("udp4", ":32227")
@@ -79,10 +79,10 @@ func (s *AlpacaDiscoveryServer) OpenSocket() {
 }
 
 /*
-	ResolveUDPAddress()
+ResolveUDPAddress()
 
-	@returns A resolved UDP address broadcast by the server.
-	@see https://ascom-standards.org/Developer/ASCOM%20Alpaca%20API%20Reference.pdf
+@returns A resolved UDP address broadcast by the server.
+@see https://ascom-standards.org/Developer/ASCOM%20Alpaca%20API%20Reference.pdf
 */
 func (s *AlpacaDiscoveryServer) ResolveUDPAddress() {
 	address, err := net.ResolveUDPAddr("udp4", ":32227")

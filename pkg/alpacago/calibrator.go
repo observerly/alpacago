@@ -53,21 +53,21 @@ func NewCoverCalibrator(clientId uint32, secure bool, domain string, ip string, 
 }
 
 /*
-	IsConnected() common method to all ASCOM Alpaca compliant devices
+IsConnected() common method to all ASCOM Alpaca compliant devices
 
-	@returns the connected state of the device
-	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__connected
+@returns the connected state of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__connected
 */
 func (c *CoverCalibrator) IsConnected() (bool, error) {
 	return c.Alpaca.GetBooleanResponse("covercalibrator", c.DeviceNumber, "connected")
 }
 
 /*
-	SetConnected() common method to all ASCOM Alpaca compliant devices
+SetConnected() common method to all ASCOM Alpaca compliant devices
 
-	@param connected bool (set True to connect to the device hardware, set false to disconnect from the device hardware)
-	@returns the connected state of the device
-	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/put__device_type___device_number__connected
+@param connected bool (set True to connect to the device hardware, set false to disconnect from the device hardware)
+@returns the connected state of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/put__device_type___device_number__connected
 */
 func (c *CoverCalibrator) SetConnected(connected bool) error {
 	c.Alpaca.TransactionId++
@@ -83,21 +83,21 @@ func (c *CoverCalibrator) SetConnected(connected bool) error {
 }
 
 /*
-	GetBrightness()
+GetBrightness()
 
-	@returns the current calibrator brightness in the range 0 (completely off) to MaxBrightness (fully on)
-	@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/get_covercalibrator__device_number__brightness
+@returns the current calibrator brightness in the range 0 (completely off) to MaxBrightness (fully on)
+@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/get_covercalibrator__device_number__brightness
 */
 func (c *CoverCalibrator) GetBrightness() (float64, error) {
 	return c.Alpaca.GetFloat64Response("covercalibrator", c.DeviceNumber, "brightness")
 }
 
 /*
-	GetStatus()
+GetStatus()
 
-	@returns the state of the calibration device, if present, otherwise returns "NotPresent". The calibrator state mode is specified as an integer value from the CalibratorStatus Enum.
-	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__calibratorstate
-	@see https://ascom-standards.org/Help/Platform/html/T_ASCOM_DeviceInterface_CalibratorStatus.htm
+@returns the state of the calibration device, if present, otherwise returns "NotPresent". The calibrator state mode is specified as an integer value from the CalibratorStatus Enum.
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__calibratorstate
+@see https://ascom-standards.org/Help/Platform/html/T_ASCOM_DeviceInterface_CalibratorStatus.htm
 */
 func (c *CoverCalibrator) GetStatus() (CalibratorState, error) {
 	status, err := c.Alpaca.GetInt32Response("covercalibrator", c.DeviceNumber, "calibratorstate")
@@ -105,11 +105,11 @@ func (c *CoverCalibrator) GetStatus() (CalibratorState, error) {
 }
 
 /*
-	GetCoverStatus()
+GetCoverStatus()
 
-	@returns the state of the device cover, if present, otherwise returns "NotPresent". The cover state mode is specified as an integer value from the CoverStatus Enum.
-	@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/get_covercalibrator__device_number__coverstate
-	@see https://ascom-standards.org/Help/Platform/html/T_ASCOM_DeviceInterface_CoverStatus.htm
+@returns the state of the device cover, if present, otherwise returns "NotPresent". The cover state mode is specified as an integer value from the CoverStatus Enum.
+@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/get_covercalibrator__device_number__coverstate
+@see https://ascom-standards.org/Help/Platform/html/T_ASCOM_DeviceInterface_CoverStatus.htm
 */
 func (c *CoverCalibrator) GetCoverStatus() (CoverState, error) {
 	status, err := c.Alpaca.GetInt32Response("covercalibrator", c.DeviceNumber, "coverstate")
@@ -117,20 +117,20 @@ func (c *CoverCalibrator) GetCoverStatus() (CoverState, error) {
 }
 
 /*
-	GetMaxBrightness()
+GetMaxBrightness()
 
-	@returns the brightness value that makes the calibrator deliver its maximum illumination.
-	@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/get_covercalibrator__device_number__maxbrightness
+@returns the brightness value that makes the calibrator deliver its maximum illumination.
+@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/get_covercalibrator__device_number__maxbrightness
 */
 func (c *CoverCalibrator) GetMaxBrightness() (int32, error) {
 	return c.Alpaca.GetInt32Response("covercalibrator", c.DeviceNumber, "maxbrightness")
 }
 
 /*
-	SetCalibratorOn()
+SetCalibratorOn()
 
-	@returns and error, or nil, if nil the calibrator on if the device has calibration capability.
-	@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/put_covercalibrator__device_number__calibratoron
+@returns and error, or nil, if nil the calibrator on if the device has calibration capability.
+@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/put_covercalibrator__device_number__calibratoron
 */
 func (c *CoverCalibrator) SetCalibratorOn(brightness int32) error {
 	c.Alpaca.TransactionId++
@@ -146,10 +146,10 @@ func (c *CoverCalibrator) SetCalibratorOn(brightness int32) error {
 }
 
 /*
-	SetCalibratorOff()
+SetCalibratorOff()
 
-	@turns the calibrator off if the device has calibration capability.
-	@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/put_covercalibrator__device_number__calibratoroff
+@turns the calibrator off if the device has calibration capability.
+@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/put_covercalibrator__device_number__calibratoroff
 */
 func (c *CoverCalibrator) SetCalibratorOff() error {
 	c.Alpaca.TransactionId++
@@ -163,10 +163,10 @@ func (c *CoverCalibrator) SetCalibratorOff() error {
 }
 
 /*
-	CloseCover()
+CloseCover()
 
-	@returns and error, or nil, if nil initiates cover closing if a cover is present.
-	@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/put_covercalibrator__device_number__closecover
+@returns and error, or nil, if nil initiates cover closing if a cover is present.
+@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/put_covercalibrator__device_number__closecover
 */
 func (c *CoverCalibrator) CloseCover() error {
 	c.Alpaca.TransactionId++
@@ -180,10 +180,10 @@ func (c *CoverCalibrator) CloseCover() error {
 }
 
 /*
-	HaltCover()
+HaltCover()
 
-	@returns and error, or nil, if nil stops any cover movement that may be in progress if a cover is present and cover movement can be interrupted.
-	@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/put_covercalibrator__device_number__haltcover
+@returns and error, or nil, if nil stops any cover movement that may be in progress if a cover is present and cover movement can be interrupted.
+@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/put_covercalibrator__device_number__haltcover
 */
 func (c *CoverCalibrator) HaltCover() error {
 	c.Alpaca.TransactionId++
@@ -197,10 +197,10 @@ func (c *CoverCalibrator) HaltCover() error {
 }
 
 /*
-	OpenCover()
+OpenCover()
 
-	@returns and error, or nil, if nil initiates cover opening if a cover is present.
-	@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/put_covercalibrator__device_number__opencover
+@returns and error, or nil, if nil initiates cover opening if a cover is present.
+@see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/put_covercalibrator__device_number__opencover
 */
 func (c *CoverCalibrator) OpenCover() error {
 	c.Alpaca.TransactionId++
