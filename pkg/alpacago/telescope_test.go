@@ -65,6 +65,14 @@ func TestNewTelescopeDeviceNumber(t *testing.T) {
 	}
 }
 
+func TestNewTelescopeSetUnPark(t *testing.T) {
+	var err = telescope.SetUnPark()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+}
+
 func TestNewTelescopeTrackingMode(t *testing.T) {
 	telescope := NewTelescope(65535, false, "", "0.0.0.0", 8000, 0, 1)
 
@@ -1246,8 +1254,8 @@ func TestNewTelescopeSetSlewToTargetAsync(t *testing.T) {
 	}
 }
 
-func TestNewTelescopeSetUnPark(t *testing.T) {
-	var err = telescope.SetUnPark()
+func TestNewTelescopeSetPark(t *testing.T) {
+	var err = telescope.SetPark()
 
 	if err != nil {
 		t.Errorf("got %q", err)
