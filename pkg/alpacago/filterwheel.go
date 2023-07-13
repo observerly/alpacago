@@ -19,31 +19,31 @@ func NewFilterWheel(clientId uint32, secure bool, domain string, ip string, port
 }
 
 /*
-	GetDescription() common method to all ASCOM Alpaca compliant devices
+GetDescription() common method to all ASCOM Alpaca compliant devices
 
-	@returns the description of the device
-	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__description
+@returns the description of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__description
 */
 func (f *FilterWheel) GetDescription() (string, error) {
 	return f.Alpaca.GetDescription("filterwheel", f.DeviceNumber)
 }
 
 /*
-	IsConnected() common method to all ASCOM Alpaca compliant devices
+IsConnected() common method to all ASCOM Alpaca compliant devices
 
-	@returns the connected state of the device
-	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__connected
+@returns the connected state of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__connected
 */
 func (f *FilterWheel) IsConnected() (bool, error) {
 	return f.Alpaca.GetBooleanResponse("filterwheel", f.DeviceNumber, "connected")
 }
 
 /*
-	SetConnected() common method to all ASCOM Alpaca compliant devices
+SetConnected() common method to all ASCOM Alpaca compliant devices
 
-	@param connected bool (set True to connect to the device hardware, set false to disconnect from the device hardware)
-	@returns the connected state of the device
-	@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/put__device_type___device_number__connected
+@param connected bool (set True to connect to the device hardware, set false to disconnect from the device hardware)
+@returns the connected state of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/put__device_type___device_number__connected
 */
 func (f *FilterWheel) SetConnected(connected bool) error {
 	f.Alpaca.TransactionId++
@@ -59,40 +59,40 @@ func (f *FilterWheel) SetConnected(connected bool) error {
 }
 
 /*
-	GetFocusOffsets()
+GetFocusOffsets()
 
-	@returns an integer array of filter focus offsets.
-	@see https://ascom-standards.org/api/#/FilterWheel%20Specific%20Methods/get_filterwheel__device_number__focusoffsets
+@returns an integer array of filter focus offsets.
+@see https://ascom-standards.org/api/#/FilterWheel%20Specific%20Methods/get_filterwheel__device_number__focusoffsets
 */
 func (f *FilterWheel) GetFocusOffsets() ([]uint32, error) {
 	return f.Alpaca.GetUInt32ListResponse("filterwheel", f.DeviceNumber, "focusoffsets")
 }
 
 /*
-	GetNames()
+GetNames()
 
-	@returns the names of the filters.
-	@see https://ascom-standards.org/api/#/FilterWheel%20Specific%20Methods/get_filterwheel__device_number__names
+@returns the names of the filters.
+@see https://ascom-standards.org/api/#/FilterWheel%20Specific%20Methods/get_filterwheel__device_number__names
 */
 func (f *FilterWheel) GetNames() ([]string, error) {
 	return f.Alpaca.GetStringListResponse("filterwheel", f.DeviceNumber, "names")
 }
 
 /*
-	GetPosition()
+GetPosition()
 
-	@returns the current filter wheel position.
-	@see https://ascom-standards.org/api/#/FilterWheel%20Specific%20Methods/get_filterwheel__device_number__position
+@returns the current filter wheel position.
+@see https://ascom-standards.org/api/#/FilterWheel%20Specific%20Methods/get_filterwheel__device_number__position
 */
 func (f *FilterWheel) GetPosition() (int32, error) {
 	return f.Alpaca.GetInt32Response("filterwheel", f.DeviceNumber, "position")
 }
 
 /*
-	SetPosition()
+SetPosition()
 
-	@returns an error or nil, if nil it sets the filter wheel position
-	@see https://ascom-standards.org/api/#/FilterWheel%20Specific%20Methods/put_filterwheel__device_number__position
+@returns an error or nil, if nil it sets the filter wheel position
+@see https://ascom-standards.org/api/#/FilterWheel%20Specific%20Methods/put_filterwheel__device_number__position
 */
 func (f *FilterWheel) SetPosition(position int32) error {
 	f.Alpaca.TransactionId++
