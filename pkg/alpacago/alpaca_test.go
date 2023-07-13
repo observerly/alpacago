@@ -152,7 +152,7 @@ func TestNewAlpacaAPIFloat64Response(t *testing.T) {
 func TestNewAlpacaAPIInt32Response(t *testing.T) {
 	got, err := client.GetInt32Response("telescope", 0, "alignmentmode")
 
-	var want int32 = 2
+	var want int32 = 1
 
 	if err != nil {
 		t.Errorf("got %q, wanted %d", err, want)

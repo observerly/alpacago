@@ -238,6 +238,23 @@ func (t *Telescope) CanFindHome() (bool, error) {
 }
 
 /*
+FindHome()
+
+@returns an error or nil, if nil it puts the telescope into the homed state.
+@see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__findhome
+*/
+func (t *Telescope) FindHome() error {
+	t.Alpaca.TransactionId++
+
+	var form map[string]string = map[string]string{
+		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
+		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
+	}
+
+	return t.Alpaca.Put("telescope", t.DeviceNumber, "findhome", form)
+}
+
+/*
 CanMoveAxis()
 
 @returns true if this telescope can move the requested axis.
