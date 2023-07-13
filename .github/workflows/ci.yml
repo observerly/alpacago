@@ -15,7 +15,7 @@ jobs:
     name: CI/CD Build
     strategy:
       matrix:
-        go: [ '1.17.x', ]
+        go: [ '1.18.x',]
         os: [ ubuntu-latest ]
 
     runs-on: ${{ matrix.os }}
@@ -30,9 +30,10 @@ jobs:
           go-version: ${{ matrix.go }}
 
       - name: Tailscale
-        uses: tailscale/github-action@v1
+        uses: tailscale/github-action@ce41a99162202a647a4b24c30c558a567b926709
         with:
           authkey: ${{ secrets.TAILSCALE_EPHEMERAL_AUTH_KEY }}
+          version: "1.36.0"
 
       - name: Go Test
         run: go test ./... -race -coverprofile=coverage.txt -covermode=atomic
