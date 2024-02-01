@@ -688,7 +688,7 @@ func TestNewTelescopeSetDoesRefractionPut(t *testing.T) {
 func TestNewTelescopeEquatorialSystem(t *testing.T) {
 	var got, err = telescope.GetEquatorialSystem()
 
-	var want = J2000
+	var want = "J2000"
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
@@ -699,7 +699,7 @@ func TestNewTelescopeEquatorialSystem(t *testing.T) {
 	}
 
 	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %d", telescope.Alpaca.ErrorMessage, want)
+		t.Errorf("got %q, wanted %q", telescope.Alpaca.ErrorMessage, want)
 	}
 }
 
