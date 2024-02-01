@@ -820,7 +820,7 @@ func (t *Telescope) SetSlewToAltAz(altitude float64, azimuth float64) error {
 /*
 SetSlewToAltAzAsync
 
-@returns an error or nil, if nil it moves the telescope to the given local horizontal coordinates, return immediatley after
+@returns an error or nil, if nil it moves the telescope to the given local horizontal coordinates, return immediately after
 the slew starts. The client can poll the Slewing method to determine when the mount reaches the intended coordinates.
 @see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtoaltazasync
 */
@@ -850,7 +850,7 @@ func (t *Telescope) SetSlewToAltAzAsync(altitude float64, azimuth float64) error
 /*
 SetSlewToCoordinates
 
-@returns an error or nil, if nil it moves the telescope to the given local horizontal coordinates, return immediatley after
+@returns an error or nil, if nil it moves the telescope to the given local horizontal coordinates, return immediately after
 the slew starts. The client can poll the Slewing method to determine when the mount reaches the intended coordinates.
 @see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtocoordinates
 */
@@ -882,7 +882,7 @@ func (t *Telescope) SetSlewToCoordinates(rightAscension float64, declination flo
 /*
 SetSlewToCoordinatesAsync
 
-@returns an error or nil, if nil it moves the telescope to the given equatorial coordinates, return immediatley after
+@returns an error or nil, if nil it moves the telescope to the given equatorial coordinates, return immediately after
 the slew starts. The client can poll the Slewing method to determine when the mount reaches the intended coordinates.
 @see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtocoordinatesasync
 */
@@ -935,7 +935,7 @@ func (t *Telescope) SetSlewToTarget() error {
 SetSlewToTargetAsync
 
 @returns an error or nil, if nil it moves the telescope to the TargetRightAscension and TargetDeclination equatorial coordinates,
-return immediatley after the slew starts. The client can poll the Slewing method to determine when the mount reaches the
+return immediately after the slew starts. The client can poll the Slewing method to determine when the mount reaches the
 intended coordinates.
 @see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/put_telescope__device_number__slewtotargetasync
 */

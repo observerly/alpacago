@@ -911,7 +911,7 @@ func (c *Camera) AbortExposure() error {
 /*
 PulseGuide()
 
-@returns an error or nil, if nil starts a pulse guide operation i.e., it activates the Camera's mount control sytem to instruct the mount to move in a particular direction for a given period of time
+@returns an error or nil, if nil starts a pulse guide operation i.e., it activates the Camera's mount control system to instruct the mount to move in a particular direction for a given period of time
 @see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/put_camera__device_number__pulseguide
 */
 func (c *Camera) SetPulseGuide(direction Direction, duration int32) error {
