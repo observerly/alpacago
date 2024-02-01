@@ -33,6 +33,18 @@ const (
 	J2000
 )
 
+// String returns the string representation of the EquatorialSystem value.
+func (es EquatorialSystem) String() string {
+	switch es {
+	case Topocentric:
+		return "Topocentric"
+	case J2000:
+		return "J2000"
+	default:
+		return fmt.Sprintf("Unknown EquatorialSystem value: %d", es)
+	}
+}
+
 const (
 	PierUnknown PierPointingMode = -1
 	PierEast    PierPointingMode = 0
@@ -545,9 +557,9 @@ GetEquatorialSystem()
 @returns the current equatorial coordinate system used by this telescope (e.g. Topocentric or J2000).
 @see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__equatorialsystem
 */
-func (t *Telescope) GetEquatorialSystem() (EquatorialSystem, error) {
+func (t *Telescope) GetEquatorialSystem() (string, error) {
 	system, err := t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "equatorialsystem")
-	return EquatorialSystem(system), err
+	return EquatorialSystem(system).String(), err
 }
 
 /*
