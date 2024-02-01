@@ -15,25 +15,29 @@ jobs:
     name: CI/CD Build
     strategy:
       matrix:
-        go: [ '1.18.x',]
+        go: [ '1.21.x',]
         os: [ ubuntu-latest ]
 
     runs-on: ${{ matrix.os }}
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout 🛎
+        uses: actions/checkout@main
 
-      - name: Go Setup
+      # Setup our base Go environment 🧬
+      - name: Setup Go Environment
         uses: actions/setup-go@v2
         with:
           go-version: ${{ matrix.go }}
 
+      # Setup Tailscale VPN 📡
       - name: Tailscale
-        uses: tailscale/github-action@ce41a99162202a647a4b24c30c558a567b926709
+        uses: tailscale/github-action@v2
         with:
-          authkey: ${{ secrets.TAILSCALE_EPHEMERAL_AUTH_KEY }}
-          version: "1.36.0"
+          oauth-client-id: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
+          tags: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ADVERTISED_TAGS }}
+          version: '1.56.0'
 
       - name: Go Test
         run: go test ./... -race -coverprofile=coverage.txt -covermode=atomic

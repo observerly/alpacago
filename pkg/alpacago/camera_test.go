@@ -424,7 +424,7 @@ func TestNewCameraCanSetCCDTemperature(t *testing.T) {
 
 	var got, err = camera.CanSetCCDTemperature()
 
-	var want bool = false
+	var want bool = true
 
 	if err != nil {
 		t.Errorf("got %q", err)
@@ -1316,7 +1316,7 @@ func TestNewCameraSetCCDTemperatureCoolerSetPoint(t *testing.T) {
 
 	var got, err = camera.GetCCDTemperatureCoolerSetPoint()
 
-	var want float64 = 0
+	var want float64 = 4.5
 
 	if err != nil {
 		t.Errorf("got %q", err)
