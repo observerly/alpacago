@@ -151,7 +151,7 @@ func TestNewTelescopeSetAbortSlew(t *testing.T) {
 func TestNewTelescopeAlignmentMode(t *testing.T) {
 	var got, err = telescope.GetAlignmentMode()
 
-	var want = AlignmentPolar
+	var want = "Polar"
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
@@ -162,7 +162,7 @@ func TestNewTelescopeAlignmentMode(t *testing.T) {
 	}
 
 	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %d", telescope.Alpaca.ErrorMessage, want)
+		t.Errorf("got %q, wanted %q", telescope.Alpaca.ErrorMessage, want)
 	}
 }
 
