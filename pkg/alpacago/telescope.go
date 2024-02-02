@@ -22,6 +22,20 @@ const (
 	AlignmentGermanPolar
 )
 
+// String returns the string representation of the AlignmentSystem value.
+func (am AlignmentMode) String() string {
+	switch am {
+	case AlignmentAltAz:
+		return "Altitude-Azimuth"
+	case AlignmentPolar:
+		return "Polar"
+	case AlignmentGermanPolar:
+		return "German Polar"
+	default:
+		return fmt.Sprintf("Unknown AlignmentSystem value: %d", am)
+	}
+}
+
 const (
 	AxisAzmRa AxisType = iota
 	AxisAltDec
@@ -149,9 +163,9 @@ The alignment mode is specified as an integer value from the
 AlignmentModes Enum.
 @see https://ascom-standards.org/api/#/Telescope%20Specific%20Methods/get_telescope__device_number__alignmentmode
 */
-func (t *Telescope) GetAlignmentMode() (AlignmentMode, error) {
+func (t *Telescope) GetAlignmentMode() (string, error) {
 	mode, err := t.Alpaca.GetInt32Response("telescope", t.DeviceNumber, "alignmentmode")
-	return AlignmentMode(mode), err
+	return AlignmentMode(mode).String(), err
 }
 
 /*
