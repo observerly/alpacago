@@ -42,6 +42,20 @@ const (
 	AxisTertiary
 )
 
+// String returns the string representation of the AxisType value.
+func (at AxisType) String() string {
+	switch at {
+	case AxisAzmRa:
+		return "Azimuth/RA"
+	case AxisAltDec:
+		return "Altitude/Dec"
+	case AxisTertiary:
+		return "Tertiary"
+	default:
+		return fmt.Sprintf("Unknown AxisType value: %d", at)
+	}
+}
+
 const (
 	Topocentric EquatorialSystem = iota
 	J2000
