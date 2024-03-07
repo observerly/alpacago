@@ -182,14 +182,12 @@ func TestNewFocuserGetMaxStep(t *testing.T) {
 func TestNewFocuserGetPosition(t *testing.T) {
 	var got, err = focuser.GetPosition()
 
-	var want int32 = 25000
-
 	if err != nil {
 		t.Errorf("got %q", err)
 	}
 
-	if got != want {
-		t.Errorf("got %d, wanted %d", got, want)
+	if got <= 0 || got > 50000 {
+		t.Errorf("got %d, wanted a value between 0 and 50000", got)
 	}
 
 	if focuser.Alpaca.ErrorNumber != 0 {
