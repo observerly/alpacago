@@ -1,6 +1,7 @@
 package alpacago
 
 import (
+	"strings"
 	"testing"
 	"time"
 )
@@ -317,22 +318,22 @@ func TestNewDomeShutterStatus(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if got > 2 || got < 0 {
-		t.Errorf("got %q, wanted %q", got, "the shutter status to represnet an iota in range 0 to 2")
+	want := []string{"open", "closed", "opening", "closing", "error"}
+
+	if !strings.Contains(strings.Join(want, ","), got) {
+		t.Errorf("got %q, wanted %q", got, "the shutter status to represent a valid status value")
 	}
 
 	if dome.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %q", dome.Alpaca.ErrorMessage, "the shutter status to represnet an iota in range 0 to 2")
+		t.Errorf("got %q, wanted %q", dome.Alpaca.ErrorMessage, "the shutter status to represent a valid status value")
 	}
 }
 
 func TestNewDomeShutterStatusToStringRepresentation(t *testing.T) {
 	var got, err = dome.GetShutterStatus()
 
-	var status = ShutterStatus.String(got)
-
-	if status == "" {
-		t.Errorf("got %q, wanted %q", status, "the shutter status to represnet an iota in range 0 to 2")
+	if got == "" {
+		t.Errorf("got %q, wanted %q", got, "the shutter status to represnet an iota in range 0 to 2")
 	}
 
 	if err != nil {
@@ -417,22 +418,27 @@ func TestNewDomeAbortSlew(t *testing.T) {
 func TestNewDomeOpenShutter(t *testing.T) {
 	var err = dome.OpenShutter()
 
+	if err != nil {
+		t.Errorf("got %v, wanted %q", err, "the dome to be either open, or opening")
+	}
+
+	// Wait for the dome to open the shutter:
 	time.Sleep(time.Second * 5)
 
-	var got, _ = dome.GetShutterStatus()
-
-	var want = Open
+	got, err := dome.GetShutterStatus()
 
 	if err != nil {
 		t.Errorf("got %v, wanted %q", err, "the dome to be either open, or opening")
 	}
 
-	if got != want {
-		t.Errorf("got %q, wanted %q", got, "the dome to be either open, or opening")
+	want := []string{"open", "opening"}
+
+	if !strings.Contains(strings.Join(want, ","), got) {
+		t.Errorf("got %q, wanted %q", got, "the shutter status to represent a valid status value")
 	}
 
 	if dome.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %d", dome.Alpaca.ErrorMessage, want)
+		t.Errorf("got %q, wanted %q", dome.Alpaca.ErrorMessage, want)
 	}
 }
 
@@ -551,19 +557,23 @@ func TestNewDomeSyncoAzimuth(t *testing.T) {
 func TestNewDomeCloseShutter(t *testing.T) {
 	var err = dome.CloseShutter()
 
-	var got, _ = dome.GetShutterStatus()
+	if err != nil {
+		t.Errorf("got %q, wanted %q", err, "the dome to be either close, or closing")
+	}
 
-	var want = Closed | Closing
+	got, err := dome.GetShutterStatus()
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, "the dome to be either close, or closing")
 	}
 
-	if got != want {
-		t.Errorf("got %q, wanted %q", err, "the dome to be either close, or closing")
+	want := []string{"close", "closing"}
+
+	if !strings.Contains(strings.Join(want, ","), got) {
+		t.Errorf("got %q, wanted %q", got, "the shutter status to represent a valid status value")
 	}
 
 	if dome.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %d", dome.Alpaca.ErrorMessage, want)
+		t.Errorf("got %q, wanted %q", dome.Alpaca.ErrorMessage, want)
 	}
 }

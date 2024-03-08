@@ -203,9 +203,9 @@ GetShutterStatus()
 @returns the status of the dome shutter or roll-off roof. 0 = Open, 1 = Closed, 2 = Opening, 3 = Closing, 4 = Shutter status error
 @see https://ascom-standards.org/api/#/Dome%20Specific%20Methods/get_dome__device_number__shutterstatus
 */
-func (d *Dome) GetShutterStatus() (ShutterStatus, error) {
+func (d *Dome) GetShutterStatus() (string, error) {
 	status, err := d.Alpaca.GetInt32Response("dome", d.DeviceNumber, "shutterstatus")
-	return ShutterStatus(status), err
+	return ShutterStatus(status).String(), err
 }
 
 /*
