@@ -3,6 +3,7 @@ package alpacago
 
 import (
 	"fmt"
+	"time"
 
 	log "github.com/sirupsen/logrus"
 
@@ -40,8 +41,15 @@ func NewAlpacaAPI(clientId uint32, secure bool, domain string, ip string, port i
 		urlBase = fmt.Sprintf("%s://%s", protocol, domain)
 	}
 
+	// Create a new resty client:
+	resty := resty.New()
+
+	// Set the timeout to 60 seconds:
+	resty.SetTimeout(60 * time.Second)
+
+	// Create a new ASCOM Alpaca API client:
 	client := ASCOMAlpacaAPIClient{
-		Client:        resty.New(),
+		Client:        resty,
 		UrlBase:       urlBase,
 		ClientId:      clientId,
 		TransactionId: 0,
