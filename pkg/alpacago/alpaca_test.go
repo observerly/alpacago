@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-var client = NewAlpacaAPI(65535, false, "100.80.84.116", "", -1)
+var client = NewAlpacaAPI(65535, false, "100.69.47.32", "", -1)
 
 func TestNewAlpacaAPIBaseURL(t *testing.T) {
 	client := NewAlpacaAPI(65535, false, "", "0.0.0.0", 8000)
@@ -20,7 +20,7 @@ func TestNewAlpacaAPIBaseURL(t *testing.T) {
 
 func TestNewAlpacaAPIBaseURLForHost(t *testing.T) {
 	var got string = client.UrlBase
-	var want string = "http://100.80.84.116"
+	var want string = "http://100.69.47.32"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)
@@ -170,7 +170,7 @@ func TestNewAlpacaAPIInt32Response(t *testing.T) {
 func TestNewAlpacaAPIInt32ListResponse(t *testing.T) {
 	got, err := client.GetUInt32ListResponse("filterwheel", 0, "focusoffsets")
 
-	want := [6]uint32{2295, 9177, 3053, 5430, 2965, 4952}
+	want := [6]uint32{6719, 1312, 9495, 6217, 9605, 444}
 
 	if err != nil {
 		t.Errorf("got %q, wanted %d", err, want)

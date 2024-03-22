@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-var focuser = NewFocuser(65535, false, "100.80.84.116", "", -1, 0)
+var focuser = NewFocuser(65535, false, "100.69.47.32", "", -1, 0)
 
 func TestNewFocuserBaseURL(t *testing.T) {
 	focuser := NewFocuser(65535, false, "", "0.0.0.0", 8000, 0)
@@ -19,7 +19,7 @@ func TestNewFocuserBaseURL(t *testing.T) {
 
 func TestNewFocuserBaseURLForHost(t *testing.T) {
 	var got string = focuser.Alpaca.UrlBase
-	var want string = "http://100.80.84.116"
+	var want string = "http://100.69.47.32"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)

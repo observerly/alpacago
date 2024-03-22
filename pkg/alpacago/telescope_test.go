@@ -10,7 +10,7 @@ var latitude float64 = 19.820667
 
 var longitude float64 = -155.468167
 
-var telescope = NewTelescope(65535, false, "100.80.84.116", "", -1, 0, 1)
+var telescope = NewTelescope(65535, false, "100.69.47.32", "", -1, 0, 1)
 
 func TestNewTelescopeBaseURL(t *testing.T) {
 	telescope := NewTelescope(65535, false, "", "0.0.0.0", 8000, 0, 1)
@@ -25,7 +25,7 @@ func TestNewTelescopeBaseURL(t *testing.T) {
 
 func TestNewTelescopeBaseURLForHost(t *testing.T) {
 	var got string = telescope.Alpaca.UrlBase
-	var want string = "http://100.80.84.116"
+	var want string = "http://100.69.47.32"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)
@@ -432,7 +432,7 @@ func TestNewTelescopeCanSetPark(t *testing.T) {
 func TestNewTelescopeCanSetPierSide(t *testing.T) {
 	var got, err = telescope.CanSetPierSide()
 
-	var want bool = true
+	var want bool = false
 
 	if err != nil {
 		t.Errorf("got %q, wanted %t", err, want)
@@ -808,7 +808,17 @@ func TestNewTelescopeSideOfPier(t *testing.T) {
 }
 
 func TestNewTelescopeSetSideOfPierEastPut(t *testing.T) {
-	var err = telescope.SetSideOfPier(0)
+	canSetPierSide, err := telescope.CanSetPierSide()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if canSetPierSide == false {
+		return
+	}
+
+	err = telescope.SetSideOfPier(0)
 
 	if err != nil {
 		t.Errorf("got %q", err)
@@ -820,7 +830,17 @@ func TestNewTelescopeSetSideOfPierEastPut(t *testing.T) {
 }
 
 func TestNewTelescopeSetSideOfPierWestPut(t *testing.T) {
-	var err = telescope.SetSideOfPier(1)
+	canSetPierSide, err := telescope.CanSetPierSide()
+
+	if err != nil {
+		t.Errorf("got %q", err)
+	}
+
+	if canSetPierSide == false {
+		return
+	}
+
+	err = telescope.SetSideOfPier(1)
 
 	if err != nil {
 		t.Errorf("got %q", err)

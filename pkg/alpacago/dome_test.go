@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-var dome = NewDome(65535, false, "100.80.84.116", "", -1, 0)
+var dome = NewDome(65535, false, "100.69.47.32", "", -1, 0)
 
 func TestNewDomeBaseURL(t *testing.T) {
 	dome := NewDome(65535, false, "", "0.0.0.0", 8000, 0)
@@ -21,7 +21,7 @@ func TestNewDomeBaseURL(t *testing.T) {
 
 func TestNewDomeBaseURLForHost(t *testing.T) {
 	var got string = dome.Alpaca.UrlBase
-	var want string = "http://100.80.84.116"
+	var want string = "http://100.69.47.32"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)
