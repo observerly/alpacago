@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-var filterwheel = NewFilterWheel(65535, false, "100.80.84.116", "", -1, 0)
+var filterwheel = NewFilterWheel(65535, false, "100.69.47.32", "", -1, 0)
 
 func TestNewFilterWheelBaseURL(t *testing.T) {
 	filterwheel := NewFilterWheel(65535, false, "", "0.0.0.0", 8000, 0)
@@ -19,7 +19,7 @@ func TestNewFilterWheelBaseURL(t *testing.T) {
 
 func TestNewFilterWheelBaseURLForHost(t *testing.T) {
 	var got string = filterwheel.Alpaca.UrlBase
-	var want string = "http://100.80.84.116"
+	var want string = "http://100.69.47.32"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)
@@ -110,7 +110,7 @@ func TestNewFilterWheelSetConnected(t *testing.T) {
 func TestNewFilterWheelGetFocusOffsets(t *testing.T) {
 	var got, err = filterwheel.GetFocusOffsets()
 
-	want := [6]uint32{2295, 9177, 3053, 5430, 2965, 4952}
+	want := [6]uint32{6719, 1312, 9495, 6217, 9605, 444}
 
 	if err != nil {
 		t.Errorf("got %, wanted %q", err, want)
