@@ -244,7 +244,7 @@ func TestNewCameraGetOperationalState(t *testing.T) {
 
 	var got, err = camera.GetOperationalState()
 
-	var want = CameraIdle
+	var want = "idle"
 
 	if err != nil {
 		t.Errorf("got %q, wanted %q", err, want)
@@ -254,28 +254,16 @@ func TestNewCameraGetOperationalState(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q, wanted %d", telescope.Alpaca.ErrorMessage, want)
+	if camera.Alpaca.ErrorNumber != 0 {
+		t.Errorf("got %q, wanted %q", camera.Alpaca.ErrorMessage, want)
 	}
 }
 
 func TestNewCameraGetOperationalStateToStringRepresentation(t *testing.T) {
-	camera.SetConnected(true)
-
-	var got, err = camera.GetOperationalState()
-
-	var state = OperationalState.String(got)
+	var state = OperationalState.String(CameraIdle)
 
 	if state == "" {
 		t.Errorf("got %q, wanted %q", state, "the operational status to represnet an iota in range 0 to 5")
-	}
-
-	if err != nil {
-		t.Errorf("got %q", err)
-	}
-
-	if telescope.Alpaca.ErrorNumber != 0 {
-		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
 
@@ -1517,7 +1505,7 @@ func TestNewCameraStopExposure(t *testing.T) {
 
 	var got, _ = camera.GetOperationalState()
 
-	var want = CameraIdle
+	var want = "idle"
 
 	if got != want {
 		t.Errorf("got %q, wanted %q", got, want)
