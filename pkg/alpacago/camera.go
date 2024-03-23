@@ -183,9 +183,9 @@ GetOperationalState()
 The operational state is specified as an integer value from the OperationalState Enum.
 @see https://ascom-standards.org/api/#/Camera%20Specific%20Methods/get_camera__device_number__camerastate
 */
-func (c *Camera) GetOperationalState() (OperationalState, error) {
+func (c *Camera) GetOperationalState() (string, error) {
 	state, err := c.Alpaca.GetInt32Response("camera", c.DeviceNumber, "camerastate")
-	return OperationalState(state), err
+	return OperationalState(state).String(), err
 }
 
 /*
