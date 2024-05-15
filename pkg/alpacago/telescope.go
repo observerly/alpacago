@@ -1097,8 +1097,12 @@ Z indicating the 'Zulu', UTC time zone.
 */
 func (t *Telescope) GetUTCDate() (time.Time, error) {
 	utc, err := t.Alpaca.GetStringResponse("telescope", t.DeviceNumber, "utcdate")
-	date, _ := time.Parse("yyyy-MM-ddTHH:mm:ss.fffffffZ", utc)
-	return date, err
+
+	if err != nil {
+		return time.Time{}, err
+	}
+
+	return time.Parse("2006-01-02T15:04:05.000", utc)
 }
 
 /*

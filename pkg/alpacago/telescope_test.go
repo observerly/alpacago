@@ -1126,20 +1126,14 @@ func TestNewTelescopeGetTrackingRate(t *testing.T) {
 }
 
 func TestNewTelescopeGetUTCDate(t *testing.T) {
-	var got, err = telescope.GetUTCDate()
-
-	var want time.Time = time.Date(1, 1, 1, 0, 0, 0, 0, time.UTC)
+	var _, err = telescope.GetUTCDate()
 
 	if err != nil {
-		t.Errorf("got %q, wanted %q", err, want.String())
-	}
-
-	if got != want {
-		t.Errorf("got %q, wanted %q", got, want.String())
+		t.Errorf("got %q", err)
 	}
 
 	if telescope.Alpaca.ErrorNumber != 0 && telescope.Alpaca.ErrorMessage != "" {
-		t.Errorf("got %q, wanted %q", telescope.Alpaca.ErrorMessage, want.String())
+		t.Errorf("got %q", telescope.Alpaca.ErrorMessage)
 	}
 }
 

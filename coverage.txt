@@ -380,5 +380,5 @@ github.com/observerly/alpacago/pkg/alpacago/telescope.go:1039.81,1049.2 3 1
 github.com/observerly/alpacago/pkg/alpacago/telescope.go:1057.48,1059.2 1 1
 github.com/observerly/alpacago/pkg/alpacago/telescope.go:1067.54,1077.2 3 15
 github.com/observerly/alpacago/pkg/alpacago/telescope.go:1085.54,1087.2 1 1
-github.com/observerly/alpacago/pkg/alpacago/telescope.go:1098.53,1102.2 3 1
-github.com/observerly/alpacago/pkg/alpacago/telescope.go:1113.57,1126.2 4 1
+github.com/observerly/alpacago/pkg/alpacago/telescope.go:1098.53,1105.2 4 1
+github.com/observerly/alpacago/pkg/alpacago/telescope.go:1116.57,1129.2 4 1
