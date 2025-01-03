@@ -1139,7 +1139,7 @@ func (t *Telescope) SetUTCDate(UTCDate time.Time) error {
 	date := UTCDate.Format("2006-01-02T15:04:05.000000000Z")
 
 	var form map[string]string = map[string]string{
-		"UTCDate":             fmt.Sprintf("%q", date),
+		"UTCDate":             date,
 		"ClientID":            fmt.Sprintf("%d", t.Alpaca.ClientId),
 		"ClientTransactionID": fmt.Sprintf("%d", t.Alpaca.TransactionId),
 	}
