@@ -1,6 +1,9 @@
 package alpacago
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 type CalibratorState int32
 
@@ -35,6 +38,19 @@ const (
 	// The Cover encountered an error when changing state
 	CoverError
 )
+
+func (s CoverState) String() string {
+	name := []string{"not_present", "closed", "moving", "open", "unknown", "error"}
+
+	i := uint8(s)
+
+	switch {
+	case i <= uint8(Error):
+		return name[i]
+	default:
+		return strconv.Itoa(int(i))
+	}
+}
 
 type CoverCalibrator struct {
 	Alpaca       *ASCOMAlpacaAPIClient
@@ -111,9 +127,9 @@ GetCoverStatus()
 @see https://ascom-standards.org/api/#/CoverCalibrator%20Specific%20Methods/get_covercalibrator__device_number__coverstate
 @see https://ascom-standards.org/Help/Platform/html/T_ASCOM_DeviceInterface_CoverStatus.htm
 */
-func (c *CoverCalibrator) GetCoverStatus() (CoverState, error) {
+func (c *CoverCalibrator) GetCoverStatus() (string, error) {
 	status, err := c.Alpaca.GetInt32Response("covercalibrator", c.DeviceNumber, "coverstate")
-	return CoverState(status), err
+	return CoverState(status).String(), err
 }
 
 /*

@@ -142,7 +142,7 @@ func TestNewCalibratorCoverGetCoverStatus(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if got != CoverClosed && got != CoverOpen && got != CoverMoving && got != CoverUnknown {
+	if got != "closed" && got != "open" && got != "moving" && got != "unknown" {
 		t.Errorf("got %v, but expected the calibrator to be either open, close or moving", got)
 	}
 
