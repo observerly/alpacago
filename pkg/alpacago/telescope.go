@@ -3,6 +3,7 @@ package alpacago
 import (
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 )
 
@@ -1102,7 +1103,24 @@ func (t *Telescope) GetUTCDate() (time.Time, error) {
 		return time.Time{}, err
 	}
 
-	return time.Parse("2006-01-02T15:04:05.000", utc)
+	// Ensure the string ends with 'Z'
+	if !strings.HasSuffix(utc, "Z") {
+		utc += "Z"
+	}
+
+	// Ensure there are at least three fractional digits
+	if dotIndex := strings.Index(utc, "."); dotIndex != -1 {
+		fractional := utc[dotIndex+1 : len(utc)-1] // Exclude 'Z'
+		if len(fractional) < 3 {
+			utc = utc[:dotIndex+1] + fractional + strings.Repeat("0", 3-len(fractional)) + "Z"
+		}
+	} else {
+		// If no fractional seconds, add .000
+		utc = strings.TrimSuffix(utc, "Z") + ".000Z"
+	}
+
+	// Use RFC3339 layout which expects 'Z' and fractional seconds
+	return time.Parse(time.RFC3339, utc)
 }
 
 /*
